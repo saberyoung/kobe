@@ -1,0 +1,1327 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pst.pipeline.PstGetTilings &#8212; pstools 0.5.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pst-pipeline-pstgettilings">
+<h1>pst.pipeline.PstGetTilings<a class="headerlink" href="#pst-pipeline-pstgettilings" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings">
+<em class="property">class </em><code class="sig-prename descclassname">pst.pipeline.PstGetTilings.</code><code class="sig-name descname">PstGetTilings</code><span class="sig-paren">(</span><em class="sig-param">name=None</em>, <em class="sig-param">ra=None</em>, <em class="sig-param">dec=None</em>, <em class="sig-param">fovra=None</em>, <em class="sig-param">fovdec=None</em>, <em class="sig-param">index=None</em>, <em class="sig-param">defconf=None</em>, <em class="sig-param">logger=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings" title="Permalink to this definition">¶</a></dt>
+<dd><p>PstGetTilings: Generate, read and process tilings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>telescope name, if none, will be constructed with coordinates</p>
+</dd>
+<dt><strong>ra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling ra list, default: None</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling dec list, default: None</p>
+</dd>
+<dt><strong>fovra</strong><span class="classifier"><cite>list</cite></span></dt><dd><dl class="simple">
+<dt>tiling field of view list in ra direction, </dt><dd><p>default: None</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>fovdec</strong><span class="classifier"><cite>list</cite></span></dt><dd><dl class="simple">
+<dt>tiling field of view list in dec direction,</dt><dd><p>default: None</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>index</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling index list, default: None</p>
+</dd>
+<dt><strong>defconf</strong><span class="classifier"><cite>dict</cite></span></dt><dd><p>default configure, if any PstGetTilings parameter was included in defconf dictionary, 
+then its default value would be applied</p>
+</dd>
+<dt><strong>logger</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>logging object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">PstParseTriggers</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">PstGetGalaxies</span></code></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>see also <a class="reference external" href="https://github.com/saberyoung/pstools/blob/master/notebook/test_tilings.ipynb">https://github.com/saberyoung/pstools/blob/master/notebook/test_tilings.ipynb</a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.altaz" title="pst.pipeline.PstGetTilings.PstGetTilings.altaz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">altaz</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate altazimuth</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.astrotab" title="pst.pipeline.PstGetTilings.PstGetTilings.astrotab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">astrotab</span></code></a>(self)</p></td>
+<td><p>output astropy table (<a class="reference external" href="https://docs.astropy.org/en/stable/table/">https://docs.astropy.org/en/stable/table/</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_airmass" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_airmass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_airmass</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate airmass for tilings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_dis" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_dis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_dis</span></code></a>(self, triggerobj[, nest, limdist])</p></td>
+<td><p>calculate each tilings the probability that can reach targeting sources</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_loc" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_loc</span></code></a>(self, triggerobj[, nest])</p></td>
+<td><p>calculate each tilings the probability that can cover targeting sources</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_mass" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_mass</span></code></a>(self, galaxyobj[, nside, nest])</p></td>
+<td><p>calculate probability of local luminous mass (galaxies) for each tilings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_solar" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_solar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_solar</span></code></a>(self, sobj[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate distance of tilings to solar object</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_sun" title="pst.pipeline.PstGetTilings.PstGetTilings.calc_sun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_sun</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate sun height for tilings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.checkdata" title="pst.pipeline.PstGetTilings.PstGetTilings.checkdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">checkdata</span></code></a>(self)</p></td>
+<td><p>check if PstGetTilings is parsed or not</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.common_ele" title="pst.pipeline.PstGetTilings.PstGetTilings.common_ele"><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code></a>(list1, list2[, nullv])</p></td>
+<td><p>find common elements of list1 inside list2</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.cut_contours" title="pst.pipeline.PstGetTilings.PstGetTilings.cut_contours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut_contours</span></code></a>(self, triggerobj[, cls, nest, frac])</p></td>
+<td><p>remove tilings the probability that can cover targeting sources</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.divide_OB" title="pst.pipeline.PstGetTilings.PstGetTilings.divide_OB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB</span></code></a>(self[, nobw, nobh])</p></td>
+<td><p>divide each tiling to a serious of sub-tilings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.divide_OB_one" title="pst.pipeline.PstGetTilings.PstGetTilings.divide_OB_one"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB_one</span></code></a>(rac, decc, fovw, fovh, nobw, nobh)</p></td>
+<td><p>divide one pointing to a list of sub-pointings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.generate" title="pst.pipeline.PstGetTilings.PstGetTilings.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code></a>(self[, limra, limdec, fovra, …])</p></td>
+<td><p>create pointings by tiling sky</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.generate_mc" title="pst.pipeline.PstGetTilings.PstGetTilings.generate_mc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_mc</span></code></a>(self, skymap, num[, limra, …])</p></td>
+<td><p>monte carlo approach on shiftra and shiftdec to maxmize trigger probability with a number of pointings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.ipix_in_box" title="pst.pipeline.PstGetTilings.PstGetTilings.ipix_in_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code></a>(ra, dec, width, height, nside, nest)</p></td>
+<td><p>finding the healpix indices of a given box</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.obstime" title="pst.pipeline.PstGetTilings.PstGetTilings.obstime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">obstime</span></code></a>([t])</p></td>
+<td><p>define observing time</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.read" title="pst.pipeline.PstGetTilings.PstGetTilings.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a>(self[, filename, filetype, wdir])</p></td>
+<td><p>read pointings from file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.readfile" title="pst.pipeline.PstGetTilings.PstGetTilings.readfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readfile</span></code></a>(self[, filename, filetype, wdir])</p></td>
+<td><p>read pointings from file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.remove_fields_file" title="pst.pipeline.PstGetTilings.PstGetTilings.remove_fields_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_fields_file</span></code></a>(self[, filename, …])</p></td>
+<td><p>remove fields by input file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.remove_fileds_coo" title="pst.pipeline.PstGetTilings.PstGetTilings.remove_fileds_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_fileds_coo</span></code></a>(self, ra, dec, fovra, fovdec)</p></td>
+<td><p>remove fields by input coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.run_config" title="pst.pipeline.PstGetTilings.PstGetTilings.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a>(self, defconf)</p></td>
+<td><p>read default value for parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.save" title="pst.pipeline.PstGetTilings.PstGetTilings.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(self[, filetype, filename, wdir])</p></td>
+<td><p>save tilings to a file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.set_name" title="pst.pipeline.PstGetTilings.PstGetTilings.set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></a>(self, name)</p></td>
+<td><p>set telescope name</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetTilings.PstGetTilings.vertices" title="pst.pipeline.PstGetTilings.PstGetTilings.vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code></a>(ra, dec, fovw, fovh)</p></td>
+<td><p>finding the vertices of a FoV given the central location (ra[deg], dec[deg]) and the FoV size (fovw [deg], fovh [deg]).</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>flatten</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.altaz">
+<code class="sig-name descname">altaz</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.altaz" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate altazimuth</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>altaz</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>altaz list</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd><p>observing time,</p>
+</dd>
+<dt><strong>observaroty</strong><span class="classifier"><cite>astropy.coordinate</cite></span></dt><dd><p>observaroty location</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.astrotab">
+<code class="sig-name descname">astrotab</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.astrotab" title="Permalink to this definition">¶</a></dt>
+<dd><p>output astropy table (<a class="reference external" href="https://docs.astropy.org/en/stable/table/">https://docs.astropy.org/en/stable/table/</a>)</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+<span class="go">{&#39;n&#39;: array([    0,     1,     2, ..., 27788, 27789, 27790]), &#39;ra&#39;: array([  1.06418,   2.12836,   3.19253, ..., 286.53708, 315.19079, 343.8445 ]), &#39;dec&#39;: array([-20., -20., -20., ...,  88.,  88.,  88.]), &#39;fovra&#39;: array([1., 1., 1., ..., 1., 1., 1.]), &#39;fovdec&#39;: array([1., 1., 1., ..., 1., 1., 1.])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n       ra      dec    fovra   fovdec</span>
+<span class="go">int64  float64  float64 float64 float64</span>
+<span class="go">----- --------- ------- ------- -------</span>
+<span class="go">0   1.06418   -20.0     1.0     1.0</span>
+<span class="go">1   2.12836   -20.0     1.0     1.0</span>
+<span class="go">2   3.19253   -20.0     1.0     1.0</span>
+<span class="go">3   4.25671   -20.0     1.0     1.0</span>
+<span class="go">4   5.32089   -20.0     1.0     1.0</span>
+<span class="go">5   6.38507   -20.0     1.0     1.0</span>
+<span class="go">6   7.44924   -20.0     1.0     1.0</span>
+<span class="go">7   8.51342   -20.0     1.0     1.0</span>
+<span class="go">8    9.5776   -20.0     1.0     1.0</span>
+<span class="go">9  10.64178   -20.0     1.0     1.0</span>
+<span class="go">10  11.70596   -20.0     1.0     1.0</span>
+<span class="go">11  12.77013   -20.0     1.0     1.0</span>
+<span class="go">12  13.83431   -20.0     1.0     1.0</span>
+<span class="go">13  14.89849   -20.0     1.0     1.0</span>
+<span class="gp">... </span>      <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>
+<span class="go">27776 305.71716    87.0     1.0     1.0</span>
+<span class="go">27777 324.82448    87.0     1.0     1.0</span>
+<span class="go">27778 343.93181    87.0     1.0     1.0</span>
+<span class="go">27779  28.65371    88.0     1.0     1.0</span>
+<span class="go">27780  57.30742    88.0     1.0     1.0</span>
+<span class="go">27781  85.96113    88.0     1.0     1.0</span>
+<span class="go">27782 114.61483    88.0     1.0     1.0</span>
+<span class="go">27783 143.26854    88.0     1.0     1.0</span>
+<span class="go">27784 171.92225    88.0     1.0     1.0</span>
+<span class="go">27785 200.57596    88.0     1.0     1.0</span>
+<span class="go">27786 229.22967    88.0     1.0     1.0</span>
+<span class="go">27787 257.88338    88.0     1.0     1.0</span>
+<span class="go">27788 286.53708    88.0     1.0     1.0</span>
+<span class="go">27789 315.19079    88.0     1.0     1.0</span>
+<span class="go">27790  343.8445    88.0     1.0     1.0                </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_airmass">
+<code class="sig-name descname">calc_airmass</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_airmass" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate airmass for tilings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd><p>aismass of each tilings</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_airmass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n        airmass</span>
+<span class="go">int64      float64</span>
+<span class="go">----- ------------------</span>
+<span class="go">0  2.082351877381677</span>
+<span class="go">1 2.0366523500208884</span>
+<span class="go">2 1.9937839280277412</span>
+<span class="go">3 1.9535296936928823</span>
+<span class="go">4  1.915696477565739</span>
+<span class="go">5 1.8801104138666542</span>
+<span class="go">6  1.846615265170311</span>
+<span class="go">7  1.815069130505551</span>
+<span class="go">8 1.7853445670112462</span>
+<span class="go">9 1.7573257899791146</span>
+<span class="go">10 1.7309076785530657</span>
+<span class="go">11  1.705994857597817</span>
+<span class="go">12 1.6824997774744856</span>
+<span class="go">13  1.660343245357579</span>
+<span class="gp">... </span>               <span class="o">...</span>
+<span class="go">27777  2.361500041443534</span>
+<span class="go">27778 2.2815119508872708</span>
+<span class="go">27779 2.2437920691844204</span>
+<span class="go">27780 2.2419237250450905</span>
+<span class="go">27781 2.2787374614856644</span>
+<span class="go">27782 2.3484040877350263</span>
+<span class="go">27783  2.437960365979658</span>
+<span class="go">27784  2.526884196120685</span>
+<span class="go">27785  2.590320402338957</span>
+<span class="go">27786  2.607713411858955</span>
+<span class="go">27787  2.573007412223912</span>
+<span class="go">27788 2.4981055056098107</span>
+<span class="go">27789  2.406259305188414</span>
+<span class="go">27790 2.3215526907548627 </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_dis">
+<code class="sig-name descname">calc_prob_dis</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">triggerobj</em>, <em class="sig-param">nest=None</em>, <em class="sig-param">limdist=400</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_dis" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate each tilings the probability that can reach targeting sources</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>triggerobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+<dt><strong>limdist</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>limiting distance of telescope on targeting sources, e.g. kilonovae, unit in Mpc</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">calc_prob_dis</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n            prob</span>
+<span class="go">int64        float64</span>
+<span class="go">----- ----------------------</span>
+<span class="go">0 2.3419805886408296e-06</span>
+<span class="go">1  2.500055445348643e-06</span>
+<span class="go">2  2.544504009265499e-06</span>
+<span class="go">3  2.719092839650723e-06</span>
+<span class="go">4 2.8069783715468555e-06</span>
+<span class="go">5 2.9320193609482796e-06</span>
+<span class="go">6  2.987128541519283e-06</span>
+<span class="go">7  3.063352038540268e-06</span>
+<span class="go">8  3.097282271848335e-06</span>
+<span class="go">9 3.0991167082713078e-06</span>
+<span class="go">10 3.0892570423443215e-06</span>
+<span class="go">11 3.0842840851790526e-06</span>
+<span class="go">12 3.0677284821807573e-06</span>
+<span class="go">13  3.012545385329722e-06</span>
+<span class="gp">... </span>                   <span class="o">...</span>
+<span class="go">27776  6.781067862926155e-06</span>
+<span class="go">27777  6.553070919138916e-06</span>
+<span class="go">27778  6.553070919138916e-06</span>
+<span class="go">27779 5.4498666141403325e-06</span>
+<span class="go">27780 5.4498666141403325e-06</span>
+<span class="go">27781 4.6269040182437215e-06</span>
+<span class="go">27782  5.144928039011793e-06</span>
+<span class="go">27783  5.144928039011793e-06</span>
+<span class="go">27784  4.688104407494185e-06</span>
+<span class="go">27785  5.341106408103707e-06</span>
+<span class="go">27786  5.628845287057135e-06</span>
+<span class="go">27787  5.388979196318181e-06</span>
+<span class="go">27788  6.781067862926155e-06</span>
+<span class="go">27789  6.181369738911302e-06</span>
+<span class="go">27790  6.553070919138916e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_loc">
+<code class="sig-name descname">calc_prob_loc</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">triggerobj</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_loc" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate each tilings the probability that can cover targeting sources</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>triggerobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">calc_prob_loc</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n            prob</span>
+<span class="go">int64        float64</span>
+<span class="go">----- ----------------------</span>
+<span class="go">0  7.762505447792172e-05</span>
+<span class="go">1 0.00012162028911602872</span>
+<span class="go">2 0.00018488661247951556</span>
+<span class="go">3 0.00027625315863596554</span>
+<span class="go">4 0.00038066692835706515</span>
+<span class="go">5  0.0004793012342172087</span>
+<span class="go">6  0.0005629543081437528</span>
+<span class="go">7  0.0006256609931332212</span>
+<span class="go">8  0.0006782250883419683</span>
+<span class="go">9  0.0005599687530534132</span>
+<span class="go">10 0.00048668849730236496</span>
+<span class="go">11  0.0004166983917616087</span>
+<span class="go">12  0.0003430322368362478</span>
+<span class="go">13  0.0002687973618959957</span>
+<span class="gp">... </span>                   <span class="o">...</span>
+<span class="go">27776 1.6135793843685656e-05</span>
+<span class="go">27777   1.53210855578347e-05</span>
+<span class="go">27778 1.5388783387778718e-05</span>
+<span class="go">27779   9.30311429730731e-06</span>
+<span class="go">27780  8.821616723970638e-06</span>
+<span class="go">27781  7.765044427002605e-06</span>
+<span class="go">27782 1.0692238193097823e-05</span>
+<span class="go">27783 1.2511435412197865e-05</span>
+<span class="go">27784 1.3244990370456746e-05</span>
+<span class="go">27785 1.3703530269145885e-05</span>
+<span class="go">27786 1.3517874076051426e-05</span>
+<span class="go">27787 1.2687796993406217e-05</span>
+<span class="go">27788 1.6181818795770013e-05</span>
+<span class="go">27789 1.5537190545016493e-05</span>
+<span class="go">27790 1.5394664113960722e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_mass">
+<code class="sig-name descname">calc_prob_mass</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">galaxyobj</em>, <em class="sig-param">nside=None</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_prob_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate probability of local luminous mass (galaxies) for each tilings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>galaxyobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstGetGalaxies object</p>
+</dd>
+<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span><span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;GLADE&#39;</span><span class="p">,</span><span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">calc_prob_mass</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n            prob</span>
+<span class="go">int64        float64</span>
+<span class="go">----- ----------------------</span>
+<span class="go">0                    0.0</span>
+<span class="go">1                    0.0</span>
+<span class="go">2                    0.0</span>
+<span class="go">3                    0.0</span>
+<span class="go">4                    0.0</span>
+<span class="go">5                    0.0</span>
+<span class="go">6                    0.0</span>
+<span class="go">7                    0.0</span>
+<span class="go">8                    0.0</span>
+<span class="go">9                    0.0</span>
+<span class="go">10                    0.0</span>
+<span class="go">11                    0.0</span>
+<span class="go">12                    0.0</span>
+<span class="go">13                    0.0</span>
+<span class="gp">... </span>                   <span class="o">...</span>
+<span class="go">27776                    0.0</span>
+<span class="go">27777                    0.0</span>
+<span class="go">27778                    0.0</span>
+<span class="go">27779                    0.0</span>
+<span class="go">27780                    0.0</span>
+<span class="go">27781                    0.0</span>
+<span class="go">27782                    0.0</span>
+<span class="go">27783                    0.0</span>
+<span class="go">27784                    0.0</span>
+<span class="go">27785                    0.0</span>
+<span class="go">27786                    0.0</span>
+<span class="go">27787                    0.0</span>
+<span class="go">27788                    0.0</span>
+<span class="go">27789 0.00024173661941324885</span>
+<span class="go">27790                    0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_solar">
+<code class="sig-name descname">calc_solar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sobj</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate distance of tilings to solar object</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>sobj</strong><span class="classifier"><cite>string</cite></span></dt><dd><dl class="simple">
+<dt>options:  <cite>earth</cite>, <cite>sun</cite>, <cite>earth-moon-barycenter</cite>, <cite>moon</cite>, <cite>mercury</cite>, </dt><dd><p><cite>venus</cite>, <cite>mars</cite>, <cite>jupiter</cite>, <cite>saturn</cite>, <cite>uranus</cite>, <cite>neptune</cite></p>
+</dd>
+</dl>
+</dd>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd><p>distance of each galaxies to selected solar object, unit in deg</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_solar</span><span class="p">(</span><span class="s1">&#39;moon&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n          dist</span>
+<span class="go">deg</span>
+<span class="go">int64      float64</span>
+<span class="go">----- ------------------</span>
+<span class="go">0 111.48230429252158</span>
+<span class="go">1 110.52744709508559</span>
+<span class="go">2 109.57391448903458</span>
+<span class="go">3  108.6217290640065</span>
+<span class="go">4 107.67094152725195</span>
+<span class="go">5 106.72159490501019</span>
+<span class="go">6 105.77374246664934</span>
+<span class="go">7 104.82741217070645</span>
+<span class="go">8 103.88266016978994</span>
+<span class="go">9  102.9395352333374</span>
+<span class="go">10 101.99808772943797</span>
+<span class="go">11 101.05837851768933</span>
+<span class="go">12 100.12044371734643</span>
+<span class="go">13  99.18434776772013</span>
+<span class="gp">... </span>               <span class="o">...</span>
+<span class="go">27777  69.84262000949794</span>
+<span class="go">27778  69.11775063255271</span>
+<span class="go">27779  67.07074034783025</span>
+<span class="go">27780  66.17721327085206</span>
+<span class="go">27781   65.6006729976947</span>
+<span class="go">27782  65.48707626852809</span>
+<span class="go">27783  65.86541699110153</span>
+<span class="go">27784  66.63943402915353</span>
+<span class="go">27785  67.61480362745114</span>
+<span class="go">27786  68.55123667202297</span>
+<span class="go">27787  69.22232875770946</span>
+<span class="go">27788  69.46812448873096</span>
+<span class="go">27789   69.2304760529254</span>
+<span class="go">27790  68.56560022596703</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_solar</span><span class="p">(</span><span class="s1">&#39;sun&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n          dist</span>
+<span class="go">deg</span>
+<span class="go">int64      float64</span>
+<span class="go">----- ------------------</span>
+<span class="go">0  122.6472102176067</span>
+<span class="go">1 121.67138532219919</span>
+<span class="go">2  120.6964468468499</span>
+<span class="go">3 119.72240300080793</span>
+<span class="go">4 118.74929022624694</span>
+<span class="go">5  117.7771365754901</span>
+<span class="go">6 116.80598003086068</span>
+<span class="go">7 115.83583204441057</span>
+<span class="go">8 114.86673232977677</span>
+<span class="go">9 113.89871238597732</span>
+<span class="go">10  112.9318046668423</span>
+<span class="go">11 111.96605169115686</span>
+<span class="go">12 111.00146979487849</span>
+<span class="go">13 110.03810362674838</span>
+<span class="gp">... </span>               <span class="o">...</span>
+<span class="go">27777  71.86662386557985</span>
+<span class="go">27778   71.3055620381576</span>
+<span class="go">27779  69.19218545294606</span>
+<span class="go">27780  68.22709702079628</span>
+<span class="go">27781   67.4870335327892</span>
+<span class="go">27782  67.15772949901837</span>
+<span class="go">27783  67.32279011585291</span>
+<span class="go">27784  67.94023255598934</span>
+<span class="go">27785   68.8543514227436</span>
+<span class="go">27786  69.83825250213873</span>
+<span class="go">27787  70.65206222160572</span>
+<span class="go">27788  71.10037152954308</span>
+<span class="go">27789  71.07656783320597</span>
+<span class="go">27790  70.58629443695105</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.calc_sun">
+<code class="sig-name descname">calc_sun</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.calc_sun" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate sun height for tilings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy</cite></span></dt><dd><p>sun height</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_sun</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Latitude -33.6547778 deg&gt;               </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.checkdata">
+<code class="sig-name descname">checkdata</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.checkdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if PstGetTilings is parsed or not</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>res</strong><span class="classifier"><cite>bool</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.common_ele">
+<em class="property">static </em><code class="sig-name descname">common_ele</code><span class="sig-paren">(</span><em class="sig-param">list1</em>, <em class="sig-param">list2</em>, <em class="sig-param">nullv=-99</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.common_ele" title="Permalink to this definition">¶</a></dt>
+<dd><p>find common elements of list1 inside list2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list1</strong><span class="classifier">sequence</span></dt><dd><p>an index list, to be checked</p>
+</dd>
+<dt><strong>list2</strong><span class="classifier">sequence</span></dt><dd><p>an index list</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ele</strong><span class="classifier">sequence</span></dt><dd><p>common elements</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.cut_contours">
+<code class="sig-name descname">cut_contours</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">triggerobj</em>, <em class="sig-param">cls=None</em>, <em class="sig-param">nest=None</em>, <em class="sig-param">frac=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.cut_contours" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove tilings the probability that can cover targeting sources</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>triggerobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>cls</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>list of confidence level, default: [.5, .9]</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+<dt><strong>frac</strong><span class="classifier"><cite>float</cite> between 0 and 1</span></dt><dd><p>fraction, tiling would be remained when its fraction that covered by a CL region is larger than <cite>float</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">cut_contours</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">{0.9: {&#39;n&#39;: array([0.0000e+00, 1.0000e+00, 2.0000e+00, ..., 2.7781e+04, 2.7782e+04, 2.7783e+04]), &#39;ra&#39;: array([  1.06418,   2.12836,   3.19253, ...,  85.96113, 114.61483, 143.26854]), &#39;dec&#39;: array([-20., -20., -20., ...,  88.,  88.,  88.]), &#39;fovra&#39;: array([1., 1., 1., ..., 1., 1., 1.]), &#39;fovdec&#39;: array([1., 1., 1., ..., 1., 1., 1.])}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.divide_OB">
+<code class="sig-name descname">divide_OB</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">nobw=None</em>, <em class="sig-param">nobh=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.divide_OB" title="Permalink to this definition">¶</a></dt>
+<dd><p>divide each tiling to a serious of sub-tilings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>nobw</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>number of pointings in OB, in ra direction</p>
+</dd>
+<dt><strong>nobh</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>number of pointings in OB, in dec direction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">divide_OB</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=250119&gt;</span>
+<span class="go">n       ra      dec    fovra   fovdec</span>
+<span class="go">int64  float64  float64 float64 float64</span>
+<span class="go">----- --------- ------- ------- -------</span>
+<span class="go">1  -0.00696   -21.0 0.33333 0.33333</span>
+<span class="go">1   1.06418   -21.0 0.33333 0.33333</span>
+<span class="go">1   2.13532   -21.0 0.33333 0.33333</span>
+<span class="go">1       0.0   -20.0 0.33333 0.33333</span>
+<span class="go">1   1.06418   -20.0 0.33333 0.33333</span>
+<span class="go">1   2.12836   -20.0 0.33333 0.33333</span>
+<span class="go">1   0.00656   -19.0 0.33333 0.33333</span>
+<span class="go">1   1.06418   -19.0 0.33333 0.33333</span>
+<span class="go">1    2.1218   -19.0 0.33333 0.33333</span>
+<span class="go">2   1.05722   -21.0 0.33333 0.33333</span>
+<span class="go">2   2.12836   -21.0 0.33333 0.33333</span>
+<span class="go">2    3.1995   -21.0 0.33333 0.33333</span>
+<span class="go">2   1.06418   -20.0 0.33333 0.33333</span>
+<span class="go">2   2.12836   -20.0 0.33333 0.33333</span>
+<span class="gp">... </span>      <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>
+<span class="go">27790 286.53708    88.0 0.33333 0.33333</span>
+<span class="go">27790 315.19079    88.0 0.33333 0.33333</span>
+<span class="go">27790  343.8445    88.0 0.33333 0.33333</span>
+<span class="go">27790  257.8921    89.0 0.33333 0.33333</span>
+<span class="go">27790 315.19079    89.0 0.33333 0.33333</span>
+<span class="go">27790 372.48948    89.0 0.33333 0.33333</span>
+<span class="go">27791 324.73718    87.0 0.33333 0.33333</span>
+<span class="go">27791  343.8445    87.0 0.33333 0.33333</span>
+<span class="go">27791 362.95182    87.0 0.33333 0.33333</span>
+<span class="go">27791 315.19079    88.0 0.33333 0.33333</span>
+<span class="go">27791  343.8445    88.0 0.33333 0.33333</span>
+<span class="go">27791 372.49821    88.0 0.33333 0.33333</span>
+<span class="go">27791 286.54581    89.0 0.33333 0.33333</span>
+<span class="go">27791  343.8445    89.0 0.33333 0.33333</span>
+<span class="go">27791 401.14319    89.0 0.33333 0.33333</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.divide_OB_one">
+<em class="property">static </em><code class="sig-name descname">divide_OB_one</code><span class="sig-paren">(</span><em class="sig-param">rac</em>, <em class="sig-param">decc</em>, <em class="sig-param">fovw</em>, <em class="sig-param">fovh</em>, <em class="sig-param">nobw</em>, <em class="sig-param">nobh</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.divide_OB_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>divide one pointing to a list of sub-pointings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>rac</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>ra center of a tiling</p>
+</dd>
+<dt><strong>decc</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>dec center of a tiling</p>
+</dd>
+<dt><strong>fovw</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>fov in ra direction of a tiling</p>
+</dd>
+<dt><strong>fovh</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>fov in dec direction of a tiling</p>
+</dd>
+<dt><strong>nobw</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>number of pointings in OB, in ra direction</p>
+</dd>
+<dt><strong>nobh</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>number of pointings in OB, in dec direction</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>ra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling ra list</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling dec list</p>
+</dd>
+<dt><strong>fovra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling field of view list in ra direction</p>
+</dd>
+<dt><strong>fovdec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>tiling field of view list in dec direction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">limra=None</em>, <em class="sig-param">limdec=None</em>, <em class="sig-param">fovra=None</em>, <em class="sig-param">fovdec=None</em>, <em class="sig-param">shiftra=None</em>, <em class="sig-param">shiftdec=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>create pointings by tiling sky</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>limra</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: ra range, default: [0, 360]</p>
+</dd>
+<dt><strong>limdec</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: dec range, default: [-90, 90]</p>
+</dd>
+<dt><strong>fovra</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in ra direction</p>
+</dd>
+<dt><strong>fovdec</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in dec direction</p>
+</dd>
+<dt><strong>shiftra</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>ra of initial tiling will be 0 + shiftra</p>
+</dd>
+<dt><strong>shiftdec</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>dec of initial tiling will be 0 + shiftdec</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+<span class="go">{&#39;n&#39;: array([    0,     1,     2, ..., 27788, 27789, 27790]), &#39;ra&#39;: array([  1.06418,   2.12836,   3.19253, ..., 286.53708, 315.19079, 343.8445 ]), &#39;dec&#39;: array([-20., -20., -20., ...,  88.,  88.,  88.]), &#39;fovra&#39;: array([1., 1., 1., ..., 1., 1., 1.]), &#39;fovdec&#39;: array([1., 1., 1., ..., 1., 1., 1.])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n       ra      dec    fovra   fovdec</span>
+<span class="go">int64  float64  float64 float64 float64</span>
+<span class="go">----- --------- ------- ------- -------</span>
+<span class="go">0   1.06418   -20.0     1.0     1.0</span>
+<span class="go">1   2.12836   -20.0     1.0     1.0</span>
+<span class="go">2   3.19253   -20.0     1.0     1.0</span>
+<span class="go">3   4.25671   -20.0     1.0     1.0</span>
+<span class="go">4   5.32089   -20.0     1.0     1.0</span>
+<span class="go">5   6.38507   -20.0     1.0     1.0</span>
+<span class="go">6   7.44924   -20.0     1.0     1.0</span>
+<span class="go">7   8.51342   -20.0     1.0     1.0</span>
+<span class="go">8    9.5776   -20.0     1.0     1.0</span>
+<span class="go">9  10.64178   -20.0     1.0     1.0</span>
+<span class="go">10  11.70596   -20.0     1.0     1.0</span>
+<span class="go">11  12.77013   -20.0     1.0     1.0</span>
+<span class="go">12  13.83431   -20.0     1.0     1.0</span>
+<span class="go">13  14.89849   -20.0     1.0     1.0</span>
+<span class="gp">... </span>      <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>
+<span class="go">27776 305.71716    87.0     1.0     1.0</span>
+<span class="go">27777 324.82448    87.0     1.0     1.0</span>
+<span class="go">27778 343.93181    87.0     1.0     1.0</span>
+<span class="go">27779  28.65371    88.0     1.0     1.0</span>
+<span class="go">27780  57.30742    88.0     1.0     1.0</span>
+<span class="go">27781  85.96113    88.0     1.0     1.0</span>
+<span class="go">27782 114.61483    88.0     1.0     1.0</span>
+<span class="go">27783 143.26854    88.0     1.0     1.0</span>
+<span class="go">27784 171.92225    88.0     1.0     1.0</span>
+<span class="go">27785 200.57596    88.0     1.0     1.0</span>
+<span class="go">27786 229.22967    88.0     1.0     1.0</span>
+<span class="go">27787 257.88338    88.0     1.0     1.0</span>
+<span class="go">27788 286.53708    88.0     1.0     1.0</span>
+<span class="go">27789 315.19079    88.0     1.0     1.0</span>
+<span class="go">27790  343.8445    88.0     1.0     1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.generate_mc">
+<code class="sig-name descname">generate_mc</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">skymap</em>, <em class="sig-param">num</em>, <em class="sig-param">limra=None</em>, <em class="sig-param">limdec=None</em>, <em class="sig-param">fovra=None</em>, <em class="sig-param">fovdec=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.generate_mc" title="Permalink to this definition">¶</a></dt>
+<dd><p>monte carlo approach on shiftra and shiftdec to maxmize trigger probability with a number of pointings</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>skymap</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>num</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>number of pointings</p>
+</dd>
+<dt><strong>limra</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: ra range, default: [0, 360]</p>
+</dd>
+<dt><strong>limdec</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: dec range, default: [-90, 90]</p>
+</dd>
+<dt><strong>fovra</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in ra direction</p>
+</dd>
+<dt><strong>fovdec</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in dec direction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.ipix_in_box">
+<em class="property">static </em><code class="sig-name descname">ipix_in_box</code><span class="sig-paren">(</span><em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">nside</em>, <em class="sig-param">nest</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.ipix_in_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>finding the healpix indices of a given box</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ra</strong><span class="classifier"><cite>float</cite> or <cite>numpy array</cite></span></dt><dd><p>center ra of a box</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>float</cite> or <cite>numpy array</cite></span></dt><dd><p>center dec of a box</p>
+</dd>
+<dt><strong>width</strong><span class="classifier"><cite>float</cite> or <cite>numpy array</cite></span></dt><dd><p>width ra of a box</p>
+</dd>
+<dt><strong>height</strong><span class="classifier"><cite>float</cite> or <cite>numpy array</cite></span></dt><dd><p>height of a box</p>
+</dd>
+<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>indexlist</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>list of indices</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.obstime">
+<em class="property">static </em><code class="sig-name descname">obstime</code><span class="sig-paren">(</span><em class="sig-param">t=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>define observing time</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>t</strong><span class="classifier"><cite>float</cite> or None or astropy.time</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>read pointings from file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;pst_tilings&#39;</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;npz&#39;</span><span class="p">,</span> <span class="n">wdir</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.readfile">
+<code class="sig-name descname">readfile</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.readfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>read pointings from file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>data</strong><span class="classifier"><cite>dictionary</cite></span></dt><dd><p>Tilings: <cite>ra</cite>, <cite>dec</cite>, <cite>fovra</cite>, <cite>fovdec</cite>, <cite>n</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.remove_fields_file">
+<code class="sig-name descname">remove_fields_file</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">wdir=None</em>, <em class="sig-param">nside=None</em>, <em class="sig-param">skipfrac=None</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.remove_fields_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove fields by input file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+<dt><strong>skipfrac</strong><span class="classifier"><cite>float</cite> between 0 and 1</span></dt><dd><p>skipping fraction
+tiling would be skipped when a fraction of it was already covered</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">remove_fields_file</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.remove_fileds_coo">
+<code class="sig-name descname">remove_fileds_coo</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">fovra</em>, <em class="sig-param">fovdec</em>, <em class="sig-param">nside=None</em>, <em class="sig-param">nest=None</em>, <em class="sig-param">skipfrac=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.remove_fileds_coo" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove fields by input coordinate</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>ra list to be skipped</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>dec list to be skipped</p>
+</dd>
+<dt><strong>fovra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>fovra list to be skipped</p>
+</dd>
+<dt><strong>fovdec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>fovdec list to be skipped</p>
+</dd>
+<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+<dt><strong>skipfrac</strong><span class="classifier"><cite>float</cite> between 0 and 1</span></dt><dd><p>skipping fraction
+tiling would be skipped when a fraction of it was already covered</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=27791&gt;</span>
+<span class="go">n       ra      dec    fovra   fovdec</span>
+<span class="go">int64  float64  float64 float64 float64</span>
+<span class="go">----- --------- ------- ------- -------</span>
+<span class="go">0   1.06418   -20.0     1.0     1.0</span>
+<span class="go">1   2.12836   -20.0     1.0     1.0</span>
+<span class="go">2   3.19253   -20.0     1.0     1.0</span>
+<span class="go">3   4.25671   -20.0     1.0     1.0</span>
+<span class="go">4   5.32089   -20.0     1.0     1.0</span>
+<span class="go">5   6.38507   -20.0     1.0     1.0</span>
+<span class="go">6   7.44924   -20.0     1.0     1.0</span>
+<span class="go">7   8.51342   -20.0     1.0     1.0</span>
+<span class="go">8    9.5776   -20.0     1.0     1.0</span>
+<span class="go">9  10.64178   -20.0     1.0     1.0</span>
+<span class="go">10  11.70596   -20.0     1.0     1.0</span>
+<span class="go">11  12.77013   -20.0     1.0     1.0</span>
+<span class="go">12  13.83431   -20.0     1.0     1.0</span>
+<span class="go">13  14.89849   -20.0     1.0     1.0</span>
+<span class="gp">... </span>      <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>
+<span class="go">27776 305.71716    87.0     1.0     1.0</span>
+<span class="go">27777 324.82448    87.0     1.0     1.0</span>
+<span class="go">27778 343.93181    87.0     1.0     1.0</span>
+<span class="go">27779  28.65371    88.0     1.0     1.0</span>
+<span class="go">27780  57.30742    88.0     1.0     1.0</span>
+<span class="go">27781  85.96113    88.0     1.0     1.0</span>
+<span class="go">27782 114.61483    88.0     1.0     1.0</span>
+<span class="go">27783 143.26854    88.0     1.0     1.0</span>
+<span class="go">27784 171.92225    88.0     1.0     1.0</span>
+<span class="go">27785 200.57596    88.0     1.0     1.0</span>
+<span class="go">27786 229.22967    88.0     1.0     1.0</span>
+<span class="go">27787 257.88338    88.0     1.0     1.0</span>
+<span class="go">27788 286.53708    88.0     1.0     1.0</span>
+<span class="go">27789 315.19079    88.0     1.0     1.0</span>
+<span class="go">27790  343.8445    88.0     1.0     1.0   </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">remove_fileds_coo</span><span class="p">([</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],</span><span class="n">skipfrac</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">&lt;Table length=27670&gt;</span>
+<span class="go">n       ra      dec    fovra   fovdec</span>
+<span class="go">int64  float64  float64 float64 float64</span>
+<span class="go">----- --------- ------- ------- -------</span>
+<span class="go">0   1.06418   -20.0     1.0     1.0</span>
+<span class="go">1   2.12836   -20.0     1.0     1.0</span>
+<span class="go">2   3.19253   -20.0     1.0     1.0</span>
+<span class="go">3   4.25671   -20.0     1.0     1.0</span>
+<span class="go">4   5.32089   -20.0     1.0     1.0</span>
+<span class="go">5   6.38507   -20.0     1.0     1.0</span>
+<span class="go">6   7.44924   -20.0     1.0     1.0</span>
+<span class="go">7   8.51342   -20.0     1.0     1.0</span>
+<span class="go">8    9.5776   -20.0     1.0     1.0</span>
+<span class="go">9  10.64178   -20.0     1.0     1.0</span>
+<span class="go">10  11.70596   -20.0     1.0     1.0</span>
+<span class="go">11  12.77013   -20.0     1.0     1.0</span>
+<span class="go">12  13.83431   -20.0     1.0     1.0</span>
+<span class="go">13  14.89849   -20.0     1.0     1.0</span>
+<span class="gp">... </span>      <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>     <span class="o">...</span>
+<span class="go">27776 305.71716    87.0     1.0     1.0</span>
+<span class="go">27777 324.82448    87.0     1.0     1.0</span>
+<span class="go">27778 343.93181    87.0     1.0     1.0</span>
+<span class="go">27779  28.65371    88.0     1.0     1.0</span>
+<span class="go">27780  57.30742    88.0     1.0     1.0</span>
+<span class="go">27781  85.96113    88.0     1.0     1.0</span>
+<span class="go">27782 114.61483    88.0     1.0     1.0</span>
+<span class="go">27783 143.26854    88.0     1.0     1.0</span>
+<span class="go">27784 171.92225    88.0     1.0     1.0</span>
+<span class="go">27785 200.57596    88.0     1.0     1.0</span>
+<span class="go">27786 229.22967    88.0     1.0     1.0</span>
+<span class="go">27787 257.88338    88.0     1.0     1.0</span>
+<span class="go">27788 286.53708    88.0     1.0     1.0</span>
+<span class="go">27789 315.19079    88.0     1.0     1.0</span>
+<span class="go">27790  343.8445    88.0     1.0     1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.run_config">
+<code class="sig-name descname">run_config</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">defconf</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.run_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>read default value for parameters</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>defconf</strong><span class="classifier"><cite>dict</cite></span></dt><dd><p>input parameter settings, if None, use default</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;limdec&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">run_config</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>save tilings to a file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetTilings</span> <span class="kn">import</span> <span class="n">PstGetTilings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetTilings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>set telescope name</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>if not telescope name given, construct with telescope coordinate:
+lon-lat-alt</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetTilings.PstGetTilings.vertices">
+<em class="property">static </em><code class="sig-name descname">vertices</code><span class="sig-paren">(</span><em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">fovw</em>, <em class="sig-param">fovh</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetTilings.PstGetTilings.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>finding the vertices of a FoV given the central location (ra[deg], dec[deg])
+and the FoV size (fovw [deg], fovh [deg]).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ra</strong><span class="classifier"><cite>float</cite>  or <cite>numpy array</cite></span></dt><dd><p>center ra of a box</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>float</cite>  or <cite>numpy array</cite></span></dt><dd><p>center dec of a box</p>
+</dd>
+<dt><strong>fovw</strong><span class="classifier"><cite>float</cite>  or <cite>numpy array</cite></span></dt><dd><p>width ra of a box</p>
+</dd>
+<dt><strong>fovh</strong><span class="classifier"><cite>float</cite>  or <cite>numpy array</cite></span></dt><dd><p>height of a box</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>vertices</strong><span class="classifier"><cite>list</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pstools</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">pstools tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../view.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">view</span></code> – tools for visulazation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cookbook</span></code> – Provide various generic useful functions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC/BY/4.0/International.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/generated/PstGetTilings.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

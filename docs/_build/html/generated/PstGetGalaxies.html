@@ -1,0 +1,881 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pst.pipeline.PstGetGalaxies &#8212; pstools 0.5.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pst-pipeline-pstgetgalaxies">
+<h1>pst.pipeline.PstGetGalaxies<a class="headerlink" href="#pst-pipeline-pstgetgalaxies" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies">
+<em class="property">class </em><code class="sig-prename descclassname">pst.pipeline.PstGetGalaxies.</code><code class="sig-name descname">PstGetGalaxies</code><span class="sig-paren">(</span><em class="sig-param">name=None</em>, <em class="sig-param">ra=None</em>, <em class="sig-param">dec=None</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">gname=None</em>, <em class="sig-param">mag=None</em>, <em class="sig-param">index=None</em>, <em class="sig-param">defconf=None</em>, <em class="sig-param">logger=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies" title="Permalink to this definition">¶</a></dt>
+<dd><p>PstGetGalaxies: Generate, read and process galaxies</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>telescope name, if none, will be constructed with coordinates</p>
+</dd>
+<dt><strong>ra</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies ra list, default: None</p>
+</dd>
+<dt><strong>dec</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies dec list, default: None</p>
+</dd>
+<dt><strong>distance</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies distance list, default: None</p>
+</dd>
+<dt><strong>mag</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies magnitude list, default: None</p>
+</dd>
+<dt><strong>gname</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies name list, default: None</p>
+</dd>
+<dt><strong>index</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>galaxies index list, default: None</p>
+</dd>
+<dt><strong>defconf</strong><span class="classifier"><cite>dict</cite></span></dt><dd><p>default configure, if any PstGetGalaxies parameter was included in defconf dictionary, 
+then its default value would be applied</p>
+</dd>
+<dt><strong>logger</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>logging object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">PstGetTilings</span></code>, <a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PstGetGalaxies</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>see also <a class="reference external" href="https://github.com/saberyoung/pstools/blob/master/notebook/test_galaxies.ipynb">https://github.com/saberyoung/pstools/blob/master/notebook/test_galaxies.ipynb</a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.Galaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Galaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.altaz" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.altaz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">altaz</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate altazimuth</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.astrotab" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.astrotab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">astrotab</span></code></a>(self)</p></td>
+<td><p>output astropy table (<a class="reference external" href="https://docs.astropy.org/en/stable/table/">https://docs.astropy.org/en/stable/table/</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_airmass" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_airmass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_airmass</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate airmass for galaxies</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_dis" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_dis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_dis</span></code></a>(self, triggerobj[, nest])</p></td>
+<td><p>calculate each galaxy the probability from distance distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_loc" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_loc</span></code></a>(self, triggerobj[, nest])</p></td>
+<td><p>calculate the localization probability of each galaxy in their center pixel</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_solar" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_solar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_solar</span></code></a>(self, sobj[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate distance of galaxies to solar object</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_sun" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_sun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_sun</span></code></a>(self[, obstime, lat, lon, alt])</p></td>
+<td><p>calculate sun height for galaxies</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.checkdata" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.checkdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">checkdata</span></code></a>(self)</p></td>
+<td><p>check if PstGetGalaxies is parsed or not</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.generate" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code></a>(self[, limra, limdec, catalog, …])</p></td>
+<td><p>generate galaxies by querying Vizier</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.hpmap" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.hpmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hpmap</span></code></a>(self[, nside, nest])</p></td>
+<td><p>build a healpix map with PstGetGalaxies.data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.obstime" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.obstime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">obstime</span></code></a>([t])</p></td>
+<td><p>define observing time</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.read" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a>(self[, filename, filetype, wdir])</p></td>
+<td><p>read galaxies from file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.readfile" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.readfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readfile</span></code></a>(self[, filename, filetype, wdir])</p></td>
+<td><p>read galaxies from file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.run_config" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a>(self, defconf)</p></td>
+<td><p>read default value for parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.save" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(self[, filetype, filename, wdir])</p></td>
+<td><p>save galaxies to a file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.set_name" title="pst.pipeline.PstGetGalaxies.PstGetGalaxies.set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></a>(self, name)</p></td>
+<td><p>set telescope name</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.altaz">
+<code class="sig-name descname">altaz</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.altaz" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate altazimuth</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>altaz</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>altaz list</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd><p>observing time,</p>
+</dd>
+<dt><strong>observaroty</strong><span class="classifier"><cite>astropy.coordinate</cite></span></dt><dd><p>observaroty location</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.astrotab">
+<code class="sig-name descname">astrotab</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.astrotab" title="Permalink to this definition">¶</a></dt>
+<dd><p>output astropy table (<a class="reference external" href="https://docs.astropy.org/en/stable/table/">https://docs.astropy.org/en/stable/table/</a>)</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=23991&gt;</span>
+<span class="go">n                       name                         ra        dec        distance     mag</span>
+<span class="go">int64                    str82                      float64    float64      float64    float64</span>
+<span class="go">----- -------------------------------------------- ---------- ---------- ------------- --------</span>
+<span class="go">0              37670:ESO217-017:ESO217-017:---    179.586  -50.97639  63.717247595 -20.4313</span>
+<span class="go">1                  --:---:---:20181914-7051317 304.579773 -70.858833 62.2100694769 -22.9563</span>
+<span class="go">2                    17625:NGC1961:NGC1961:---    85.5199   69.37866 63.8005161226 -23.0541</span>
+<span class="go">3 64041:ESO185-054:ESO185-054:20032702-5556498  300.86261 -55.947193 68.8713202645 -22.3002</span>
+<span class="go">4                  --:---:---:00574891+3021083  14.453818  30.352314 78.3041870859 -22.4849</span>
+<span class="go">5       43423:NGC4709:NGC4709:12500394-4122554 192.516449 -41.382072 66.6945103643 -22.6005</span>
+<span class="go">6       15406:NGC1600:NGC1600:04313985-0505099  67.916077  -5.086102 67.2166182679 -21.8334</span>
+<span class="go">7         49025:IC4329:IC4329:13490531-3017452 207.272141 -30.295889 63.8224292971 -22.4189</span>
+<span class="go">8       43924:NGC4782:NGC4782:12543569-1234069 193.648743  -12.56859  69.376260513 -22.2661</span>
+<span class="go">9         62407:IC4765:IC4765:18471814-6319521 281.825623  -63.33115 70.2414517955  -21.838</span>
+<span class="go">10       10302:NGC1060:NGC1060:02431504+3225300  40.812687  32.425011 79.1940957915 -22.2765</span>
+<span class="go">11 57649:ESO137-008:ESO137-008:16154609-6055071 243.942078 -60.918663 63.0029911687 -21.9668</span>
+<span class="go">12 57612:ESO137-006:ESO137-006:16150386-6054261 243.766098 -60.907261 79.8947610861 -22.1526</span>
+<span class="go">13       19622:NGC2258:NGC2258:06474618+7428546 101.942436  74.481842 65.6418095541 -21.7609</span>
+<span class="gp">... </span>                                         <span class="o">...</span>        <span class="o">...</span>        <span class="o">...</span>           <span class="o">...</span>      <span class="o">...</span>
+<span class="go">23976                        --:---:ESO217-006:---    177.444   -52.1222 87.2376818255 -18.6435</span>
+<span class="go">23977                        --:---:ESO576-047:---     201.04    -17.902 98.4997238141 -18.3072</span>
+<span class="go">23978                        --:---:ESO383-019:---     203.45  -37.73178 97.6881556667 -20.9692</span>
+<span class="go">23979                        --:---:ESO383-059:---     205.01  -32.89598  96.216373912 -18.6662</span>
+<span class="go">23980                        --:---:ESO383-084:---    207.186  -35.80501 98.0074344629 -18.7263</span>
+<span class="go">23981                        --:---:ESO383-093:---    207.684  -36.75278 99.6797792736  -20.203</span>
+<span class="go">23982                          --:---:UGC10489:---    249.335   62.74141  88.497194846 -18.5246</span>
+<span class="go">23983                          --:---:UGC10557:---    252.061   13.90453 69.7802767525 -18.4587</span>
+<span class="go">23984                        --:---:ESO102-006:---    262.235  -66.15067 90.7612652378 -19.6995</span>
+<span class="go">23985                        --:---:ESO399-008:---    299.471  -32.46556 82.8182312366 -19.7206</span>
+<span class="go">23986                          --:---:UGC11869:---    329.926   44.35817 85.4620306264 -18.2489</span>
+<span class="go">23987                          --:---:UGC11899:---    331.187   44.94891 83.2020728228 -18.7407</span>
+<span class="go">23988                          --:---:UGC12062:---    337.729   39.44567  80.035795991 -18.5164</span>
+<span class="go">23989                          --:---:UGC12761:---     356.14    6.04077 93.7045229755 -18.4388</span>
+<span class="go">23990                        --:---:ESO215-011:---    164.564  -49.42383 82.4167960688 -19.6501</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_airmass">
+<code class="sig-name descname">calc_airmass</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_airmass" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate airmass for galaxies</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd><p>aismass of each galaxy</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_airmass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n         airmass</span>
+<span class="go">int64       float64</span>
+<span class="go">----- -------------------</span>
+<span class="go">0    2.45822474769971</span>
+<span class="go">1  -1.582820782124962</span>
+<span class="go">2  -2.418465393396415</span>
+<span class="go">3 -2.1552326830446353</span>
+<span class="go">4  -5.836324948920255</span>
+<span class="go">5  1.1808382514756013</span>
+<span class="go">6  -2.100571797667892</span>
+<span class="go">7  -4.409531346475804</span>
+<span class="go">8 -2.3322078594904623</span>
+<span class="go">9 -22.456682403975346</span>
+<span class="go">10  -5.530047411614138</span>
+<span class="go">11  1.4202164017530534</span>
+<span class="go">12   3.035017007059533</span>
+<span class="go">13   3.514106192534303</span>
+<span class="gp">... </span>                <span class="o">...</span>
+<span class="go">2478  -8.050072007646094</span>
+<span class="go">2479  -3.244213057431077</span>
+<span class="go">2480 -1.3238910756227278</span>
+<span class="go">2481   5.675834562202663</span>
+<span class="go">2482   1.285876078526185</span>
+<span class="go">2483   4.697281278442855</span>
+<span class="go">2484 -1.1460986096538353</span>
+<span class="go">2485  -4.839581546710565</span>
+<span class="go">2486  1.2271304406718495</span>
+<span class="go">2487 -3.2252172351830937</span>
+<span class="go">2488 -3.2156676633639614</span>
+<span class="go">2489 -2.6912267582548473</span>
+<span class="go">2490 -1.9772720228546403</span>
+<span class="go">2491  -1.245843683922017</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_dis">
+<code class="sig-name descname">calc_prob_dis</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">triggerobj</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_dis" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate each galaxy the probability from distance distribution.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>triggerobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">calc_prob_dis</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n            prob</span>
+<span class="go">int64        float64</span>
+<span class="go">----- ----------------------</span>
+<span class="go">0  4.689546195431277e-07</span>
+<span class="go">1 1.1885425467637767e-06</span>
+<span class="go">2  7.236225284574737e-08</span>
+<span class="go">3 1.8311021499842933e-07</span>
+<span class="go">4  2.299045888552183e-08</span>
+<span class="go">5  3.970894399243602e-06</span>
+<span class="go">6 1.7237244486275295e-07</span>
+<span class="go">7 1.5800110539396612e-06</span>
+<span class="go">8  9.533719932024894e-08</span>
+<span class="go">9  1.694104788141493e-05</span>
+<span class="go">10 3.6634249776590484e-08</span>
+<span class="go">11 5.3503570784002356e-08</span>
+<span class="go">12                    0.0</span>
+<span class="go">13 1.6129515983493087e-07</span>
+<span class="gp">... </span>                   <span class="o">...</span>
+<span class="go">2477 1.2071687148609212e-08</span>
+<span class="go">2478  2.785388678971533e-08</span>
+<span class="go">2479  6.522168308072937e-08</span>
+<span class="go">2480  4.655106737253541e-05</span>
+<span class="go">2481  5.309869829433903e-07</span>
+<span class="go">2482  6.040797494995478e-07</span>
+<span class="go">2483  8.661872354220442e-09</span>
+<span class="go">2484  4.199977807128782e-06</span>
+<span class="go">2485 3.6786813759222278e-09</span>
+<span class="go">2486  2.787555103923971e-06</span>
+<span class="go">2487  1.508035341020697e-08</span>
+<span class="go">2488 1.3361634353665521e-08</span>
+<span class="go">2489 1.9511270857343716e-08</span>
+<span class="go">2490 2.7607735557675464e-07</span>
+<span class="go">2491 3.0980960021459507e-06</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_loc">
+<code class="sig-name descname">calc_prob_loc</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">triggerobj</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_prob_loc" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate the localization probability of each galaxy in their center pixel</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>triggerobj</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>PstParseTriggers object</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">calc_prob_loc</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n            prob</span>
+<span class="go">int64        float64</span>
+<span class="go">----- ----------------------</span>
+<span class="go">0 1.5637598103792824e-05</span>
+<span class="go">1 4.1564742774336236e-05</span>
+<span class="go">2 7.4099969227877845e-06</span>
+<span class="go">3  1.392453548154686e-05</span>
+<span class="go">4 3.1442444023962773e-07</span>
+<span class="go">5 3.7145227221084495e-05</span>
+<span class="go">6 2.1804973957569932e-05</span>
+<span class="go">7  2.326217672248188e-07</span>
+<span class="go">8  6.785513402446836e-06</span>
+<span class="go">9  9.436367017384702e-08</span>
+<span class="go">10 3.3040075395909226e-07</span>
+<span class="go">11  1.395602640846228e-08</span>
+<span class="go">12  1.958021450430296e-06</span>
+<span class="go">13 2.2640017389577904e-07</span>
+<span class="gp">... </span>                   <span class="o">...</span>
+<span class="go">2477  2.232319447165003e-07</span>
+<span class="go">2478  5.814795979191668e-07</span>
+<span class="go">2479    4.8723962399549e-07</span>
+<span class="go">2480 1.3827155101346376e-06</span>
+<span class="go">2481 2.8209811142971617e-06</span>
+<span class="go">2482  3.430237663418057e-08</span>
+<span class="go">2483 3.3050864016173866e-09</span>
+<span class="go">2484  6.652237415193616e-05</span>
+<span class="go">2485  3.168978960448268e-07</span>
+<span class="go">2486  8.649814370731974e-06</span>
+<span class="go">2487   8.80995743012443e-07</span>
+<span class="go">2488   8.80995743012443e-07</span>
+<span class="go">2489 1.0677603786094531e-06</span>
+<span class="go">2490  1.904402472728465e-05</span>
+<span class="go">2491  0.0001926440173553161</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_solar">
+<code class="sig-name descname">calc_solar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sobj</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate distance of galaxies to solar object</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>sobj</strong><span class="classifier"><cite>string</cite></span></dt><dd><dl class="simple">
+<dt>options:  <cite>earth</cite>, <cite>sun</cite>, <cite>earth-moon-barycenter</cite>, <cite>moon</cite>, <cite>mercury</cite>, </dt><dd><p><cite>venus</cite>, <cite>mars</cite>, <cite>jupiter</cite>, <cite>saturn</cite>, <cite>uranus</cite>, <cite>neptune</cite></p>
+</dd>
+</dl>
+</dd>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy.tab</cite></span></dt><dd><p>distance of each galaxies to selected solar object, unit in deg</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_solar</span><span class="p">(</span><span class="s1">&#39;moon&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n          dist</span>
+<span class="go">deg</span>
+<span class="go">int64      float64</span>
+<span class="go">----- ------------------</span>
+<span class="go">0  53.33330588792869</span>
+<span class="go">1  88.24625042763911</span>
+<span class="go">2  79.55175108487516</span>
+<span class="go">3  78.30869490502155</span>
+<span class="go">4  77.32031077621345</span>
+<span class="go">5  68.09252455916292</span>
+<span class="go">6  80.20545198639483</span>
+<span class="go">7 62.159401885764616</span>
+<span class="go">8  76.97208445032689</span>
+<span class="go">9  53.00344701561276</span>
+<span class="go">10  60.55196604922355</span>
+<span class="go">11 54.169964482303634</span>
+<span class="go">12 104.36704371919019</span>
+<span class="go">13  33.49649104707532</span>
+<span class="gp">... </span>               <span class="o">...</span>
+<span class="go">2478  66.04212038717846</span>
+<span class="go">2479   83.8518979831337</span>
+<span class="go">2480 138.01191140250333</span>
+<span class="go">2481 120.79226149839266</span>
+<span class="go">2482 54.790569376554906</span>
+<span class="go">2483  96.55882206244557</span>
+<span class="go">2484 119.08533624379777</span>
+<span class="go">2485   67.7534238448892</span>
+<span class="go">2486  71.98254120864843</span>
+<span class="go">2487  73.72821267289586</span>
+<span class="go">2488  73.77667723826598</span>
+<span class="go">2489  73.96900697494519</span>
+<span class="go">2490  81.28711502508183</span>
+<span class="go">2491 105.26879312115406</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_solar</span><span class="p">(</span><span class="s1">&#39;sun&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n          dist</span>
+<span class="go">deg</span>
+<span class="go">int64      float64</span>
+<span class="go">----- ------------------</span>
+<span class="go">0 51.959195379172066</span>
+<span class="go">1  76.49962734958095</span>
+<span class="go">2  68.86971807113785</span>
+<span class="go">3  66.63391392017586</span>
+<span class="go">4  70.21262580349818</span>
+<span class="go">5  79.54835437287645</span>
+<span class="go">6  68.73822577642416</span>
+<span class="go">7 50.405703769869724</span>
+<span class="go">8  65.49131587811843</span>
+<span class="go">9 42.359346813019016</span>
+<span class="go">10  48.84373745219334</span>
+<span class="go">11  59.52268646001445</span>
+<span class="go">12 113.02831343004696</span>
+<span class="go">13 21.967900070925094</span>
+<span class="gp">... </span>               <span class="o">...</span>
+<span class="go">2478 56.910345907873406</span>
+<span class="go">2479  75.87621789437932</span>
+<span class="go">2480  130.8055874507337</span>
+<span class="go">2481 132.58578867970064</span>
+<span class="go">2482 61.845696164577355</span>
+<span class="go">2483 100.66624864878354</span>
+<span class="go">2484 108.00146970397446</span>
+<span class="go">2485  57.57861000515114</span>
+<span class="go">2486   83.4599566267763</span>
+<span class="go">2487 63.331472768688236</span>
+<span class="go">2488  63.37667486721704</span>
+<span class="go">2489  62.64938693196699</span>
+<span class="go">2490  69.64205481246496</span>
+<span class="go">2491  93.62311346982547</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_sun">
+<code class="sig-name descname">calc_sun</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">obstime=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">alt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.calc_sun" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate sun height for galaxies</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
+</dd>
+<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>table</strong><span class="classifier"><cite>astropy</cite></span></dt><dd><p>sun height</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">calc_sun</span><span class="p">(</span><span class="n">obstime</span><span class="o">=</span><span class="s1">&#39;2020-01-01 00:00:00&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;Latitude -27.0241102 deg&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.checkdata">
+<code class="sig-name descname">checkdata</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.checkdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if PstGetGalaxies is parsed or not</p>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>res</strong><span class="classifier"><cite>bool</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">limra=None</em>, <em class="sig-param">limdec=None</em>, <em class="sig-param">catalog=None</em>, <em class="sig-param">filtro=None</em>, <em class="sig-param">size=None</em>, <em class="sig-param">limdist=None</em>, <em class="sig-param">limmag=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate galaxies by querying Vizier</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>limra</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>galaxies: ra range, default: [0, 360]</p>
+</dd>
+<dt><strong>limdec</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>galaxies: dec range, default: [-90, 90]</p>
+</dd>
+<dt><strong>limdist</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>galaxies: distance range, default: [0, 1000]
+Notice: depending on the network, it will take time to download Vizier galaxies,</p>
+<blockquote>
+<div><p>we recommend you to download your galaxy dataset, and use the store option to remain the list, 
+so that to be faster for the next time</p>
+</div></blockquote>
+</dd>
+<dt><strong>limmag</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>galaxies: absolute magnitude range, default: [-18, -99]</p>
+</dd>
+<dt><strong>catalog</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>Vizier galaxy catalog, options: <cite>GWGC</cite>, <cite>GLADE</cite>, default: GLADE</p>
+</dd>
+<dt><strong>filtro</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>magnitude filter. <cite>B</cite> and <cite>K</cite> are available for <cite>GLADE</cite> while only <cite>B</cite> available for <cite>GLADE</cite>
+default: B</p>
+</dd>
+<dt><strong>size</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>size of the querying galaxies, -1 for the full query. default: -1</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+<span class="go">{&#39;n&#39;: array([   0,    1,    2, ..., 2489, 2490, 2491]), &#39;name&#39;: array([&#39;28655:NGC3034:NGC3034:09555243+6940469&#39;, &#39;42407:NGC4594:NGC4594:12395949-1137230&#39;, &#39;--:---:---:12564369+2140575&#39;, ..., &#39;--:---:SDSSJ122250.38+155056.9:---&#39;, &#39;--:---:SDSSJ124211.24+074016.0:---&#39;, &#39;--:---:NGC5496:---&#39;], dtype=&#39;&lt;U62&#39;), &#39;ra&#39;: array([148.96846 , 189.997894, 194.182068, ..., 185.71    , 190.547   ,  212.908   ]), &#39;dec&#39;: array([ 69.679703, -11.62307 ,  21.682659, ...,  15.84916 ,   7.6711  , -1.15744 ]), &#39;mag&#39;: array([-19.2115, -19.2974, -18.6564, ..., -18.159 , -18.0476, -18.3384]), &#39;dist&#39;: array([ 4.70228466,  3.65995815,  3.87868462, ..., 24.87682446, 29.75218196, 23.42497082])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">astrotab</span><span class="p">()</span>
+<span class="go">&lt;Table length=2492&gt;</span>
+<span class="go">n                    name                      ra        dec       distance     mag</span>
+<span class="go">int64                 str62                   float64    float64     float64    float64</span>
+<span class="go">----- -------------------------------------- ---------- --------- ------------- --------</span>
+<span class="go">0 28655:NGC3034:NGC3034:09555243+6940469  148.96846 69.679703 4.70228466231 -19.2115</span>
+<span class="go">1 42407:NGC4594:NGC4594:12395949-1137230 189.997894 -11.62307 3.65995814653 -19.2974</span>
+<span class="go">2            --:---:---:12564369+2140575 194.182068 21.682659 3.87868462045 -18.6564</span>
+<span class="go">3 41220:NGC4472:NGC4472:12294679+0800014 187.444992   8.00041 14.6955181559 -20.9739</span>
+<span class="go">4 47404:NGC5194:NGC5194:13295269+4711429 202.469574 47.195259 2.49371678269 -18.3042</span>
+<span class="go">5 10266:NGC1068:NGC1068:02424077-0000478   40.66988  -0.01329 18.4142043388 -21.9158</span>
+<span class="go">6 42831:NGC4649:NGC4649:12434000+1133093 190.916702  11.55261 16.4529675514 -21.3112</span>
+<span class="go">7 33550:NGC3521:NGC3521:11054859-0002092 166.452469   -0.0359 11.2915350655 -20.8638</span>
+<span class="go">8 41361:NGC4486:NGC4486:12304942+1223279 187.705933   12.3911 18.5306296927 -21.4225</span>
+<span class="go">9 29265:NGC3115:NGC3115:10051397-0743068 151.308243  -7.71858 6.51337285663   -19.04</span>
+<span class="go">10              34695:NGC3627:NGC3627:---    170.062   12.9916 12.9133823516 -21.1252</span>
+<span class="go">11   14508:IC0356:IC0356:04074690+6948447   61.94545 69.812431 16.4486586923 -20.9407</span>
+<span class="go">12              69327:NGC7331:NGC7331:---    339.267  34.41562 18.1813685082 -21.6281</span>
+<span class="go">13              27077:NGC2903:NGC2903:---    143.042  21.50141 10.9303004689 -21.0632</span>
+<span class="gp">... </span>                                   <span class="o">...</span>        <span class="o">...</span>       <span class="o">...</span>           <span class="o">...</span>      <span class="o">...</span>
+<span class="go">2477                  34426:NGC3607:---:---    169.227  18.05301 24.9589462382 -21.0361</span>
+<span class="go">2478                 38905:UGC07207:---:---     183.08  37.01366  21.227046734 -18.3744</span>
+<span class="go">2479                  49354:NGC5354:---:---    208.362  40.30397 38.9986946803 -20.7053</span>
+<span class="go">2480                  60315:NGC6368:---:---    261.798  11.54362 32.8410432488 -20.7821</span>
+<span class="go">2481               135878:PGC135878:---:---    344.386    -2.501 38.2733015989 -18.3245</span>
+<span class="go">2482               166072:PGC166072:---:---    50.7864   62.7893 8.30849177211 -18.3676</span>
+<span class="go">2483             2801052:PGC2801052:---:---    315.851  57.28721 13.5503403375 -18.7498</span>
+<span class="go">2484                2802656:NGC5904:---:---    229.639   2.08277 2.39941051318 -19.5605</span>
+<span class="go">2485              38897:NGC4173:NGC4173:---    183.089  29.20702 21.0457642607 -19.2158</span>
+<span class="go">2486     --:---:SDSSJ022739.95-010913.2:---    36.9165  -1.15368 21.2227303453  -18.494</span>
+<span class="go">2487     --:---:SDSSJ123616.69+260006.9:---     189.07  26.00194 25.2571985761 -18.3719</span>
+<span class="go">2488     --:---:SDSSJ123626.88+255738.2:---    189.112  25.96063 20.7004974885 -18.9699</span>
+<span class="go">2489     --:---:SDSSJ122250.38+155056.9:---     185.71  15.84916 24.8768244613  -18.159</span>
+<span class="go">2490     --:---:SDSSJ124211.24+074016.0:---    190.547    7.6711 29.7521819633 -18.0476</span>
+<span class="go">2491                     --:---:NGC5496:---    212.908  -1.15744 23.4249708242 -18.3384</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.hpmap">
+<code class="sig-name descname">hpmap</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">nside=None</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.hpmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>build a healpix map with PstGetGalaxies.data</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>hpmap</strong><span class="classifier">array-like shape (Npix,)</span></dt><dd><p>healpix fits map for trigger localization probability (1d)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.obstime">
+<em class="property">static </em><code class="sig-name descname">obstime</code><span class="sig-paren">(</span><em class="sig-param">t=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>define observing time</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>t</strong><span class="classifier"><cite>float</cite> or None or astropy.time</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>read galaxies from file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;pst_galaxies&#39;</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;npz&#39;</span><span class="p">,</span> <span class="n">wdir</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.readfile">
+<code class="sig-name descname">readfile</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.readfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>read galaxies from file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>data</strong><span class="classifier"><cite>dictionary</cite></span></dt><dd><p>Galaxies: <cite>n</cite>, <cite>ra</cite>, <cite>dec</cite>, <cite>dist</cite>, <cite>mag</cite>, <cite>name</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.run_config">
+<code class="sig-name descname">run_config</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">defconf</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.run_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>read default value for parameters</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>defconf</strong><span class="classifier"><cite>dict</cite></span></dt><dd><p>input parameter settings, if None, use default</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;catalog&#39;</span><span class="p">:</span> <span class="s1">&#39;GWGC&#39;</span><span class="p">,</span> <span class="s1">&#39;limdist&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">run_config</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">wdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>save galaxies to a file</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>name of file</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>type of file, options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file)</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstGetGalaxies</span> <span class="kn">import</span> <span class="n">PstGetGalaxies</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstGetGalaxies</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstGetGalaxies.PstGetGalaxies.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstGetGalaxies.PstGetGalaxies.set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>set telescope name</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>if not telescope name given, construct with telescope coordinate:
+lon-lat-alt</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pstools</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">pstools tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../view.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">view</span></code> – tools for visulazation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cookbook</span></code> – Provide various generic useful functions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC/BY/4.0/International.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/generated/PstGetGalaxies.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

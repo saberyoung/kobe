@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pst.pipeline.PstPrioritization &#8212; pstools 0.5.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pst-pipeline-pstprioritization">
+<h1>pst.pipeline.PstPrioritization<a class="headerlink" href="#pst-pipeline-pstprioritization" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pst.pipeline.PstPrioritization.PstPrioritization">
+<em class="property">class </em><code class="sig-prename descclassname">pst.pipeline.PstPrioritization.</code><code class="sig-name descname">PstPrioritization</code><span class="sig-paren">(</span><em class="sig-param">hpmap=None</em>, <em class="sig-param">fithdr=None</em>, <em class="sig-param">xmlinf=None</em>, <em class="sig-param">defconf=None</em>, <em class="sig-param">logger=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstPrioritization.PstPrioritization" title="Permalink to this definition">¶</a></dt>
+<dd><p>PstPrioritization: optimize searching strategy considering probability and visibility</p>
+<ul class="simple">
+<li><p>implement the following functions:</p></li>
+</ul>
+<p>-&gt; __init__()
+-&gt; run()</p>
+<p class="rubric">Examples</p>
+<p>see also <a class="reference external" href="https://github.com/saberyoung/pstools/blob/master/notebook/test_prio.ipynb">https://github.com/saberyoung/pstools/blob/master/notebook/test_prio.ipynb</a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstPrioritization.PstPrioritization.obstime" title="pst.pipeline.PstPrioritization.PstPrioritization.obstime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">obstime</span></code></a>([t])</p></td>
+<td><p>define observing time</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pst.pipeline.PstPrioritization.PstPrioritization.run" title="pst.pipeline.PstPrioritization.PstPrioritization.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(self, url[, wdir, savefits, nest])</p></td>
+<td><p>parser skymap url, and build PstParseTriggers.data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pst.pipeline.PstPrioritization.PstPrioritization.run_config" title="pst.pipeline.PstPrioritization.PstPrioritization.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a>(self, defconf)</p></td>
+<td><p>read default value for parameters</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pst.pipeline.PstPrioritization.PstPrioritization.obstime">
+<em class="property">static </em><code class="sig-name descname">obstime</code><span class="sig-paren">(</span><em class="sig-param">t=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstPrioritization.PstPrioritization.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>define observing time</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>t</strong><span class="classifier"><cite>float</cite> or None or astropy.time</span></dt><dd><p>observing time.
+None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstPrioritization.PstPrioritization.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">url</em>, <em class="sig-param">wdir=None</em>, <em class="sig-param">savefits=None</em>, <em class="sig-param">nest=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstPrioritization.PstPrioritization.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>parser skymap url, and build PstParseTriggers.data</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>url</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>url of healpix fits</p>
+</dd>
+<dt><strong>savefits</strong><span class="classifier"><cite>string</cite> or None</span></dt><dd><p>save healpix fits or not,
+if None, not save; 
+if a string, savefits would be used to construct the downloaded file.</p>
+</dd>
+<dt><strong>wdir</strong><span class="classifier"><cite>string</cite></span></dt><dd><p>working directory for downloaded healpix file if savefits is not None.</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pst.pipeline.PstPrioritization.PstPrioritization.run_config">
+<code class="sig-name descname">run_config</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">defconf</em><span class="sig-paren">)</span><a class="headerlink" href="#pst.pipeline.PstPrioritization.PstPrioritization.run_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>read default value for parameters</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>defconf</strong><span class="classifier"><cite>dict</cite></span></dt><dd><p>input parameter settings, if None, use default</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pst.pipeline.PstParseTriggers</span> <span class="kn">import</span> <span class="n">PstParseTriggers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">PstParseTriggers</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cls&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="o">.</span><span class="mi">9</span><span class="p">,</span><span class="o">.</span><span class="mi">99</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">run_config</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pstools</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">pstools tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../view.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">view</span></code> – tools for visulazation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cookbook</span></code> – Provide various generic useful functions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC/BY/4.0/International.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/generated/PstPrioritization.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

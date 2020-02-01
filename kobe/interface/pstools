@@ -1,0 +1,181 @@
+#!/usr/bin/env python
+
+"""############################################################################
+2019/1/30 Start version 0.1. Only module avaivale for call..
+2019/3/27 version 0.2. add pstool.py. Init cookbook
+2019/6/22 version 0.3. add slack.py. Possible for multiple telescopes, however limits their FoV composition
+2019/9/17 version 0.4. use class
+""" ############################################################################
+from __future__ import print_function
+from builtins import input
+import argparse,time,sys,os,pst,gcn
+import numpy as np
+
+start_time = time.time()
+description = ">> PStools main algorithm"
+
+if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser(description=description,\
+        formatter_class=argparse.RawTextHelpFormatter)   
+
+    # mandatory
+    parser.add_argument("mode",choices=['gui','slack','cmd'],type=str,\
+        help='''
+        PSTools mode:
+        Gui:     [gui]   Enable gui mode
+        Slack:   [slack] Enable slack mode
+        Command: [cmd]   Enalbe command mode''')
+
+    # optional
+    # for command mode
+    parser.add_argument("-x", dest="task",\
+        help='''
+        tasks to do for cmd mode:
+        [1] Init configuration 
+        [2] Check configuration 
+        [3] Modify configuration 
+        [4] Serve alert 
+        [5] Monitor alert
+        [6] Offline alert 
+        [7] Web tutorial
+        ''')
+    parser.add_argument("-f", dest="fits",\
+        help='trigger map for manual search, '+\
+            'optional: healpix fits or xml voevent')
+    parser.add_argument("-t", dest="tel",\
+        help='specify telescopes, divided with `,`'+\
+            'for multiple telescopes')
+    parser.add_argument("-l",dest='xml',\
+        help='xml file that would be served locally')
+    parser.add_argument("-s", dest='server',\
+        default='eApps',choices=['local','eApps',\
+        'Atlantic_2','Atlantic_3','Linode'],\
+        help='GCN server for serving and listening')
+    parser.add_argument("-p", dest='port',\
+        default='PUBLIC',choices=['PUBLIC','PRIVATE'],\
+        help='GCN port for serving and listening')
+    parser.add_argument("-v", dest="verbose",\
+        default=False,action="store_true",\
+        help='Enable task progress report') 
+
+    # read parameters
+    args = parser.parse_args()
+
+    # decide interface
+    if args.mode == 'gui':  # - GUI
+        pst.pstgui.main()
+
+    elif args.mode == 'slack':  # - SLACK
+        pst.pstslack.main()
+
+    elif args.mode == 'cmd':  # - CMD
+
+        # define task for cmd mode
+        _task = args.task
+        if _task is None:
+            sys.exit('for cmd mode, option -x is required')
+        try:
+            _task = int(_task)
+        except: 
+            sys.exit('option -x can be int number from 1 to 7')
+        if not _task in np.arange(1,8):
+            sys.exit('option -x can be int number from 1 to 7')
+
+        # other args for cmd mode
+        _verbose = args.verbose
+        _server, _port = args.server, args.port    
+
+        # do task
+        if _task == 1:  # - generate configuration
+            if args.tel is None:
+                _tell = input('telescope name:\t')
+            else:
+                _tell = args.tel
+            for _tel in _tell.split(','): 
+                if len(_tel) == 0:continue
+                _config = pst.load_config(_tel)
+                for _class in ['general','telescope']:
+                    if _config[_class]['check']:
+                        print('%s %s is ready, modify it with option 4'%\
+                          (_tel,_class))
+                    else:            
+                        pst.gen_config(_config[_class]['config'],_class)
+
+        elif _task == 2:  # - check configuration
+            if args.tel is None:
+                _config = pst.load_config()
+                if not _config: sys.exit()
+                _tell = _config['general']['params']['react']['telescope']
+                if len(_tell)==0: 
+                    sys.exit('### no tel found from %s'%_config['config'])
+            else: _tell = args.tel
+            for _tel in _tell.split(','): 
+                if len(_tel) == 0:continue
+                _config = pst.load_config(_tel,_verbose=True)
+                if not _config: sys.exit()
+                for _class in ['general','telescope']:
+                    print('- %s %s configuration: %s'%\
+                      (_tel,_class,_config[_class]['check']))
+
+        elif _task == 3:  # - revise configuration
+            if args.tel is None:
+                _config = pst.load_config()
+                if not _config: sys.exit()
+                _tell = _config['general']['params']['react']['telescope']
+                if len(_tell)==0:
+                    sys.exit('### no tel from input or %s'%\
+                         _config['general']['config'])
+            else: _tell = args.tel
+
+            for _tel in _tell.split(','):
+                if len(_tel) == 0:continue
+                for _class in ['general','telescope']:  
+                    _config = pst.load_config(_tel)
+                    if not _config: sys.exit()         
+                    _d = False
+                    while not _d:
+                        answ = input('Modify %s-%s file? (Y/N/Q)'%(_tel,_class))
+                        if answ in ['y','Y']:
+                            pst.choose(_tel,_class,_config)
+                            _d = True
+                        elif answ in ['n','N']:
+                            _d = True
+                        elif answ in ['q','Q']:
+                            sys.exit()
+                        else:
+                            print ('wrong option')
+
+        elif _task == 4:    # - serve alert
+            from gcn.cmdline import serve_main
+            if args.server != 'local':
+                sys.exit('Only local server can be served')
+            if args.xml is None:
+                sys.exit('Pls specify a XML file to serve')
+            _s1,_s2 = pst.lvc_server(_server, _port, _verbose)
+            _info = 'Serve Mode:\thost:%s:port:%s'%(_s1,_s2)
+            if _verbose: print('## %s'%_info)
+            sys.exit(serve_main(args=[args.xml,'--host', '%s:%s'%(_s1,_s2)]))
+
+        elif _task == 5:  # - auto listen alert
+            _s1,_s2 = pst.lvc_server(_server, _port, _verbose)
+            _info = 'Monitor mode: listening host:%s:port:%s'%(_s1,_s2)
+            if _verbose: print('## %s'%_info)
+            gcn.listen(handler = pst.process_gcn, host=_s1, port=_s2)
+
+        elif _task == 6:  # - manual search trigger
+            pst.man_search(args.fits, args.tel, _verbose)
+
+        elif _task == 7:  # - web tutorial
+            _html = 'https://pstools-documentation.readthedocs.io/en/latest/'
+            try:
+                import webbrowser
+                webbrowser.open(_html, new=2)
+                print ('open %s'%_html)
+            except: print ('Failed to open %s'%_html)
+    else:
+        sys.exit('task wrong...')
+
+# done
+print("-"*80)
+print('>>>>> Completed in '+str(int(time.time()-start_time))+' sec\n')
