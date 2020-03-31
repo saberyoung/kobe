@@ -1,4 +1,4 @@
-# KOBE: KilonOvae BEats
+# KOBE: Key Observing Block Establishment
 
 **tutorial**
 https://kobe.readthedocs.io/en/latest/

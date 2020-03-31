@@ -1,0 +1,125 @@
+.. _kbcand:
+   
+:mod:`Candidates`
+===========================================
+
+:ref:`Previous <kbtel>`
+:ref:`Next <kbtrigger>`
+| :ref:`1. Telescope  <kbtel1>`
+
+Besides setting up observatories, the other important elements for observations include: candidates and triggers.
+In this chapter, we show how `KOBE` would deal with `candidates` objects.
+
+Set candidate list
+----------------------------------------
+1. `KOBE` could generate a list of candidates including their coordinates, magnitude and distance:
+
+   .. code-block:: bash
+		
+      >>> from kobe import candidates
+      >>> a=candidates()
+      >>> a.readc(ra=[1,10,30], dec=[-30,20,57])
+      >>> a.candshow(marker='x',color='r')
+      >>> a.savefig('cand')
+
+   .. image:: ../static/cand.png
+      :width: 800
+      :align: center
+      :alt: cand.png
+
+   The same as `pointings`, one could generate candidates via a file:
+   
+   .. code-block:: bash
+		   
+      >>> a.readc_file(filename)   
+   
+2. `KOBE` could simulate a series of candidates depending on trigger informations (which would be described in detail in the :ref:`next chapter <kbtrigger>`):
+   
+   .. code-block:: bash
+
+      >>> from kobe import schedule
+      >>> a = schedule()       
+      >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+      >>> a.sim_candidates(100)
+      >>> a.candidates
+      <Table length=100>
+      n           ra         ...        dist
+      int64      float64       ...      float64
+      ----- ------------------ ... ------------------
+      0       23.115234375 ...  375.9515624386379
+      1       24.169921875 ... 329.81103124515795
+      2 202.93945312499997 ...  298.0457228059061
+      3 20.390624999999996 ...  340.7921527021853
+      4 29.179687500000004 ... 348.23222429754685
+      5 219.46289062499997 ...  209.4316853009612
+      ...                ... ...                ...
+      94  34.89257812499999 ...  312.6570100894105
+      95         234.140625 ... 194.50830434378472
+      96       189.66796875 ...  314.2610304124869
+      97        4.306640625 ...   336.507412048297
+      98  90.08789062499999 ...  136.7218608009585
+      99 223.76953124999997 ... 182.44403569924526
+      >>> a.locshow(cls=[.9])
+      >>> a.candshow(marker='x',color='k')
+      >>> a.savefig('candl')
+      
+   .. image:: ../static/candl.png
+      :width: 800
+      :align: center
+      :alt: candl.png
+
+Lightcurve construction
+----------------------------------------
+
+`KOBE` generate targeting lightcurves via OAC API:
+   
+   .. code-block:: bash
+		
+      >>> from kobe import candidates     
+      >>> a=candidates()
+
+      # suppose we're aiming to detect Kilonova
+      # query via open supernova catalog
+      >>> a.generatelc(tname='AT2017gfo', timeout=60)
+      >>> a.lc
+      <Table length=825>
+      time        magnitude ... e_upper_magnitude
+      float64        float64  ...        str4
+      ------------------- --------- ... -----------------
+      -239.64600000000064     20.44 ...
+      -192.62200000000303     21.39 ...
+      -191.65700000000652     21.34 ...
+      -190.65400000000227     21.26 ...
+      -189.64500000000407      21.1 ...
+      -188.65600000000268     20.58 ...
+      ...       ... ...               ...
+      20.98899999999412     21.46 ...
+      21.008999999998196     21.48 ...
+      24.98899999999412     22.06 ...
+      25.008999999998196     20.21 ...
+      27.98899999999412     19.96 ...
+      28.98899999999412      20.6 ...
+
+      # one can save the lightcurves, for the use of next time
+      >>> a.savelc('tmplc')
+      
+   .. code-block:: bash
+		
+      >>> from kobe import candidates      
+      >>> a=candidates()
+
+      # read lightcurve locally
+      >>> a.readlc('tmplc')
+
+      # show lightcurves in r,g,i and u band without upperlimit
+      >>> a.lcshow(clear=True,showlim=False,filts='rgiu')
+      <Figure size 1280x960 with 1 Axes>      
+      >>> a.savefig('lc')
+
+   .. image:: ../static/lc.png
+      :width: 800
+      :align: center
+      :alt: lc.png
+	    
+:ref:`Previous <kbtel>`
+:ref:`Next <kbtrigger>`

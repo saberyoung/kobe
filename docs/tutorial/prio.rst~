@@ -1,0 +1,21 @@
+.. _kbprio:
+   
+:mod:`Priorization and Optimization`
+===========================================
+
+:ref:`Previous <kbtrigger>`
+    
+Priorization
+----------------------------------------
+
+`Yang et al, 2019 <https://iopscience.iop.org/article/10.3847/1538-4357/ab0e06/meta>`_
+
+.. code-block:: bash
+   >>> from kobe import schedule
+   >>> a.schedule()
+   
+   
+Assessment and optimization
+-------------------------------------------------
+
+:ref:`Previous <kbtrigger>`

@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pointings – define pointing networks for telescope &#8212; KOBE 0.0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/kb_favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kobe.KBpointings.pointings" href="generated/kobe.KBpointings.pointings.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="candidates.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pointings-define-pointing-networks-for-telescope">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope<a class="headerlink" href="#pointings-define-pointing-networks-for-telescope" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pointing">
+<h2>pointing<a class="headerlink" href="#pointing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.pointings.html#kobe.KBpointings.pointings" title="kobe.KBpointings.pointings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointings</span></code></a></p></td>
+<td><p>telescope: define the name and a pointing list for one telescope inherient from tilings and galaxies</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tilings">
+<h2>Tilings<a class="headerlink" href="#tilings" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.html#kobe.KBpointings.tilings" title="kobe.KBpointings.tilings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings</span></code></a>([logger])</p></td>
+<td><p>tilings: Generate, read and process tilings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.generatep.html#kobe.KBpointings.tilings.generatep" title="kobe.KBpointings.tilings.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.generatep</span></code></a>(self, \*\*kwargs)</p></td>
+<td><p>generate pointings by tiling sky</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.readp.html#kobe.KBpointings.tilings.readp" title="kobe.KBpointings.tilings.readp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.readp</span></code></a>(self, filename[, filetype, …])</p></td>
+<td><p>read pointings from file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.removep_coo.html#kobe.KBpointings.tilings.removep_coo" title="kobe.KBpointings.tilings.removep_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.removep_coo</span></code></a>(self, ra, dec, fovra, fovdec)</p></td>
+<td><p>remove fields by input coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.removep_file.html#kobe.KBpointings.tilings.removep_file" title="kobe.KBpointings.tilings.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.removep_file</span></code></a>(self[, split, nest, …])</p></td>
+<td><p>remove fields by input file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.savep.html#kobe.KBpointings.tilings.savep" title="kobe.KBpointings.tilings.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.savep</span></code></a>(self, filename[, filetype, …])</p></td>
+<td><p>save tilings to a file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.tilings.divide_OB.html#kobe.KBpointings.tilings.divide_OB" title="kobe.KBpointings.tilings.divide_OB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.divide_OB</span></code></a>(self, obra, obdec, \*\*kwargs)</p></td>
+<td><p>divide each tiling to a serious of sub-tilings</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="galaxies">
+<h2>Galaxies<a class="headerlink" href="#galaxies" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.html#kobe.KBpointings.galaxies" title="kobe.KBpointings.galaxies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies</span></code></a>([logger])</p></td>
+<td><p>galaxies: Generate (by querying astropy.Vizier),  read and process galaxies</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.generatep.html#kobe.KBpointings.galaxies.generatep" title="kobe.KBpointings.galaxies.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.generatep</span></code></a>(self, \*\*kwargs)</p></td>
+<td><p>generate galaxies by querying Vizier</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.readp.html#kobe.KBpointings.galaxies.readp" title="kobe.KBpointings.galaxies.readp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.readp</span></code></a>(self, filename[, filetype, …])</p></td>
+<td><p>read pointings from file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.removep_coo.html#kobe.KBpointings.galaxies.removep_coo" title="kobe.KBpointings.galaxies.removep_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.removep_coo</span></code></a>(self, ra, dec, fovra, …)</p></td>
+<td><p>remove fields by input coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.removep_file.html#kobe.KBpointings.galaxies.removep_file" title="kobe.KBpointings.galaxies.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.removep_file</span></code></a>(self[, split, nest, …])</p></td>
+<td><p>remove fields by input file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.savep.html#kobe.KBpointings.galaxies.savep" title="kobe.KBpointings.galaxies.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.savep</span></code></a>(self, filename[, filetype, …])</p></td>
+<td><p>save tilings to a file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/kobe.KBpointings.galaxies.galaxies2hpmap.html#kobe.KBpointings.galaxies.galaxies2hpmap" title="kobe.KBpointings.galaxies.galaxies2hpmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">galaxies.galaxies2hpmap</span></code></a>(self[, tracer, …])</p></td>
+<td><p>build a healpix map with KBGetGalaxies.data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/kb.gif" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">KOBE</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">KOBE tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="candidates.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="generated/kobe.KBpointings.pointings.html" title="next chapter">kobe.KBpointings.pointings</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC/BY/4.0/International.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pointings.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -2,9 +2,9 @@
 Licenses
 ********
 
-PSTools License
+KOBE License
 ==============
 
-PSTools is licensed under the GNU General Public License.
+KOBE is licensed under the GNU General Public License.
 
 .. include:: ../LICENSE

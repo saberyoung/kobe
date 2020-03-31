@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>pstools tutorial &#8212; pstools 0.5.1.1 documentation</title>
+    <title>KOBE tutorial &#8212; KOBE 0.0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,9 +12,10 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pipeline – tools dealing with trigger map, tilings and galaxies" href="pipeline.html" />
+    <link rel="next" title="Issues" href="issues.html" />
     <link rel="prev" title="Installation" href="install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,10 +33,27 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="pstools-tutorial">
-<h1>pstools tutorial<a class="headerlink" href="#pstools-tutorial" title="Permalink to this headline">¶</a></h1>
-<p>See the Jupyter Notebook version of this tutorial at
-<a class="reference external" href="https://github.com/saberyoung/pstools/tree/master/notebook">https://github.com/saberyoung/pstools/tree/master/notebook</a></p>
+  <div class="section" id="kobe-tutorial">
+<h1>KOBE tutorial<a class="headerlink" href="#kobe-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Documentation for KOBE is hosted by <a class="reference external" href="http://kobe.readthedocs.org/en/stable/">Read the Docs</a>.</p>
+<div class="section" id="scheme-and-general-settings">
+<h2><a class="reference internal" href="tutorial/scheme.html#kbscheme"><span class="std std-ref">1. Scheme and General settings</span></a><a class="headerlink" href="#scheme-and-general-settings" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="pointing">
+<h2><a class="reference internal" href="tutorial/point.html#kbpoint"><span class="std std-ref">2. Pointing</span></a><a class="headerlink" href="#pointing" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="telescope-and-observatory">
+<h2><a class="reference internal" href="tutorial/tel.html#kbtel"><span class="std std-ref">3. Telescope and Observatory</span></a><a class="headerlink" href="#telescope-and-observatory" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="candidates">
+<h2><a class="reference internal" href="tutorial/cand.html#kbcand"><span class="std std-ref">4. Candidates</span></a><a class="headerlink" href="#candidates" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="triggers">
+<h2><a class="reference internal" href="tutorial/trigger.html#kbtrigger"><span class="std std-ref">5. Triggers</span></a><a class="headerlink" href="#triggers" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="priorization-and-optimization">
+<h2><a class="reference internal" href="tutorial/prio.html#kbprio"><span class="std std-ref">6. Priorization and Optimization</span></a><a class="headerlink" href="#priorization-and-optimization" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -45,7 +63,10 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">pstools</a></h1>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/kb.gif" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">KOBE</a></h1>
 
 
 
@@ -55,22 +76,21 @@
 
 
 <h3>Navigation</h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pstools tutorial</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="view.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">view</span></code> – tools for visulazation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cookbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cookbook</span></code> – Provide various generic useful functions</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">KOBE tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
 <div class="relations">
@@ -78,7 +98,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="pipeline.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+      <li>Next: <a href="issues.html" title="next chapter">Issues</a></li>
   </ul></li>
 </ul>
 </div>

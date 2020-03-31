@@ -1,0 +1,12 @@
+.. _linking-pages:
+
+.. kobe:
+   
+:mod:`general` -- provide various generic useful functions kobe objects
+========================================================================
+
+.. automodule:: kobe.KButils
+    :members:
+    :undoc-members:
+    :inherited-members:
+    :show-inheritance:     

@@ -1,24 +1,17 @@
 from setuptools import setup
-from kobe.__version__ import version
+from kobe.__version__ import version, description
 
 setup(
     name='kobe',
     version=version,
+    description=description,
     python_requires='>=2.7',
-    packages=[
-        'kobe',
-        'kobe.pipeline',
-        'kobe.view',
-        'kobe.circulate',
-        'kobe.interface',
-    ],
+    packages=['kobe'],
     install_requires=[
-        'meander',
         'astropy',
         'numpy',
         'healpy',
         'matplotlib',
-        'astroquery',
     ],
     classifiers=[                     
         'Development Status :: 1 - Planning',

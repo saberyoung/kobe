@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# pstools documentation build configuration file, created by
+# KOBE documentation build configuration file, created by
 # sphinx-quickstart on Fri Nov 21 13:06:27 2008.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -36,16 +36,16 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General substitutions.
-project = u"pstools"
+project = u"KOBE"
 copyright = u"CC/BY/4.0/International"
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
 # The short X.Y version.
-import pst
+import kobe
+version = kobe.__version__
 
-version = pst.__version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -96,16 +96,16 @@ exclude_patterns = [".build/*", "templates/*", "ext/*.rst"]
 # html_title = None
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-# html_short_title = None
+html_short_title = 'kbdoc'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-# html_logo = None
+html_logo = 'static/kb.gif'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-# html_favicon = None
+html_favicon = 'static/kb_favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -152,25 +152,25 @@ html_additional_pages = {
 # html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "pstools-doc"
+htmlhelp_basename = "kobe-doc"
 
 
 # Options for LaTeX output
 # ------------------------
 
 # The paper size ('letter' or 'a4').
-# latex_paper_size = 'letter'
+latex_paper_size = 'letter'
 
 # The font size ('10pt', '11pt' or '12pt').
-# latex_font_size = '10pt'
+latex_font_size = '10pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
-latex_documents = [("index", "pstools.tex", u"pstools Documentation", u"", "manual")]
+latex_documents = [("index", "kobe.tex", u"kobe Documentation", u"", "manual")]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-# latex_logo = None
+latex_logo = 'static/kb.gif'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.

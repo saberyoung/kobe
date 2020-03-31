@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>general – provide various generic useful functions kobe objects &#8212; KOBE 0.5.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="utils"></span><div class="section" id="module-kobe.KButils">
+<span id="general-provide-various-generic-useful-functions-kobe-objects"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects<a class="headerlink" href="#module-kobe.KButils" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="kobe.KButils.utils">
+<em class="property">class </em><code class="sig-prename descclassname">kobe.KButils.</code><code class="sig-name descname">utils</code><a class="headerlink" href="#kobe.KButils.utils" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>provide various generic useful functions kobe objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wdir</strong><span class="classifier">str</span></dt><dd><p>working directory.
+default: ./.</p>
+</dd>
+<dt><strong>clobber</strong><span class="classifier">bool</span></dt><dd><p>if any product has already been parsed, 
+set clobber as True will remove and redo the calculation.
+default: False</p>
+</dd>
+<dt><strong>cls</strong><span class="classifier">list</span></dt><dd><p>confidence levels for contours,
+e.g. cls=[.5, .9] represent 50% and 90% CL contours.      
+default: None (no contours).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>sss</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.ckdir" title="kobe.KButils.utils.ckdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code></a>(self, \*\*kwargs)</p></td>
+<td><p>check working directory, see if it’s exists, and if readable/writable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.ckpython" title="kobe.KButils.utils.ckpython"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code></a>(self)</p></td>
+<td><p>check python version</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.common_ele" title="kobe.KButils.utils.common_ele"><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code></a>(self, list1, list2[, nullv])</p></td>
+<td><p>find the common elements of 2 lists</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.flatten" title="kobe.KButils.utils.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code></a>(self, _list[, nullv])</p></td>
+<td><p>flatten a sequence if it’s a sequence of sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.gcn_server" title="kobe.KButils.utils.gcn_server"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code></a>(_server, _port)</p></td>
+<td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.getkeys" title="kobe.KButils.utils.getkeys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code></a>(self, kwargs[, _class])</p></td>
+<td><p>get specific kwargs for kobe and external function calls.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.ipix_in_box" title="kobe.KButils.utils.ipix_in_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code></a>(self, ra, dec, width, height, …)</p></td>
+<td><p>finding the healpix indices of a given box</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.is_seq" title="kobe.KButils.utils.is_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq</span></code></a>(o)</p></td>
+<td><p>Check if the object is a sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.is_seq_of_seq" title="kobe.KButils.utils.is_seq_of_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code></a>(self, o)</p></td>
+<td><p>Check if the object is a sequence of sequences</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.readlist" title="kobe.KButils.utils.readlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code></a>(self[, filename, filetype, split, keys])</p></td>
+<td><p>read data from a file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.setkeys" title="kobe.KButils.utils.setkeys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code></a>(self, kwargs)</p></td>
+<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kobe.KButils.utils.vertices" title="kobe.KButils.utils.vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code></a>(ra, dec, fovw, fovh)</p></td>
+<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kobe.KButils.utils.writelist" title="kobe.KButils.utils.writelist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code></a>(self[, filename, filetype, split, …])</p></td>
+<td><p>write data to a file</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="kobe.KButils.utils.ckdir">
+<code class="sig-name descname">ckdir</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.ckdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>check working directory,
+see if it’s exists, and if readable/writable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wdir</strong><span class="classifier">str</span></dt><dd><p>working directory</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.ckpython">
+<code class="sig-name descname">ckpython</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.ckpython" title="Permalink to this definition">¶</a></dt>
+<dd><p>check python version</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.common_ele">
+<code class="sig-name descname">common_ele</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">list1</em>, <em class="sig-param">list2</em>, <em class="sig-param">nullv=-99</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.common_ele" title="Permalink to this definition">¶</a></dt>
+<dd><p>find the common elements of 2 lists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list1</strong><span class="classifier">sequence</span></dt><dd><p>an index list</p>
+</dd>
+<dt><strong>list2</strong><span class="classifier">sequence</span></dt><dd><p>an index list</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>mask</strong><span class="classifier">sequence</span></dt><dd><p>a bool list, that indeces of common elements is True, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kobe.KButils.utils.defkwargs">
+<code class="sig-name descname">defkwargs</code><em class="property"> = {'clobber': False, 'cls': None, 'wdir': './'}</em><a class="headerlink" href="#kobe.KButils.utils.defkwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>default parameter settings</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kobe.KButils.utils.exkwargs">
+<code class="sig-name descname">exkwargs</code><em class="property"> = {'coord': ['coord'], 'graticule': ['dpar', 'dmer', 'coord', 'local'], 'healpixview': ['coord', 'unit', 'xsize', 'title', 'nest', 'min', 'max', 'flip', 'remove_dip', 'remove_mono', 'gal_cut', 'format', 'format2', 'cbar', 'notext', 'norm', 'hold', 'margins', 'sub'], 'matplotlib': ['figsize', 'dpi', 'facecolor', 'edgecolor', 'frameon', 'clear'], 'pixtool': ['nest'], 'projplot': ['ms', 'label', 'marker', 'color', 'coord'], 'readmap': ['dtype', 'nest', 'partial', 'hdu', 'verbose', 'memmap'], 'savefig': ['dpi', 'transparent', 'pad_inches', 'format'], 'writemap': ['nest', 'coord', 'overwrite']}</em><a class="headerlink" href="#kobe.KButils.utils.exkwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>set parameters for external package calls: healpy, matplotlib, etc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.flatten">
+<code class="sig-name descname">flatten</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">_list</em>, <em class="sig-param">nullv=-99</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>flatten a sequence if it’s a sequence of sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>_list</strong><span class="classifier">sequence</span></dt><dd><p>a list</p>
+</dd>
+<dt><strong>nullv</strong><span class="classifier">float</span></dt><dd><p>if the lengths of sequences are not the same,
+fill in the shorter ones with nullv, so that they have the same length</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>mask</strong><span class="classifier">sequence</span></dt><dd><p>a bool list, that indeces of common elements is True, otherwise False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.gcn_server">
+<em class="property">static </em><code class="sig-name descname">gcn_server</code><span class="sig-paren">(</span><em class="sig-param">_server</em>, <em class="sig-param">_port</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.gcn_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>get host and port so that pygcn could use for monitoring triggers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>_server:</strong></dt><dd><p>local, eApps, Atlantic_2, Atlantic_3, Linode</p>
+</dd>
+<dt><strong>_port:</strong></dt><dd><p>public, LVC, AMON</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.getkeys">
+<code class="sig-name descname">getkeys</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">kwargs</em>, <em class="sig-param">_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.getkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>get specific kwargs for kobe and external function calls.
+e.g. _class=’matplotlib’ will return all matplotlib parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.ipix_in_box">
+<code class="sig-name descname">ipix_in_box</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">nside</em>, <em class="sig-param">nest</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.ipix_in_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>finding the healpix indices of a given box</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ra,dec,width,height</strong><span class="classifier">sequence, or single number</span></dt><dd><p>the center and size of a vertice box</p>
+</dd>
+<dt><strong>nside</strong><span class="classifier">int</span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier">bool</span></dt><dd><p>healpix ordering options: 
+if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ipix_in_box</strong><span class="classifier">list</span></dt><dd><p>a sequence of healpix indices</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.is_seq">
+<em class="property">static </em><code class="sig-name descname">is_seq</code><span class="sig-paren">(</span><em class="sig-param">o</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.is_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the object is a sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>o</strong><span class="classifier">any object</span></dt><dd><p>The object to check</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>is_seq</strong><span class="classifier">bool, scalar</span></dt><dd><p>True if <em>o</em> is a sequence, False otherwise</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.is_seq_of_seq">
+<code class="sig-name descname">is_seq_of_seq</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">o</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.is_seq_of_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the object is a sequence of sequences</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>o</strong><span class="classifier">any object</span></dt><dd><p>The object to check</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>is_seq_of_seq</strong><span class="classifier">bool</span></dt><dd><p>True if <em>o</em> is a sequence of sequences, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.readlist">
+<code class="sig-name descname">readlist</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">split=' '</em>, <em class="sig-param">keys=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.readlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>read data from a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>name of file, basename is needed (without dirname)</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier">string</span></dt><dd><p>type of file
+options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file), <cite>fits</cite> (astropy.fits)</p>
+</dd>
+<dt><strong>split</strong><span class="classifier">string</span></dt><dd><p>if filetype is txt, the string defined to split each lines
+default: ‘ ‘ (space)</p>
+</dd>
+<dt><strong>keys</strong><span class="classifier">sequence</span></dt><dd><p>keys that read from file and construct data</p>
+</dd>
+<dt><strong>Other Parameters</strong></dt><dd></dd>
+<dt><strong>———-</strong></dt><dd></dd>
+<dt><strong>wdir</strong><span class="classifier">string</span></dt><dd><p>working directory</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">dictionary</span></dt><dd><p>a dictionary</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.setkeys">
+<code class="sig-name descname">setkeys</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.setkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>set kobe key arguments:
+if one kwarg provide, set it, otherwise use default</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wdir</strong><span class="classifier">str</span></dt><dd><p>working directory</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kobe.KButils.utils.version">
+<code class="sig-name descname">version</code><em class="property"> = 1.0</em><a class="headerlink" href="#kobe.KButils.utils.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>kobe class version</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.vertices">
+<em class="property">static </em><code class="sig-name descname">vertices</code><span class="sig-paren">(</span><em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">fovw</em>, <em class="sig-param">fovh</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>finding the vertices of a FoV by giving:
+the central location, i.e. ra, dec in deg) 
+and the FoV size: fovw, fovh in deg</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kobe.KButils.utils.writelist">
+<code class="sig-name descname">writelist</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">split=' '</em>, <em class="sig-param">keys=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KButils.utils.writelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>write data to a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>name of file, basename is needed (without dirname)</p>
+</dd>
+<dt><strong>filetype</strong><span class="classifier">string</span></dt><dd><p>type of file
+options: <cite>txt</cite> (plain text), <cite>npz</cite> (pickle file), <cite>fits</cite> (astropy.fits)</p>
+</dd>
+<dt><strong>split</strong><span class="classifier">string</span></dt><dd><p>if filetype is txt, the string defined to split each lines
+default: ‘ ‘ (space)</p>
+</dd>
+<dt><strong>keys</strong><span class="classifier">sequence</span></dt><dd><p>keys that read from file and construct data</p>
+</dd>
+<dt><strong>Other Parameters</strong></dt><dd></dd>
+<dt><strong>———-</strong></dt><dd></dd>
+<dt><strong>wdir</strong><span class="classifier">string</span></dt><dd><p>working directory</p>
+</dd>
+<dt><strong>clobber</strong><span class="classifier">bool</span></dt><dd><p>if any products already available in self, clobber=True will redo it</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p><a class="reference internal" href="#utils"><span class="std std-ref">KButils</span></a></p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">KOBE</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">KOBE tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC/BY/4.0/International.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

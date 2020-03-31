@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Installation &#8212; pstools 0.5.1.1 documentation</title>
+    <title>Installation &#8212; KOBE 0.0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,10 +12,11 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pstools tutorial" href="tutorial.html" />
-    <link rel="prev" title="Welcome to the pstools documentation" href="index.html" />
+    <link rel="next" title="KOBE tutorial" href="tutorial.html" />
+    <link rel="prev" title="Welcome to the KOBE documentation" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,78 +37,69 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>PSTools depends on several python libraries, e.g. <a class="reference external" href="https://healpy.readthedocs.io/en/latest/">healpy</a>,
+<p><cite>KOBE</cite> depends on several python libraries, e.g. <a class="reference external" href="https://healpy.readthedocs.io/en/latest/">healpy</a>,
 <a class="reference external" href="https://matplotlib.org/">matplotlib</a>, <a class="reference external" href="https://www.astropy.org/">astropy</a>, etc
-(see <a class="reference external" href="https://github.com/saberyoung/pstools/blob/master/requirements.txt">full list</a>).
-If you adopt pip approach, you need to do: pip install pstools –user,
-all the libraries that needed by PSTools can be installed via pip.
-If you use source setup installation, you can do: pip install -r requirements.txt,
-and pip would install them automatically so you do not need to
-install them yourself.
-If you prefer bash to the setup, <a class="reference external" href="https://astroconda.readthedocs.io/en/latest/">astrocond</a>
-is suggested, and then you need to install a few libraries if needed.</p>
-<p>As an option, PSTools employ <a class="reference external" href="https://github.com/lpsinger/pygcn">pygcn</a> to
-listens for VOEvent XML format notices over
-the custom TCP/IP VOEvent Transport Protocol,
-Thus, if you intend to activate such function,
-please verify your machine has network, which is not private.</p>
-<p>Note that only Linux and MAC OS have been tested, for Windows everything reamins unknown.
-Considering the Python version, the tool is working for Python 2/3.</p>
-</div>
-<div class="section" id="bash-installation-recommended">
-<h2>Bash installation (RECOMMENDED)<a class="headerlink" href="#bash-installation-recommended" title="Permalink to this headline">¶</a></h2>
-<p>You can download the source files from <a class="reference external" href="https://github.com/saberyoung/pstools.git">pstools repository</a> with
-the <code class="docutils literal notranslate"><span class="pre">git</span></code> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">saberyoung</span><span class="o">/</span><span class="n">pstools</span><span class="o">.</span><span class="n">git</span>
+(see <a class="reference external" href="https://github.com/saberyoung/kobe/blob/master/requirements.txt">full list</a>),
+and all of them could be installed via <cite>pip</cite>, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
-<p>which would create one directory appear in the current path, e.g. <code class="docutils literal notranslate"><span class="pre">/home/xxx/pstools/</span></code>.
-Then, you need to add one line in your bash (if you use bash):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">pstools_init</span><span class="o">=</span><span class="s2">&quot;source /home/xxx/pstools/pst.bash&quot;</span>
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only Linux and MAC OS have been tested, for Windows everything reamins unknown.</p></li>
+<li><p>Considering the Python version, the tool is working for Python 2/3.</p></li>
+</ul>
 </div>
-<p>After you source your bash file, you can then initial pstools by:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">iraf27</span><span class="o">/</span><span class="n">astroconda</span>
-<span class="n">pstools_init</span>
-</pre></div>
 </div>
-<p>This approach would not install the pipeline, but instead call python via envirnmental defination,
-which is light and easy.</p>
-</div>
-<div class="section" id="source-installation-with-pypi">
-<h2>Source installation with Pypi<a class="headerlink" href="#source-installation-with-pypi" title="Permalink to this headline">¶</a></h2>
-<p>It is possible to build the latest <code class="docutils literal notranslate"><span class="pre">pstools</span></code> with <a class="reference external" href="http://www.pip-installer.org">pip</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pstools</span>
+<div class="section" id="source-installation-with-pypi-recommended">
+<h2>Source installation with Pypi (RECOMMENDED)<a class="headerlink" href="#source-installation-with-pypi-recommended" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to build the latest <code class="docutils literal notranslate"><span class="pre">kobe</span></code> with <a class="reference external" href="http://www.pip-installer.org">pip</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">kobe</span>
 </pre></div>
 </div>
 <p>If you have installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you can keep your installation up to date
 by upgrading from time to time:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pstools</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">kobe</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="almost-as-quick-installation-from-official-source-release">
 <h2>Almost-as-quick installation from official source release<a class="headerlink" href="#almost-as-quick-installation-from-official-source-release" title="Permalink to this headline">¶</a></h2>
-<p>PSTools is also available in the
-<a class="reference external" href="https://pypi.org/project/pstools/">Python Package Index (PyPI)</a>. You can
+<p>KOBE is also available in the
+<a class="reference external" href="https://pypi.org/project/kobe/">Python Package Index (PyPI)</a>. You can
 download it with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">files</span><span class="o">.</span><span class="n">pythonhosted</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="mi">1</span><span class="n">c</span><span class="o">/</span><span class="n">d5</span><span class="o">/</span><span class="mi">42</span><span class="n">cb34cd80b1049b2f4352f17e9277344a25ee07edc8557d9abf9e963147</span><span class="o">/</span><span class="n">pstools</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">3.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">files</span><span class="o">.</span><span class="n">pythonhosted</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="mi">1</span><span class="n">c</span><span class="o">/</span><span class="n">d5</span><span class="o">/</span><span class="mi">42</span><span class="n">cb34cd80b1049b2f4352f17e9277344a25ee07edc8557d9abf9e963147</span><span class="o">/</span><span class="n">kobe</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">1.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 </pre></div>
 </div>
 <p>and build it with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="o">-</span><span class="n">xzf</span> <span class="n">pstools</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">3.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="o">-</span><span class="n">xzf</span> <span class="n">kobe</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">1.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="bash-installation">
+<h2>Bash installation<a class="headerlink" href="#bash-installation" title="Permalink to this headline">¶</a></h2>
+<p>You can download the source files from <a class="reference external" href="https://github.com/saberyoung/kobe.git">KOBE repository</a> with
+the <code class="docutils literal notranslate"><span class="pre">git</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">saberyoung</span><span class="o">/</span><span class="n">kobe</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>which would create one directory in the current path, e.g. <code class="docutils literal notranslate"><span class="pre">/home/xxx/kobe/</span></code>.
+Then, you need to source the shell file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xxx</span><span class="o">/</span><span class="n">kobe</span><span class="o">/</span><span class="n">kobe</span><span class="o">.</span><span class="n">bash</span>
+</pre></div>
+</div>
+<p>This approach would not install the pipeline, but instead call python via envirnmental defination,
+which is light and easy.</p>
 </div>
 <div class="section" id="check">
 <h2>Check<a class="headerlink" href="#check" title="Permalink to this headline">¶</a></h2>
 <p>If everything goes fine, you can test it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pst</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pst</span><span class="o">.</span><span class="n">__version__</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">kobe</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">kobe</span><span class="o">.</span><span class="n">__version__</span>
+<span class="s1">&#39;0.0.0.1&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -124,12 +116,12 @@ then run:</p>
 <h2>Uninstall<a class="headerlink" href="#uninstall" title="Permalink to this headline">¶</a></h2>
 <p>For uninstallation, one can easily delete the files directly.
 In order to know the file path, you should start python in correct environment and do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pst</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pst</span><span class="o">.</span><span class="n">__path__</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">kobe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kobe</span><span class="o">.</span><span class="n">__path__</span>
 </pre></div>
 </div>
-<p>Another approach is to remove via pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">pstools</span>
+<p>Another approach is to remove it via pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">kobe</span>
 </pre></div>
 </div>
 </div>
@@ -142,7 +134,10 @@ In order to know the file path, you should start python in correct environment a
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">pstools</a></h1>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/kb.gif" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">KOBE</a></h1>
 
 
 
@@ -154,28 +149,27 @@ In order to know the file path, you should start python in correct environment a
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">pstools tutorial</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipeline</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="view.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">view</span></code> – tools for visulazation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cookbook.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cookbook</span></code> – Provide various generic useful functions</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">KOBE tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to the pstools documentation</a></li>
-      <li>Next: <a href="tutorial.html" title="next chapter">pstools tutorial</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to the KOBE documentation</a></li>
+      <li>Next: <a href="tutorial.html" title="next chapter">KOBE tutorial</a></li>
   </ul></li>
 </ul>
 </div>
