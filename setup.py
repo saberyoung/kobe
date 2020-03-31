@@ -2,7 +2,7 @@ from setuptools import setup
 from kobe.__version__ import version, description
 
 setup(
-    name='kobe',
+    name='astrokobe',
     version=version,
     description=description,
     python_requires='>=2.7',

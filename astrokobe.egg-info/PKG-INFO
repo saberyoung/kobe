@@ -1,0 +1,12 @@
+Metadata-Version: 1.2
+Name: astrokobe
+Version: 0.0.0.1
+Summary: KOBE: Key Observing Block Establishment
+Home-page: UNKNOWN
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Requires-Python: >=2.7
