@@ -1,7 +1,7 @@
 from __future__ import print_function
 from shutil import rmtree
 import os,sys
-from pst.__version__ import version
+from kobe.__version__ import version
 
 if __name__ == '__main__':
     here = os.path.abspath(os.path.dirname(__file__))
