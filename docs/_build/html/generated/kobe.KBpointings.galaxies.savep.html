@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="telescope – tools dealing with trigger map, tilings and galaxies" href="../telescope.html" />
-    <link rel="prev" title="kobe.KBpointings.galaxies.removep_file" href="kobe.KBpointings.galaxies.removep_file.html" />
+    <link rel="prev" title="kobe.KBpointings.galaxies.reportp" href="kobe.KBpointings.galaxies.reportp.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -37,7 +37,7 @@
 <h1>kobe.KBpointings.galaxies.savep<a class="headerlink" href="#kobe-kbpointings-galaxies-savep" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="kobe.KBpointings.galaxies.savep">
-<code class="sig-prename descclassname">galaxies.</code><code class="sig-name descname">savep</code><span class="sig-paren">(</span><em class="sig-param">self, filename, filetype='npz', split=' ', keys=['n', 'ra', 'dec', 'name', 'dist', 'mag'], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.galaxies.savep" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">galaxies.</code><code class="sig-name descname">savep</code><span class="sig-paren">(</span><em class="sig-param">self, filename, filetype='npz', split=' ', data=None, keys=['n', 'ra', 'dec', 'name', 'dist', 'mag'], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.galaxies.savep" title="Permalink to this definition">¶</a></dt>
 <dd><p>save tilings to a file</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -59,7 +59,7 @@ default: ‘ ‘ (space)</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kobe</span> <span class="kn">import</span> <span class="n">galaxies</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">galaxies</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>               
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">save_pointings</span><span class="p">(</span><span class="s1">&#39;tmp.npz&#39;</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;npz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">savep</span><span class="p">(</span><span class="s1">&#39;tmp.npz&#39;</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">&#39;npz&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -95,11 +95,11 @@ default: ‘ ‘ (space)</p>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -109,7 +109,7 @@ default: ‘ ‘ (space)</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a><ul>
   <li><a href="kobe.KBpointings.galaxies.html">kobe.KBpointings.galaxies</a><ul>
-      <li>Previous: <a href="kobe.KBpointings.galaxies.removep_file.html" title="previous chapter">kobe.KBpointings.galaxies.removep_file</a></li>
+      <li>Previous: <a href="kobe.KBpointings.galaxies.reportp.html" title="previous chapter">kobe.KBpointings.galaxies.reportp</a></li>
       <li>Next: <a href="../telescope.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
   </ul></li>
   </ul></li>

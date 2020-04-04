@@ -28,7 +28,11 @@ class candidates(vcandidates):
         '''
         target lightcurve
         '''
-        
+
+        hpmapc = None
+        '''
+        healpix map for candidates
+        '''
         def __init__(self, logger=None, **kwargs):
                 """
                 initialize candidate object
@@ -161,6 +165,43 @@ class candidates(vcandidates):
                         _data.append(np.array(_r[_key]))
                 self.candidates = Table(_data, names=keys)    
 
+        def cmap(self, tracer='l', nside=512, nest=False):
+                """build a healpix map for candidates
+        
+                Parameters
+                ------------
+                tracer :      `str`
+                  what was used to build the galaxy healpy map
+                  options: [c]ounts, [l]uminosities
+                nside :      `int`
+                  healpix nside parameter, must be a power of 2, less than 2**30
+                nest :       `bool`
+                  healpix ordering options: 
+                  if True, healpix map use `nest` ordering, otherwise, use `ring` instead
+
+                from kobe import galaxies
+                >>> a=galaxies()
+                >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])
+                >>> a.gmap(tracer='l', nside=512, nest=False)
+                >>> a.hpmapm
+                array([0., 0., 0., ..., 0., 0., 0.])
+                """                                 
+                if self.candidates is None:
+                        self.logger.info ('Warning: pointings not parsed')
+                        return
+                
+                hpx = np.zeros(hp.nside2npix(nside))
+                theta, phi = np.pi/2.-np.radians(self.data['dec']),np.radians(self.data['ra'])
+                ipix = hp.ang2pix(nside,theta,phi,nest=nest)
+                if tracer == 'l':
+                        hpx[ipix] += 10**((-1)*(self.data['mag']/2.5))
+                elif tracer == 'c':
+                        hpx[ipix] += 1
+                else:
+                        self.logger.info ('Error: wrong tracer option')
+                        return
+                self.hpmapc = hpx/sum(hpx)
+                
         def generatelc(self, db='https://api.astrocats.space/', tname='AT2017gfo',
                        keys = ['time','magnitude','band','upperlimit',
                                'e_time','e_lower_time','e_upper_time',

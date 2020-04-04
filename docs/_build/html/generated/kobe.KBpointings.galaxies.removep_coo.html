@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kobe.KBpointings.galaxies.removep_file" href="kobe.KBpointings.galaxies.removep_file.html" />
-    <link rel="prev" title="kobe.KBpointings.galaxies.readp" href="kobe.KBpointings.galaxies.readp.html" />
+    <link rel="prev" title="kobe.KBpointings.galaxies.readp_file" href="kobe.KBpointings.galaxies.readp_file.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -37,7 +37,7 @@
 <h1>kobe.KBpointings.galaxies.removep_coo<a class="headerlink" href="#kobe-kbpointings-galaxies-removep-coo" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="kobe.KBpointings.galaxies.removep_coo">
-<code class="sig-prename descclassname">galaxies.</code><code class="sig-name descname">removep_coo</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">fovra</em>, <em class="sig-param">fovdec</em>, <em class="sig-param">nside=512</em>, <em class="sig-param">nest=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.galaxies.removep_coo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">galaxies.</code><code class="sig-name descname">removep_coo</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ra</em>, <em class="sig-param">dec</em>, <em class="sig-param">fovra</em>, <em class="sig-param">fovdec</em>, <em class="sig-param">data=None</em>, <em class="sig-param">nside=512</em>, <em class="sig-param">nest=False</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.galaxies.removep_coo" title="Permalink to this definition">¶</a></dt>
 <dd><p>remove fields by input coordinate</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -61,9 +61,9 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kobe</span> <span class="kn">import</span> <span class="n">galaxies</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">galaxies</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generate_pointings</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">generatep</span><span class="p">(</span><span class="n">limdec</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span> <span class="n">limdist</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
 <span class="go">INFO:kobe.KBtelescope:2492 galaxies selected from VII/281</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">remove_fileds_coo</span><span class="p">([</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">removep_coo</span><span class="p">([</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
 <span class="go">&lt;Table length=2490&gt;</span>
 <span class="go">n                    name                      ra        dec      mag         dist</span>
@@ -119,11 +119,11 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -133,7 +133,7 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a><ul>
   <li><a href="kobe.KBpointings.galaxies.html">kobe.KBpointings.galaxies</a><ul>
-      <li>Previous: <a href="kobe.KBpointings.galaxies.readp.html" title="previous chapter">kobe.KBpointings.galaxies.readp</a></li>
+      <li>Previous: <a href="kobe.KBpointings.galaxies.readp_file.html" title="previous chapter">kobe.KBpointings.galaxies.readp_file</a></li>
       <li>Next: <a href="kobe.KBpointings.galaxies.removep_file.html" title="next chapter">kobe.KBpointings.galaxies.removep_file</a></li>
   </ul></li>
   </ul></li>

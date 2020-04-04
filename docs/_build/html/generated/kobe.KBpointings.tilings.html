@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="kobe.KBpointings.tilings.divide_OB" href="kobe.KBpointings.tilings.divide_OB.html" />
+    <link rel="next" title="kobe.KBpointings.tilings.dividep" href="kobe.KBpointings.tilings.dividep.html" />
     <link rel="prev" title="kobe.KBpointings.pointings" href="kobe.KBpointings.pointings.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -39,30 +39,6 @@
 <dt id="kobe.KBpointings.tilings">
 <em class="property">class </em><code class="sig-prename descclassname">kobe.KBpointings.</code><code class="sig-name descname">tilings</code><span class="sig-paren">(</span><em class="sig-param">logger=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.tilings" title="Permalink to this definition">¶</a></dt>
 <dd><p>tilings: Generate, read and process tilings</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>limra</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: ra range, default: [0, 360]</p>
-</dd>
-<dt><strong>limdec</strong><span class="classifier"><cite>range</cite></span></dt><dd><p>tilings: dec range, default: [-90, 90]</p>
-</dd>
-<dt><strong>fovra</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in ra direction</p>
-</dd>
-<dt><strong>fovdec</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>tiling field of view in dec direction</p>
-</dd>
-<dt><strong>shiftra</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>ra of initial tiling will be 0 + shiftra</p>
-</dd>
-<dt><strong>shiftdec</strong><span class="classifier"><cite>float</cite></span></dt><dd><p>dec of initial tiling will be 0 + shiftdec</p>
-</dd>
-<dt><strong>skipfrac:        `float`</strong></dt><dd><p>one vertice is skipped when how much fraction of it is covered</p>
-</dd>
-<dt><strong>wdir</strong><span class="classifier"><cite>str</cite></span></dt><dd><p>define a working directory, that used to read and build tiling list</p>
-</dd>
-<dt><strong>clobber</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>if any products already available in self, clobber=True will redo it</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -76,6 +52,7 @@ and inheriented by <em>pointings</em>.</p>
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>data</strong></dt><dd></dd>
+<dt><strong>hpmapm</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -86,47 +63,65 @@ and inheriented by <em>pointings</em>.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent_move</span></code>(self, ra, dec, ral, decl[, …])</p></td>
+<td><p>set the next step of a pointing list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_filter</span></code>(self[, data, add, filters])</p></td>
+<td><p>set telescope filter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_time</span></code>(self[, data, add, ovhtime, exptime])</p></td>
+<td><p>set telescope observe time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
 <td><p>check working directory, see if it’s exists, and if readable/writable</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
 <td><p>check python version</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">closefig</span></code>(self, num)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">closefig</span></code>(self, num)</p></td>
 <td><p>close a figure</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
 <td><p>find the common elements of 2 lists</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_contours</span></code>(proportions, samples[, nside])</p></td>
-<td><p>Compute containment contour around desired level.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_contours</span></code>(proportions, samples[, nside])</p></td>
+<td><p>Compute containment contour around desired level with meander</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self[, split])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cumprobshow</span></code>(self, \*\*kwargs)</p></td>
+<td><p>show cumulative probability</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2hms</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from deg to hms</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self, _data[, split])</p></td>
 <td><p>read dictionary like object, generate standard texts</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.divide_OB.html#kobe.KBpointings.tilings.divide_OB" title="kobe.KBpointings.tilings.divide_OB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB</span></code></a>(self, obra, obdec, \*\*kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.dividep.html#kobe.KBpointings.tilings.dividep" title="kobe.KBpointings.tilings.dividep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dividep</span></code></a>(self, obra, obdec)</p></td>
 <td><p>divide each tiling to a serious of sub-tilings</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB_one</span></code>(rac, decc, fovw, fovh, nobw, nobh)</p></td>
-<td><p>divide one pointing to a list of sub-pointings</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dividep_one</span></code>(rac, decc, fovw, fovh, nobw, nobh)</p></td>
+<td><p>divide one pointing to a list of sub-pointings, used by divedep</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
 <td><p>flatten a sequence if it’s a sequence of sequence</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code>(_server, _port)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code>(_server, _port)</p></td>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.generatep.html#kobe.KBpointings.tilings.generatep" title="kobe.KBpointings.tilings.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatep</span></code></a>(self, \*\*kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.generatep.html#kobe.KBpointings.tilings.generatep" title="kobe.KBpointings.tilings.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatep</span></code></a>(self[, limra, limdec, fovra, …])</p></td>
 <td><p>generate pointings by tiling sky</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_OB</span></code>(self, obra, obdec, \*\*kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.groupp.html#kobe.KBpointings.tilings.groupp" title="kobe.KBpointings.tilings.groupp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupp</span></code></a>(self, obra, obdec)</p></td>
 <td><p>group sub-tilings to a joint tiling</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">healpyshow</span></code>(self, hpmap[, showtype])</p></td>
-<td><p>healpy visualization</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hms2deg</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from hms to deg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hpmapproj</span></code>(self, hpmap[, showtype])</p></td>
+<td><p>figure for healpix Map</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
@@ -137,65 +132,107 @@ and inheriented by <em>pointings</em>.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
 <td><p>Check if the object is a sequence of sequences</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow</span></code>(self[, showgrid, shown, colors])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow</span></code>(self[, data, showgrid, shown, colors])</p></td>
 <td><p>show one tiling network</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_coord</span></code>(self[, rot])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow_all</span></code>(self[, showgrid, show_label, colors])</p></td>
+<td><p>show all pointings that were parsed so far, i.e.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow_obs</span></code>(self[, showgrid, show_label, colors])</p></td>
+<td><p>show pointings for a series of telescopes at one observatory, i.e.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow_tel</span></code>(self, \*\*kwargs)</p></td>
+<td><p>show pointings for a telescope, i.e.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_box_data</span></code>(self, _data[, showgrid, n, colors])</p></td>
+<td><p>plot a series of boxes with input data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_coord</span></code>(self[, rot, bkgcolor])</p></td>
 <td><p>show specific coordinates in skymap</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_lines</span></code>(self, ra, dec, hh, ww[, n, rot, …])</p></td>
-<td><p>plot a series of vertices.</p></td>
+<td><p>plot a series of vertices</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_points</span></code>(self, ra, dec[, rot])</p></td>
-<td><p>plot a series of dots.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_point_data</span></code>(self, _data[, showgrid, n, …])</p></td>
+<td><p>plot a series of dots with input data</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sky</span></code>(self, \*\*kwargs)</p></td>
-<td><p>plot other staffs in sky: horizon, galactic plane, sun and moon</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_points</span></code>(self, ra, dec[, n, rot, colors])</p></td>
+<td><p>plot a series of dots</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preport</span></code>(self[, split])</p></td>
-<td><p>make a report for data</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_route</span></code>(self, _data[, rot, showgrid])</p></td>
+<td><p>plot the route of a series o pointings</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">projplot</span></code>(self, theta, phi, \*\*kwargs)</p></td>
-<td><p>healpy projplot</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sky</span></code>(self[, showgrid])</p></td>
+<td><p>plot horizon, galactic plane, sun and moon</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">projplot</span></code>(self, theta, phi, \*\*kwargs)</p></td>
+<td><p>call healpy projplot</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radecs</span></code>(self[, ra, dec, theta, phi, hms])</p></td>
+<td><p>read ra dec</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.rankp.html#kobe.KBpointings.tilings.rankp" title="kobe.KBpointings.tilings.rankp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rankp</span></code></a>(self[, mode, nside, nest, threshold, sort])</p></td>
+<td><p>rank pointings: rank from west to east</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
 <td><p>read data from a file</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.readp.html#kobe.KBpointings.tilings.readp" title="kobe.KBpointings.tilings.readp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readp</span></code></a>(self, filename[, filetype, split, keys])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.readp_coo.html#kobe.KBpointings.tilings.readp_coo" title="kobe.KBpointings.tilings.readp_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readp_coo</span></code></a>(self[, ra, dec, fovra, fovdec, hms])</p></td>
+<td><p>read pointings from coordinate lists</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.readp_file.html#kobe.KBpointings.tilings.readp_file" title="kobe.KBpointings.tilings.readp_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readp_file</span></code></a>(self, filename[, filetype, …])</p></td>
 <td><p>read pointings from file</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_coo.html#kobe.KBpointings.tilings.removep_coo" title="kobe.KBpointings.tilings.removep_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_coo</span></code></a>(self, ra, dec, fovra, fovdec[, …])</p></td>
 <td><p>remove fields by input coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_file.html#kobe.KBpointings.tilings.removep_file" title="kobe.KBpointings.tilings.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_file</span></code></a>(self[, split, nest, filename, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_file.html#kobe.KBpointings.tilings.removep_file" title="kobe.KBpointings.tilings.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_file</span></code></a>(self[, split, nest, skipfrac, …])</p></td>
 <td><p>remove fields by input file</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code>(self[, filepath])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.reportp.html#kobe.KBpointings.tilings.reportp" title="kobe.KBpointings.tilings.reportp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reportp</span></code></a>(self[, split])</p></td>
+<td><p>make a report for self.data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">routeshow_all</span></code>(self[, rot, showgrid, …])</p></td>
+<td><p>route show for self.observatories</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">routeshow_dat</span></code>(self[, rot, showgrid])</p></td>
+<td><p>route show for self.data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">routeshow_obs</span></code>(self[, rot, showgrid, …])</p></td>
+<td><p>route show for self.telescopes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">routeshow_tel</span></code>(self[, rot, showgrid])</p></td>
+<td><p>route show for self.pointings.data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code>(self[, filepath])</p></td>
 <td><p>save a figure</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.savep.html#kobe.KBpointings.tilings.savep" title="kobe.KBpointings.tilings.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savep</span></code></a>(self, filename[, filetype, split, keys])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.savep.html#kobe.KBpointings.tilings.savep" title="kobe.KBpointings.tilings.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savep</span></code></a>(self, filename[, filetype, split, …])</p></td>
 <td><p>save tilings to a file</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(\*\*kwargs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(self, \*\*kwargs)</p></td>
 <td><p>send out KOBE products via email</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_slack</span></code>(\*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_slack</span></code>(\*\*kwargs)</p></td>
 <td><p>send out KOBE products via slack</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_sms</span></code>(_account, _token, _from, _to, _txt)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_sms</span></code>(_account, _token, _from, _to, _txt)</p></td>
 <td><p>send out KOBE products via sms (twilio package needed)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spherical_angle</span></code>(self, ra1, dec1, ra2, dec2)</p></td>
+<td><p>calculate spherical angle</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoomin</span></code>(self[, zoomx, zoomy])</p></td>
-<td><p>zoomin figure</p></td>
+<td><p>zoomin for figure</p></td>
 </tr>
 </tbody>
 </table>
@@ -203,17 +240,6 @@ and inheriented by <em>pointings</em>.</p>
 <dt id="kobe.KBpointings.tilings.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">logger=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.tilings.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>initialize tiling object with input logger and parameter settings</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>logger</strong><span class="classifier"><cite>class</cite></span></dt><dd><p>logging object</p>
-</dd>
-<dt><strong>**kwargs :</strong></dt><dd><p>check kobe.vtilings.defkwargs, 
-kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -239,13 +265,13 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <td><p>find the common elements of 2 lists</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_contours</span></code>(proportions, samples[, nside])</p></td>
-<td><p>Compute containment contour around desired level.</p></td>
+<td><p>Compute containment contour around desired level with meander</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.divide_OB.html#kobe.KBpointings.tilings.divide_OB" title="kobe.KBpointings.tilings.divide_OB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB</span></code></a>(self, obra, obdec, \*\*kwargs)</p></td>
-<td><p>divide each tiling to a serious of sub-tilings</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.divide_OB</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_OB_one</span></code>(rac, decc, fovw, fovh, nobw, nobh)</p></td>
-<td><p>divide one pointing to a list of sub-pointings</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.divide_OB_one</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
 <td><p>flatten a sequence if it’s a sequence of sequence</p></td>
@@ -253,14 +279,14 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code>(_server, _port)</p></td>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.generatep.html#kobe.KBpointings.tilings.generatep" title="kobe.KBpointings.tilings.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatep</span></code></a>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.generatep.html#kobe.KBpointings.tilings.generatep" title="kobe.KBpointings.tilings.generatep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatep</span></code></a>(self[, limra, limdec, fovra, …])</p></td>
 <td><p>generate pointings by tiling sky</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">healpyshow</span></code>(self, hpmap[, showtype])</p></td>
-<td><p>healpy visualization</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.healpyshow</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
@@ -271,26 +297,26 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
 <td><p>Check if the object is a sequence of sequences</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow</span></code>(self[, showgrid, shown, colors])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">locshow</span></code>(self[, data, showgrid, shown, colors])</p></td>
 <td><p>show one tiling network</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.notes</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_coord</span></code>(self[, rot])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_coord</span></code>(self[, rot, bkgcolor])</p></td>
 <td><p>show specific coordinates in skymap</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_lines</span></code>(self, ra, dec, hh, ww[, n, rot, …])</p></td>
-<td><p>plot a series of vertices.</p></td>
+<td><p>plot a series of vertices</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_points</span></code>(self, ra, dec[, rot])</p></td>
-<td><p>plot a series of dots.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_points</span></code>(self, ra, dec[, n, rot, colors])</p></td>
+<td><p>plot a series of dots</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sky</span></code>(self, \*\*kwargs)</p></td>
-<td><p>plot other staffs in sky: horizon, galactic plane, sun and moon</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_sky</span></code>(self[, showgrid])</p></td>
+<td><p>plot horizon, galactic plane, sun and moon</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">projplot</span></code>(self, theta, phi, \*\*kwargs)</p></td>
-<td><p>healpy projplot</p></td>
+<td><p>call healpy projplot</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.read_slackid</span></code></p></td>
 <td><p></p></td>
@@ -298,22 +324,22 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
 <td><p>read data from a file</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.readp.html#kobe.KBpointings.tilings.readp" title="kobe.KBpointings.tilings.readp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readp</span></code></a>(self, filename[, filetype, split, keys])</p></td>
-<td><p>read pointings from file</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tilings.readp</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_coo.html#kobe.KBpointings.tilings.removep_coo" title="kobe.KBpointings.tilings.removep_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_coo</span></code></a>(self, ra, dec, fovra, fovdec[, …])</p></td>
 <td><p>remove fields by input coordinate</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_file.html#kobe.KBpointings.tilings.removep_file" title="kobe.KBpointings.tilings.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_file</span></code></a>(self[, split, nest, filename, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.removep_file.html#kobe.KBpointings.tilings.removep_file" title="kobe.KBpointings.tilings.removep_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removep_file</span></code></a>(self[, split, nest, skipfrac, …])</p></td>
 <td><p>remove fields by input file</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code>(self[, filepath])</p></td>
 <td><p>save a figure</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.savep.html#kobe.KBpointings.tilings.savep" title="kobe.KBpointings.tilings.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savep</span></code></a>(self, filename[, filetype, split, keys])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="kobe.KBpointings.tilings.savep.html#kobe.KBpointings.tilings.savep" title="kobe.KBpointings.tilings.savep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savep</span></code></a>(self, filename[, filetype, split, …])</p></td>
 <td><p>save tilings to a file</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(\*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(self, \*\*kwargs)</p></td>
 <td><p>send out KOBE products via email</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_slack</span></code>(\*\*kwargs)</p></td>
@@ -323,12 +349,12 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <td><p>send out KOBE products via sms (twilio package needed)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 </tbody>
@@ -396,11 +422,11 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -410,7 +436,7 @@ kobe.circulate.defkwargs, kobe.tilings.defkwargs</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a><ul>
       <li>Previous: <a href="kobe.KBpointings.pointings.html" title="previous chapter">kobe.KBpointings.pointings</a></li>
-      <li>Next: <a href="kobe.KBpointings.tilings.divide_OB.html" title="next chapter">kobe.KBpointings.tilings.divide_OB</a></li>
+      <li>Next: <a href="kobe.KBpointings.tilings.dividep.html" title="next chapter">kobe.KBpointings.tilings.dividep</a></li>
   </ul></li>
   </ul></li>
 </ul>

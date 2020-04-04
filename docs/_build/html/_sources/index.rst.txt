@@ -45,11 +45,11 @@ Reference/API
    :maxdepth: 1
    
    general
-   triggers
-   candidates
    pointings
    telescope
    observatory
+   candidates
+   triggers         
    schedule
    
 Indices and tables
@@ -71,5 +71,3 @@ Author
 ====================
 
 `Sheng Yang <http://www.sngyang.com>`_: saberyoung@gmail.com
-
-In memory of `Kobe Bryant <https://en.wikipedia.org/wiki/Kobe_Bryant>`_, R.I.P!

@@ -37,12 +37,14 @@
 <h1>kobe.KBtrigger.trigger.calc_loc_area<a class="headerlink" href="#kobe-kbtrigger-trigger-calc-loc-area" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="kobe.KBtrigger.trigger.calc_loc_area">
-<code class="sig-prename descclassname">trigger.</code><code class="sig-name descname">calc_loc_area</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBtrigger.trigger.calc_loc_area" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">trigger.</code><code class="sig-name descname">calc_loc_area</code><span class="sig-paren">(</span><em class="sig-param">self, cls=[0.5, 0.9], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBtrigger.trigger.calc_loc_area" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculate sky localization region area (unit in sq. deg) for different confidence level region of trigger map</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>`cls`</strong></dt><dd></dd>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>list</cite></span></dt><dd></dd>
+<dt><strong>confidence levels for contours,</strong></dt><dd></dd>
+<dt><strong>e.g. cls=[.5, .9] would construct 50% and 90% CL contours</strong></dt><dd></dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -95,11 +97,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 

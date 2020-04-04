@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="triggers – dealing with trigger map" href="../triggers.html" />
+    <link rel="next" title="pointings – define pointing networks for telescope" href="../pointings.html" />
     <link rel="prev" title="kobe.KBplotter.vcandidates" href="kobe.KBplotter.vcandidates.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -48,16 +48,28 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent_move</span></code>(self, ra, dec, ral, decl[, …])</p></td>
+<td><p>set the next step of a pointing list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_filter</span></code>(self[, data, add, filters])</p></td>
+<td><p>set telescope filter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_time</span></code>(self[, data, add, ovhtime, exptime])</p></td>
+<td><p>set telescope observe time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
 <td><p>check working directory, see if it’s exists, and if readable/writable</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
 <td><p>check python version</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
 <td><p>find the common elements of 2 lists</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self[, split])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2hms</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from deg to hms</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self, _data[, split])</p></td>
 <td><p>read dictionary like object, generate standard texts</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
@@ -67,21 +79,27 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hms2deg</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from hms to deg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq</span></code>(o)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq</span></code>(o)</p></td>
 <td><p>Check if the object is a sequence</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
 <td><p>Check if the object is a sequence of sequences</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radecs</span></code>(self[, ra, dec, theta, phi, hms])</p></td>
+<td><p>read ra dec</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
 <td><p>read data from a file</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(\*\*kwargs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(self, \*\*kwargs)</p></td>
 <td><p>send out KOBE products via email</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_slack</span></code>(\*\*kwargs)</p></td>
@@ -91,12 +109,15 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <td><p>send out KOBE products via sms (twilio package needed)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spherical_angle</span></code>(self, ra1, dec1, ra2, dec2)</p></td>
+<td><p>calculate spherical angle</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 </tbody>
@@ -133,7 +154,7 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
@@ -150,7 +171,7 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
 <td><p>read data from a file</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(\*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_email</span></code>(self, \*\*kwargs)</p></td>
 <td><p>send out KOBE products via email</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_slack</span></code>(\*\*kwargs)</p></td>
@@ -160,12 +181,12 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <td><p>send out KOBE products via sms (twilio package needed)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 </tbody>
@@ -230,11 +251,11 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -242,9 +263,9 @@ will be inheriented by kobe.trigger/galaxies/tilings/candidates.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a><ul>
+  <li><a href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a><ul>
       <li>Previous: <a href="kobe.KBplotter.vcandidates.html" title="previous chapter">kobe.KBplotter.vcandidates</a></li>
-      <li>Next: <a href="../triggers.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+      <li>Next: <a href="../pointings.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
   </ul></li>
   </ul></li>
 </ul>

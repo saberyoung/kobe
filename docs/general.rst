@@ -1,10 +1,9 @@
 .. kobe:
    
-:mod:`general` -- provide various generic useful functions kobe objects
+:mod:`general` -- provide various generic useful functions for kobe objects
 =================================================================================
 
-These classes provide various functions for other classes.
-In principle, they cannot be used independently.
+These classes provide various functions for other kobe classes.
 
 KButils
 ----------------------------

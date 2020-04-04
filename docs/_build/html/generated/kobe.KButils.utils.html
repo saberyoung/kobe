@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kobe.KBplotter.visualization" href="kobe.KBplotter.visualization.html" />
-    <link rel="prev" title="general – provide various generic useful functions kobe objects" href="../general.html" />
+    <link rel="prev" title="general – provide various generic useful functions for kobe objects" href="../general.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -38,7 +38,7 @@
 <dl class="class">
 <dt id="kobe.KButils.utils">
 <em class="property">class </em><code class="sig-prename descclassname">kobe.KButils.</code><code class="sig-name descname">utils</code><a class="headerlink" href="#kobe.KButils.utils" title="Permalink to this definition">¶</a></dt>
-<dd><p>provide various generic useful functions kobe objects</p>
+<dd><p>provide various generic useful functions for kobe objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -48,6 +48,22 @@ default: ./.</p>
 <dt><strong>clobber</strong><span class="classifier">bool</span></dt><dd><p>if any product has already been parsed, 
 set clobber as True will remove and redo the calculation.
 default: False</p>
+</dd>
+<dt><strong>rot_theta</strong><span class="classifier">int, float</span></dt><dd><p><em>healpix.visualization</em> rotation angle.
+theta = pi/2 - decl (unit in deg), default: 0.
+setted to rotate localization map along longtitude direction</p>
+</dd>
+<dt><strong>rot_phi</strong><span class="classifier">int, float</span></dt><dd><p><em>healpix.visualization</em> rotation angle.
+phi = ra (unit in deg), default: 0.
+rotate localization map along latitude direction</p>
+</dd>
+<dt><strong>rot_psi</strong><span class="classifier">int, float</span></dt><dd><p><em>healpix.visualization</em> rotation angle.
+the point at longitude and latitude will be at the center.   
+An additional rotation of angle psi around this direction is applied.
+default: 0.</p>
+</dd>
+<dt><strong>num</strong><span class="classifier">int, str</span></dt><dd><p><em>matplotlib</em> or <em>healpy</em> figure number.
+default: 1.</p>
 </dd>
 </dl>
 </dd>
@@ -61,16 +77,28 @@ default: False</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent_move</span></code>(self, ra, dec, ral, decl[, …])</p></td>
+<td><p>set the next step of a pointing list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_filter</span></code>(self[, data, add, filters])</p></td>
+<td><p>set telescope filter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrange_time</span></code>(self[, data, add, ovhtime, exptime])</p></td>
+<td><p>set telescope observe time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckdir</span></code>(self, \*\*kwargs)</p></td>
 <td><p>check working directory, see if it’s exists, and if readable/writable</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ckpython</span></code>(self)</p></td>
 <td><p>check python version</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
 <td><p>find the common elements of 2 lists</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self[, split])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2hms</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from deg to hms</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self, _data[, split])</p></td>
 <td><p>read dictionary like object, generate standard texts</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
@@ -80,27 +108,36 @@ default: False</p>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hms2deg</span></code>(self, ra, dec)</p></td>
+<td><p>coordinate from hms to deg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq</span></code>(o)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq</span></code>(o)</p></td>
 <td><p>Check if the object is a sequence</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_seq_of_seq</span></code>(self, o)</p></td>
 <td><p>Check if the object is a sequence of sequences</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radecs</span></code>(self[, ra, dec, theta, phi, hms])</p></td>
+<td><p>read ra dec</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">readlist</span></code>(self[, filename, filetype, split, keys])</p></td>
 <td><p>read data from a file</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spherical_angle</span></code>(self, ra1, dec1, ra2, dec2)</p></td>
+<td><p>calculate spherical angle</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 </tbody>
@@ -137,7 +174,7 @@ default: False</p>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getkeys</span></code>(self, kwargs[, _class])</p></td>
-<td><p>get specific kwargs for kobe and external function calls.</p></td>
+<td><p>get specific kwargs</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipix_in_box</span></code>(self, ra, dec, width, height, …)</p></td>
 <td><p>finding the healpix indices of a given box</p></td>
@@ -152,12 +189,12 @@ default: False</p>
 <td><p>read data from a file</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setkeys</span></code>(self, kwargs)</p></td>
-<td><p>set kobe key arguments: if one kwarg provide, set it, otherwise use default</p></td>
+<td><p>set kobe arguments (use default if one kwarg not provided)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertices</span></code>(ra, dec, fovw, fovh)</p></td>
-<td><p>finding the vertices of a FoV by giving: the central location, i.e.</p></td>
+<td><p>finding the vertices of a FoV by giving the central location and the FoV size</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, filename, filetype, split, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">writelist</span></code>(self[, datain, filename, …])</p></td>
 <td><p>write data to a file</p></td>
 </tr>
 </tbody>
@@ -170,13 +207,13 @@ default: False</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">defkwargs</span></code></p></td>
-<td><p>default parameter settings</p></td>
+<td><p>default kobe parameter settings</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">exkwargs</span></code></p></td>
-<td><p>set parameters for external package calls: healpy, matplotlib, etc</p></td>
+<td><p>allowed parameters for external package calls</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">version</span></code></p></td>
-<td><p>kobe class version</p></td>
+<td><p>kobe package version</p></td>
 </tr>
 </tbody>
 </table>
@@ -213,11 +250,11 @@ default: False</p>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -225,8 +262,8 @@ default: False</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a><ul>
-      <li>Previous: <a href="../general.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
+  <li><a href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a><ul>
+      <li>Previous: <a href="../general.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
       <li>Next: <a href="kobe.KBplotter.visualization.html" title="next chapter">kobe.KBplotter.visualization</a></li>
   </ul></li>
   </ul></li>

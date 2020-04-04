@@ -15,8 +15,6 @@
     <link rel="shortcut icon" href="../_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="kobe.KBpointings.galaxies.generatep" href="kobe.KBpointings.galaxies.generatep.html" />
-    <link rel="prev" title="kobe.KBpointings.galaxies" href="kobe.KBpointings.galaxies.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,32 +33,6 @@
             
   <div class="section" id="kobe-kbpointings-galaxies-galaxies2hpmap">
 <h1>kobe.KBpointings.galaxies.galaxies2hpmap<a class="headerlink" href="#kobe-kbpointings-galaxies-galaxies2hpmap" title="Permalink to this headline">¶</a></h1>
-<dl class="method">
-<dt id="kobe.KBpointings.galaxies.galaxies2hpmap">
-<code class="sig-prename descclassname">galaxies.</code><code class="sig-name descname">galaxies2hpmap</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">tracer='l'</em>, <em class="sig-param">nside=512</em>, <em class="sig-param">nest=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBpointings.galaxies.galaxies2hpmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>build a healpix map with KBGetGalaxies.data</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>tracer</strong><span class="classifier"><cite>str</cite></span></dt><dd><p>what was used to build the galaxy healpy map
-options: [c]ounts, [l]uminosities</p>
-</dd>
-<dt><strong>nside</strong><span class="classifier"><cite>int</cite></span></dt><dd><p>healpix nside parameter, must be a power of 2, less than 2**30</p>
-</dd>
-<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
-if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>hpmap</strong><span class="classifier">array-like shape (Npix,)</span></dt><dd><p>healpix fits map for trigger localization probability (1d)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
 
@@ -91,12 +63,12 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <li class="toctree-l1"><a class="reference internal" href="../faq/index.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -104,12 +76,6 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a><ul>
-  <li><a href="kobe.KBpointings.galaxies.html">kobe.KBpointings.galaxies</a><ul>
-      <li>Previous: <a href="kobe.KBpointings.galaxies.html" title="previous chapter">kobe.KBpointings.galaxies</a></li>
-      <li>Next: <a href="kobe.KBpointings.galaxies.generatep.html" title="next chapter">kobe.KBpointings.galaxies.generatep</a></li>
-  </ul></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>

@@ -45,11 +45,11 @@ Reference/API
    :maxdepth: 1
    
    general
-   triggers
-   candidates
    pointings
    telescope
    observatory
+   candidates
+   triggers         
    schedule
    
 Indices and tables

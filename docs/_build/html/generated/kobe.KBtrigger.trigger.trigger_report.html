@@ -37,7 +37,7 @@
 <h1>kobe.KBtrigger.trigger.trigger_report<a class="headerlink" href="#kobe-kbtrigger-trigger-trigger-report" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="kobe.KBtrigger.trigger.trigger_report">
-<code class="sig-prename descclassname">trigger.</code><code class="sig-name descname">trigger_report</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">style='sms'</em>, <em class="sig-param">keys_to_checkxml=('GraceID'</em>, <em class="sig-param">'AlertType'</em>, <em class="sig-param">'Group'</em>, <em class="sig-param">'FAR'</em>, <em class="sig-param">'Terrestrial'</em>, <em class="sig-param">'HasNS'</em>, <em class="sig-param">'HasRemnant'</em>, <em class="sig-param">'BNS'</em>, <em class="sig-param">'BBH'</em>, <em class="sig-param">'NSBH'</em>, <em class="sig-param">'Instruments'</em>, <em class="sig-param">'EventPage')</em>, <em class="sig-param">keys_to_checkfits=('DISTMEAN'</em>, <em class="sig-param">'DISTSTD'</em>, <em class="sig-param">'DATE-OBS'</em>, <em class="sig-param">'MJD-OBS'</em>, <em class="sig-param">'OBJECT'</em>, <em class="sig-param">'INSTRUME'</em>, <em class="sig-param">'CREATOR')</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBtrigger.trigger.trigger_report" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">trigger.</code><code class="sig-name descname">trigger_report</code><span class="sig-paren">(</span><em class="sig-param">self, cls=[0.5, 0.9], style='sms', keys_to_checkxml=('GraceID', 'AlertType', 'Group', 'FAR', 'Terrestrial', 'HasNS', 'HasRemnant', 'BNS', 'BBH', 'NSBH', 'Instruments', 'EventPage'), keys_to_checkfits=('DISTMEAN', 'DISTSTD', 'DATE-OBS', 'MJD-OBS', 'OBJECT', 'INSTRUME', 'CREATOR'), **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBtrigger.trigger.trigger_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>make a summary report for input source. 
 report is built from healpix fits header and XML file.
 specify keys in keys_to_checkxml, keys_to_checkfits</p>
@@ -52,9 +52,9 @@ can be added as you want in kobe.KBtriggers.triggers.trigger_report()</p>
 </dd>
 <dt><strong>keys_to_checkfits</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>which parameters from healpix fits header XML would be reported</p>
 </dd>
-<dt><strong>Other Parameters</strong></dt><dd></dd>
-<dt><strong>———-</strong></dt><dd></dd>
-<dt><strong>`cls`</strong></dt><dd></dd>
+<dt><strong>cls</strong><span class="classifier"><cite>list</cite></span></dt><dd></dd>
+<dt><strong>confidence levels for contours,</strong></dt><dd></dd>
+<dt><strong>e.g. cls=[.5, .9] would construct 50% and 90% CL contours</strong></dt><dd></dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -107,11 +107,11 @@ can be added as you want in kobe.KBtriggers.triggers.trigger_report()</p>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 

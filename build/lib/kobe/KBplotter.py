@@ -67,7 +67,8 @@ class visualization(utils):
         ----------        
         num          :   int or  str
             matplotlib figure number
-        Matplotlib.figure Parameters              
+        other   :
+            Matplotlib.figure Parameters              
         """                
         # init plot
         kwargs = self.setkeys(kwargs)        
@@ -98,7 +99,7 @@ class visualization(utils):
         fig.savefig(filename, **self.getkeys(kwargs, 'savefig'))
 
     def hpmapproj(self, hpmap, showtype='m', **kwargs):
-        """healpy Map projections
+        """figure for healpix Map
         
         Parameters
         ---------- 
@@ -128,7 +129,7 @@ class visualization(utils):
                 return_projected_map=False, **self.getkeys(kwargs, 'healpixview'))
         
     def projplot(self, theta, phi, **kwargs):
-        """healpy projplot
+        """call healpy projplot
 
         Parameters
         ----------          
@@ -148,7 +149,7 @@ class visualization(utils):
         plt.close(num)
 
     def _grid(self, **kwargs):
-        """generate background grids for figure
+        """generate background grids
 
         Parameters
         ----------        
@@ -157,7 +158,7 @@ class visualization(utils):
         hp.graticule(**self.getkeys(kwargs, 'graticule'))
 
     def zoomin(self, zoomx=None, zoomy=None):
-        """zoomin figure
+        """zoomin for figure
 
         Parameters
         ----------        
@@ -172,7 +173,7 @@ class visualization(utils):
                 _func(_zoom[0], _zoom[1])                
             
     def plot_sky(self, showgrid=True, **kwargs):
-        """plot: horizon, galactic plane, sun and moon
+        """plot horizon, galactic plane, sun and moon
 
         Parameters
         ----------        
@@ -300,7 +301,7 @@ class visualization(utils):
 
     @staticmethod
     def compute_contours(proportions, samples, nside=64):
-        ''' Compute containment contour around desired level.
+        ''' Compute containment contour around desired level with meander
         '''
         try:  import meander
         except:  return
@@ -336,7 +337,7 @@ class visualization(utils):
                    
     def plot_lines(self, ra, dec, hh, ww, n=None, rot=None,
                    colors=['r','k','b','y','g','m','c'], **kwargs):
-        '''plot a series of vertices.
+        '''plot a series of vertices
         '''
         for _id in range(len(ra)):
             _ra,_dec,_hh,_ww = ra[_id], dec[_id], hh[_id], ww[_id]
@@ -354,7 +355,7 @@ class visualization(utils):
 
     def plot_points(self, ra, dec, n=None, rot=None,
                    colors=['r','k','b','y','g','m','c'], **kwargs):
-        '''plot a series of dots.      
+        '''plot a series of dots
         '''                          
         for _id in range(len(ra)):
             _ra, _dec = ra[_id], dec[_id]
@@ -369,7 +370,8 @@ class visualization(utils):
 
     def plot_point_data(self, _data, showgrid=True, n=None,                      
                     colors=['r','k','b','y','g','m','c'], **kwargs):
-   
+        '''plot a series of dots with input data
+        ''' 
         if _data is None:return
         if len(_data['ra']) != len(_data['dec']): return
 
@@ -390,7 +392,8 @@ class visualization(utils):
 
     def plot_box_data(self, _data, showgrid=True, n=None,                      
                       colors=['r','k','b','y','g','m','c'], **kwargs):
-        
+        '''plot a series of boxes with input data
+        ''' 
         if _data is None: return
         for _key in ['ra','dec','fovra','fovdec']:            
             if not _key in _data.keys():return            
@@ -411,12 +414,16 @@ class visualization(utils):
                         rot=[kwargs['rot_theta'], kwargs['rot_phi'], kwargs['rot_psi']],
                         n=n, colors=colors, **kwargs)
 
-    def locshow_tel(self, **kwargs):        
+    def locshow_tel(self, **kwargs):
+        '''show pointings for a telescope, i.e. self.pointings.data
+        ''' 
         self.pointings.locshow(**kwargs)
             
     def locshow_obs(self, showgrid=True, show_label=False,                 
             colors=['r','k','b','y','g','m','c'], **kwargs):
-        
+        '''show pointings for a series of telescopes at one observatory,
+        i.e. self.telescopes
+        ''' 
         assert type(self.telescopes) is dict
         for _nt, _tel in enumerate(self.telescopes):
             _data = self.telescopes[_tel]
@@ -429,9 +436,10 @@ class visualization(utils):
 
     def locshow_all(self, showgrid=True, show_label=False,
             colors=['r','k','b','y','g','m','c'], **kwargs):
-        """show tilings in current self.observatories
+        """show all pointings that were parsed so far,
+        i.e. self.observatories
         """
-        assert self.observatories      
+        assert 'observatories' in self.__dict__
         for _no, _obs in enumerate(self.observatories):
             for _nt, _tel in enumerate(self.observatories[_obs]):
                 _data = self.observatories[_obs][_tel]
@@ -445,7 +453,8 @@ class visualization(utils):
                 _data.locshow(**kwargs)                
                 
     def plot_route(self, _data, rot=[0,0,0], showgrid=True, **kwargs):
-        
+        '''plot the route of a series o pointings
+        ''' 
         if _data is None: return
         assert 'ra' in _data.keys()
         assert 'dec' in _data.keys()        
@@ -475,428 +484,54 @@ class visualization(utils):
         kwargs['marker'] = '.'
         self.projplot(theta,phi,**kwargs) 
 
-    def routeshow_tel(self, rot=[0,0,0], showgrid=True, **kwargs):
-        assert self.pointings.data
-        assert not self.pointings.data is None
-        self.plot_route(self.pointings.data, rot=rot, showgrid=showgrid, **kwargs)
-
-    def routeshow(self, rot=[0,0,0], showgrid=True, **kwargs):
+    def routeshow_dat(self, rot=[0,0,0], showgrid=True, **kwargs):
+        '''route show for self.data
+        ''' 
         assert self.data
         assert not self.data is None
         self.plot_route(self.data, rot=rot, showgrid=showgrid, **kwargs)
         
-class vtilings(visualization):
-    """visualize one tiling network.
-       
-    Notes
-    ----------   
-    *vtilings* inherients from **visualization**,
-    and inheriented by *tilings*.
-    """    
-    def locshow(self, data=None, showgrid=True, shown=False,
-                colors=['r','k','b','y','g','m','c'], **kwargs):
-        """show one tiling network
-
-        Parameters
-        ----------
-        showgrid :          bool
-           show the grids or not          
-        Matplotlib.figure Parameters
-        Healpix graticule Parameters        
-        """
-        if data is None:
-            data = self.data
-        # plot tilings
-        if shown:
-            assert 'n' in data
-            n=data['n']
-        else:
-            n=None        
-        self.plot_box_data(data, showgrid=showgrid, n=n, colors=colors, **kwargs)
-        
-class vgalaxies(visualization):
-    """visualize one galaxy network.
-    
-    Notes
-    ----------   
-    *vgalaxies* inherients from **visualization**,
-    and inheriented by *galaxies*.
-    """
-    def locshow(self, data=None, showgrid=True, shown=False,
-                colors=['r','k','b','y','g','m','c'], **kwargs):
-        """show one galaxy network
-
-        Parameters
-        ----------        
-        showgrid :          bool
-           show the grids or not
-        Matplotlib.figure Parameters 
-        Healpix graticule Parameters
-        """
-        if data is None:
-            data = self.data
-        if shown:
-            assert 'n' in data.keys()
-            n=data['n']
-        else:
-            n=None        
-        self.plot_point_data(data, showgrid=showgrid, n=n, colors=colors, **kwargs)       
-
-    def hplocshow(self, cls=None, showhp=True, showtype='m', showgrid=True, **kwargs):
-        
-        if self.hpmapm is None:
-            self.logger.info ('Warning: hpmapm not parsed')
-            return
-        
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # create figure
-        fig = self._init_figure(**kwargs)
-                        
-        # 2d trigger healpix map
-        if showhp:                   
-            self.hpmapproj(self.hpmapm, showtype=showtype, **kwargs)
-        else:
-            self._grid(**kwargs) 
-            self.logger.info ('skip showing healpix map')
-                    
-        # show trigger contours        
-        if cls is None:
-            self.logger.info ('skip showing contours')            
-        
-        elif self.is_seq(cls):
-            contours = self.compute_contours(cls, self.hpmapm)
-            if contours is None:
-                self.logger.info ('Warning: no meander installed')
-                return
-            
-            theta_contours, phi_contours = contours
-            for _ii, _jj in enumerate(theta_contours):                
-                for _theta, _phi in zip(theta_contours[_jj], phi_contours[_jj]):
-                    if len(_theta)==0:continue                                       
-                    if showhp:
-                        self.projplot(_theta,_phi,**kwargs)
-                    else:
-                        for _kk in ['rot_theta', 'rot_phi', 'rot_psi']:
-                            kwargs.setdefault(_kk, 0)                        
-                        rot= [kwargs['rot_theta'], kwargs['rot_phi'], kwargs['rot_psi']]
-                        r = hp.Rotator(deg=True, rot=rot)
-                        _theta, _phi = r(_theta, _phi)
-                        self.projplot(_theta,_phi,**kwargs)
-                        
-        # show grids        
-        if showgrid:            
-            self._grid(**kwargs)            
-            if showhp:
-                self.plot_coord(**kwargs)
-            else:
-                self.plot_coord(rot = [kwargs['rot_theta'],
-                    kwargs['rot_phi'], kwargs['rot_psi']], **kwargs)
-    
-    def distshow(self, histtype='stepfilled',
-                 drange=None, nbin=100, **kwargs):
-        
-        # check if galaxy exists
-        if self.data is None: return        
-        if not 'dist' in self.data.keys(): return        
-        _len = []
-        for _key in ['ra','dec','name','dist','mag']:
-            _len.append(len(self.data[_key]))
-        if len(np.unique(_len)) != 1 or np.unique(_len)[0]==0:
-            return
-
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # create figure
-        fig = self._init_figure(**kwargs)        
-                         
-        # cut dist
-        if not drange is None:
-            assert len(drange)==2                    
-            dist0 = dist0[np.logical_and(dist0>min(drange), dist0<max(drange))]
-        else:
-            dist0 = self.data['dist']
-
-        # plot
-        kwargs = self.getkeys(kwargs, 'matplotlib')
-        plt.hist(dist0,nbin,histtype=histtype,**kwargs)
-        plt.xlabel('Distance (Mpc)')
-        plt.ylabel('Nuber of galaxies')
-
-    def lumshow(self, nbin=1, color1='k', color2='r', **kwargs):
-        # check if galaxy exists
-        if self.data is None: return        
-        if not 'dist' in self.data.keys(): return        
-        _len = []
-        for _key in ['ra','dec','name','dist','mag']:
-            _len.append(len(self.data[_key]))
-        if len(np.unique(_len)) != 1 or np.unique(_len)[0]==0:
-            return
-
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # plot
-        fig = self._init_figure(**kwargs)                        
-        kwargs = self.getkeys(kwargs, 'matplotlib')        
-        Lums = 10**((4.74-self.data['mag'])/2.5)
-        dist = self.data['dist']
-        ticks,Lcum,Lbin = [],[],[]
-        for ii in np.arange(min(dist),max(dist),nbin):
-            ticks.append((ii+.5)*nbin)
-            Lbin.append(sum(Lums[np.logical_and(dist<ii,dist>ii-nbin)]))
-            Lcum.append(sum(Lums[np.logical_and(dist<ii,dist>min(dist))]))            
-        plt.plot(ticks,Lbin,drawstyle="steps",\
-                label='binned luminosity',color=color1)
-        plt.plot(ticks,Lcum,drawstyle="steps",\
-                label='cumulative luminosity',color=color2)
-        plt.fill_between(ticks,Lbin,step="pre", alpha=1,color=color1)        
-        plt.xlabel('Distance (Mpc)')
-        plt.ylabel('$L_{sun}$')
-        plt.legend()
-
-class vcandidates(visualization):
-    """visualize candidates.
-
-    Notes
-    ----------   
-    *vcandidates* inherients from **visualization**,
-    and inheriented by *candidates*.   
-    """
-    def candshow(self, showgrid=True, **kwargs):
-        """show candidates
-
-        Parameters
-        ----------        
-        showgrid :          bool
-           show the grids or not
-        Matplotlib.figure Parameters 
-        Healpix graticule Parameters
-        """
-        if 'candidates' in self.__dict__:
-            self.plot_point_data(self.candidates, showgrid=showgrid, **kwargs) 
-
-    def lcshow(self, filts=None, xlim=None, ylim=None,ls='',
-               vert=None, hori=None, showlim=True, showlegend=True,
-               **kwargs): 
-        
-        if self.lc is None:return
-        assert 'time' in self.lc.keys()
-        assert 'magnitude' in self.lc.keys()
-        assert 'band' in self.lc.keys()
-
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # create figure
-        fig = self._init_figure(**kwargs)        
-                    
-        # plot lc                        
-        ax = fig.add_subplot(1, 1, 1)
-        if not xlim is None: ax.set_xlim(xlim)
-        if not ylim is None: ax.set_ylim(ylim)
-        ax.invert_yaxis()
-        ax.set_xlabel('mjd')
-        ax.set_ylabel('mag')
-        if not vert is None and not xlim is None:
-            for _vert in vert:                                
-                ax.plot([_vert, _vert],[min(xlim)-1,max(xlim)+1],'k--')
-        if not hori is None and not ylim is None:
-            for _hori in hori:
-                ax.plot([min(ylim)-1,max(ylim)+1],[_hori, _hori],'k--')
-                                                        
-        # filters
-        if filts is None:
-            filts = np.unique(self.lc['band'])
-
-        colors = cm.rainbow(np.linspace(0, 1, len(filts)))
-        markers = 'ov^<>*hH+xXDd12348.,spP|_'
-        
-        for _mm, _filter in enumerate(filts):
-                
-            # obtain pps and uls
-            _pps, _uls = self.pps(pps=True, band=_filter), \
-                self.pps(pps=False, band=_filter)
-            if len(_pps)==0: continue
-                
-            # obtain error bars
-            _dat = self.errors(pps=True, band=_filter)
-            if _dat is None: xerrdat, yerrdat = None, None
-            else: xerrdat, yerrdat = _dat
-                
-            _lmt = self.errors(pps=False, band=_filter)
-            if _lmt is None: xerrlim, yerrlim = None, None
-            else: xerrlim, yerrlim = _lmt
-            
-            # data points
-            if not _pps is None:
-                ax.errorbar(_pps['time'], _pps['magnitude'],
-                            xerr=xerrdat, yerr=yerrdat, ls=ls,
-                            marker=markers[_mm % len(markers)],
-                            color=colors[_mm], label=_filter)
-                        
-                # upper limits
-                if not _uls is None and showlim:
-                    ax.errorbar(_uls['time'], _uls['magnitude'],
-                                yerr=1, lolims=True, ls=ls,
-                                marker=markers[_mm % len(markers)],
-                                color=colors[_mm])
-        if showlegend: plt.legend()
-        return fig
-    
-
-    def obsplot(self, _time, _deg, **kwargs):
-        '''                
+    def routeshow_tel(self, rot=[0,0,0], showgrid=True, **kwargs):
+        '''route show for self.pointings.data
         '''
-        # set key        
-        kwargs = self.setkeys(kwargs)
+        assert self.pointings.data
+        assert not self.pointings.data is None
         
-        # create figure
-        fig = self._init_figure(**kwargs)
         
-        # judge        
-        if isinstance(_time, astropy.time.Time):
-            _time = [_time]       
-            _deg = [_deg]        
-                                   
-        for _x, _y in zip(_time, _deg):
-            try: _y=_y.deg
-            except:pass
-            plt.plot(_x.mjd, _y, **self.getkeys(kwargs, 'projplot'))
+    def routeshow_obs(self, rot=[0,0,0], showgrid=True, show_label=False,                 
+                      colors=['r','k','b','y','g','m','c'], **kwargs):
+        '''route show for self.telescopes
+        '''
+        assert type(self.telescopes) is dict
+        for _nt, _tel in enumerate(self.telescopes):
+            _data = self.telescopes[_tel]
+            if _nt > 0: showgrid=False                                     
+            if show_label: kwargs['label'] = '%s' %  _tel
+            else: kwargs['label'] = None            
+            kwargs['color'] = colors[_nt % len(colors)]
+            kwargs['showgrid'] = showgrid            
+            self.plot_route(_data, rot=rot, showgrid=showgrid, **kwargs)
 
-    def cooplot(self, _time, _deg, ids=False,
-                  colors=['r','k','b','y','g','m','c'], **kwargs):
-        '''                
-        '''        
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # create figure
-        fig = self._init_figure(**kwargs)
-        
-        # judge        
-        if isinstance(_time, astropy.time.Time):
-            _time = [_time]       
-            _deg = [_deg]
-        
-        _x, _y = [], {}                                
-        for _ii, (_time0, _deg0) in enumerate(zip(_time, _deg)):            
-            _x.append(_time0.mjd)
-            for _nn, _deg00 in enumerate(_deg0):                
-                if ids: _nn = ids[_nn]                
-                try: _y[_nn]
-                except: _y[_nn]=[]
-                _y[_nn].append(_deg00)
-        
-        #plot
-        for _mm, _m in enumerate(_y):
-            kwargs['color'] = colors[_mm % len(colors)]
-            if ids: kwargs['label'] = _m            
-            plt.plot(_x, _y[_m], **self.getkeys(kwargs, 'projplot'))     
-                
-class vtrigger(visualization):
-    """visualize a trigger map and its contours
+    def routeshow_all(self, rot=[0,0,0], showgrid=True, show_label=False,
+                      colors=['r','k','b','y','g','m','c'], **kwargs):
+        '''route show for self.observatories
+        '''
+        assert 'observatories' in self.__dict__
+        for _no, _obs in enumerate(self.observatories):
+            for _nt, _tel in enumerate(self.observatories[_obs]):
+                _data = self.observatories[_obs][_tel]
+                if _nt > 0 or _no > 0: showgrid=False                                        
+                if show_label:
+                    kwargs['label'] = '%s tilings (%s)' %  (_tel, _obs)
+                else:
+                    kwargs['label'] = None
+                kwargs['color'] = colors[(_nt+_no) % len(colors)]
+                kwargs['showgrid'] = showgrid 
+                self.plot_route(_data, rot=rot, showgrid=showgrid, **kwargs)                
 
-    Notes
-    ----------   
-    *vtrigger* inherients from **visualization**,
-    and inheriented by *trigger*.
-    """        
-    
-    def locshow(self, cls=None, showhp=True, showtype='m', showgrid=True, **kwargs):
-        """show trigger via healpy.mollview/gnormview....
-        parse trigger first so that self.data is not None
-        
-        Parameters
-        ----------                       
-        showgrid :          bool
-           show the background grids or not
-        rot_theta  : int, float
-           healpix.visualization rotation angle
-           pi/2 - decl, unit in deg, rotate localization map along longtitude direction
-        rot_phi    : int, float
-           phi = ra, unit in deg, rotate localization map along latitude direction
-        rot_psi    :  int, float
-           the point at longitude lon and latitude lat will be at the center.   
-           An additional rotation of angle psi around this direction is applied.
-        num          :   int or  str
-           matplotlib/healpy figure number
-        showhp :    bool
-           show healpix map or not
-        showtype  :       string
-           if show healpix map, which healpix function was called to use:
-           options: [m]ollview, [g]nomview, [c]artview, and [o]rthview
-           default: m
-        cls:   list
-           confidence levels for contours to show
-           set to None, will not show contours
-           e.g. cls=[.5, .9] would show 50% and 90% CL contours                  
-        
-        Healpix Parameters                      
-        Matplotlib.figure Parameters 
-        Healpix graticule Parameters (if showgrid=True)        
-        Healpix projplot Parameters (if show contours)
-        """
-        
-        if self.hpmap is None:
-            self.logger.info ('Warning: hpmap not parsed')
-            return
-        
-        # set key        
-        kwargs = self.setkeys(kwargs)
-        
-        # create figure
-        fig = self._init_figure(**kwargs)
-                        
-        # 2d trigger healpix map
-        if showhp:                   
-            self.hpmapproj(self.hpmap, showtype=showtype, **kwargs)
-        else:
-            self._grid(**kwargs) 
-            self.logger.info ('skip showing healpix map')
-                    
-        # show trigger contours        
-        if cls is None:
-            self.logger.info ('skip showing contours')            
-        
-        elif self.is_seq(cls):
-            contours = self.compute_contours(cls, self.hpmap)
-            if contours is None:
-                self.logger.info ('Warning: no meander installed')
-                return
-            
-            theta_contours, phi_contours = contours
-            for _ii, _jj in enumerate(theta_contours):                
-                for _theta, _phi in zip(theta_contours[_jj], phi_contours[_jj]):
-                    if len(_theta)==0:continue                                       
-                    if showhp:
-                        self.projplot(_theta,_phi,**kwargs)
-                    else:
-                        for _kk in ['rot_theta', 'rot_phi', 'rot_psi']:
-                            kwargs.setdefault(_kk, 0)                        
-                        rot= [kwargs['rot_theta'], kwargs['rot_phi'], kwargs['rot_psi']]
-                        r = hp.Rotator(deg=True, rot=rot)
-                        _theta, _phi = r(_theta, _phi)
-                        self.projplot(_theta,_phi,**kwargs)
-                        
-        # show grids        
-        if showgrid:            
-            self._grid(**kwargs)            
-            if showhp:
-                self.plot_coord(**kwargs)
-            else:
-                self.plot_coord(rot = [kwargs['rot_theta'],
-                    kwargs['rot_phi'], kwargs['rot_psi']], **kwargs)
-
-
-            
-
-    ''' '''    
-    def cumshow(pparams):
-
-        # arg params
+    def cumprobshow(self, **kwargs):
+        """show cumulative probability
+        """             
         full=pparams['full']
         fignum=pparams['fignum']
         select=pparams['select']    
@@ -1010,3 +645,415 @@ class vtrigger(visualization):
                 _cc+=1
         plt.title(_title)
         return fig
+
+
+class vtilings(visualization):
+    """visualize one tiling network.
+       
+    Notes
+    ----------   
+    *vtilings* inherients from **visualization**,
+    and inheriented by *tilings*.
+    """    
+    def locshow(self, data=None, showgrid=True, shown=False,
+                colors=['r','k','b','y','g','m','c'], **kwargs):
+        """show one tiling network
+
+        Parameters
+        ----------
+        showgrid :          bool
+           show the grids or not          
+        Matplotlib.figure Parameters
+        Healpix graticule Parameters        
+        """
+        if data is None: data = self.data
+
+        # plot tilings
+        if shown:
+            assert 'n' in data
+            n=data['n']
+        else:
+            n=None
+            
+        self.plot_box_data(data, showgrid=showgrid, n=n, colors=colors, **kwargs)
+        
+class vgalaxies(visualization):
+    """visualize one galaxy network.
+    
+    Notes
+    ----------   
+    *vgalaxies* inherients from **visualization**,
+    and inheriented by *galaxies*.
+    """
+    def locshow(self, data=None, showgrid=True, shown=False,
+                colors=['r','k','b','y','g','m','c'], **kwargs):
+        """show one galaxy network
+
+        Parameters
+        ----------        
+        showgrid :          bool
+           show the grids or not
+        Matplotlib.figure Parameters 
+        Healpix graticule Parameters
+        """
+        if data is None: data = self.data
+
+        if shown:
+            assert 'n' in data.keys()
+            n=data['n']
+        else:
+            n=None
+            
+        self.plot_point_data(data, showgrid=showgrid, n=n, colors=colors, **kwargs)       
+
+    def hplocshow(self, cls=None, showhp=True, showtype='m', showgrid=True, **kwargs):
+        """show galaxy healpix map
+        """
+        if self.hpmapm is None:
+            self.logger.info ('Warning: hpmapm not parsed')
+            return
+        
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)
+                        
+        # 2d trigger healpix map
+        if showhp:                   
+            self.hpmapproj(self.hpmapm, showtype=showtype, **kwargs)
+        else:
+            self._grid(**kwargs) 
+            self.logger.info ('skip showing healpix map')
+                    
+        # show trigger contours        
+        if cls is None:
+            self.logger.info ('skip showing contours')            
+        
+        elif self.is_seq(cls):
+            contours = self.compute_contours(cls, self.hpmapm)
+            if contours is None:
+                self.logger.info ('Warning: no meander installed')
+                return
+            
+            theta_contours, phi_contours = contours
+            for _ii, _jj in enumerate(theta_contours):                
+                for _theta, _phi in zip(theta_contours[_jj], phi_contours[_jj]):
+                    if len(_theta)==0:continue                                       
+                    if showhp:
+                        self.projplot(_theta,_phi,**kwargs)
+                    else:
+                        for _kk in ['rot_theta', 'rot_phi', 'rot_psi']:
+                            kwargs.setdefault(_kk, 0)                        
+                        rot= [kwargs['rot_theta'], kwargs['rot_phi'], kwargs['rot_psi']]
+                        r = hp.Rotator(deg=True, rot=rot)
+                        _theta, _phi = r(_theta, _phi)
+                        self.projplot(_theta,_phi,**kwargs)
+                        
+        # show grids        
+        if showgrid:            
+            self._grid(**kwargs)            
+            if showhp:
+                self.plot_coord(**kwargs)
+            else:
+                self.plot_coord(rot = [kwargs['rot_theta'],
+                    kwargs['rot_phi'], kwargs['rot_psi']], **kwargs)
+    
+    def distshow(self, histtype='stepfilled',
+                 drange=None, nbin=100, **kwargs):
+        """show distance distribution for galaxies
+        """
+        # check if galaxy exists
+        if self.data is None: return        
+        if not 'dist' in self.data.keys(): return        
+        _len = []
+        for _key in ['ra','dec','name','dist','mag']:
+            _len.append(len(self.data[_key]))
+        if len(np.unique(_len)) != 1 or np.unique(_len)[0]==0:
+            return
+
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)        
+                         
+        # cut dist
+        if not drange is None:
+            assert len(drange)==2                    
+            dist0 = dist0[np.logical_and(dist0>min(drange), dist0<max(drange))]
+        else:
+            dist0 = self.data['dist']
+
+        # plot
+        kwargs = self.getkeys(kwargs, 'matplotlib')
+        plt.hist(dist0,nbin,histtype=histtype,**kwargs)
+        plt.xlabel('Distance (Mpc)')
+        plt.ylabel('Nuber of galaxies')
+
+    def lumshow(self, nbin=1, color1='k', color2='r', **kwargs):
+        """show mass distribution for galaxies
+        """
+        # check if galaxy exists
+        if self.data is None: return        
+        if not 'dist' in self.data.keys(): return        
+        _len = []
+        for _key in ['ra','dec','name','dist','mag']:
+            _len.append(len(self.data[_key]))
+        if len(np.unique(_len)) != 1 or np.unique(_len)[0]==0:
+            return
+
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # plot
+        fig = self._init_figure(**kwargs)                        
+        kwargs = self.getkeys(kwargs, 'matplotlib')        
+        Lums = 10**((4.74-self.data['mag'])/2.5)
+        dist = self.data['dist']
+        ticks,Lcum,Lbin = [],[],[]
+        for ii in np.arange(min(dist),max(dist),nbin):
+            ticks.append((ii+.5)*nbin)
+            Lbin.append(sum(Lums[np.logical_and(dist<ii,dist>ii-nbin)]))
+            Lcum.append(sum(Lums[np.logical_and(dist<ii,dist>min(dist))]))            
+        plt.plot(ticks,Lbin,drawstyle="steps",\
+                label='binned luminosity',color=color1)
+        plt.plot(ticks,Lcum,drawstyle="steps",\
+                label='cumulative luminosity',color=color2)
+        plt.fill_between(ticks,Lbin,step="pre", alpha=1,color=color1)        
+        plt.xlabel('Distance (Mpc)')
+        plt.ylabel('$L_{sun}$')
+        plt.legend()
+
+class vcandidates(visualization):
+    """visualize candidates.
+
+    Notes
+    ----------   
+    *vcandidates* inherients from **visualization**,
+    and inheriented by *candidates*.   
+    """
+    def candshow(self, showgrid=True, **kwargs):
+        """show candidates localization
+
+        Parameters
+        ----------        
+        showgrid :          bool
+           show the grids or not
+        Matplotlib.figure Parameters 
+        Healpix graticule Parameters
+        """
+        if 'candidates' in self.__dict__:
+            self.plot_point_data(self.candidates, showgrid=showgrid, **kwargs) 
+
+    def lcshow(self, filts=None, xlim=None, ylim=None,ls='',
+               vert=None, hori=None, showlim=True, showlegend=True,
+               **kwargs): 
+        """show targeting lightcurve
+        """
+        if self.lc is None:return
+        assert 'time' in self.lc.keys()
+        assert 'magnitude' in self.lc.keys()
+        assert 'band' in self.lc.keys()
+
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)        
+                    
+        # plot lc                        
+        ax = fig.add_subplot(1, 1, 1)
+        if not xlim is None: ax.set_xlim(xlim)
+        if not ylim is None: ax.set_ylim(ylim)
+        ax.invert_yaxis()
+        ax.set_xlabel('mjd')
+        ax.set_ylabel('mag')
+        if not vert is None and not xlim is None:
+            for _vert in vert:                                
+                ax.plot([_vert, _vert],[min(xlim)-1,max(xlim)+1],'k--')
+        if not hori is None and not ylim is None:
+            for _hori in hori:
+                ax.plot([min(ylim)-1,max(ylim)+1],[_hori, _hori],'k--')
+                                                        
+        # filters
+        if filts is None:
+            filts = np.unique(self.lc['band'])
+
+        colors = cm.rainbow(np.linspace(0, 1, len(filts)))
+        markers = 'ov^<>*hH+xXDd12348.,spP|_'
+        
+        for _mm, _filter in enumerate(filts):
+                
+            # obtain pps and uls
+            _pps, _uls = self.pps(pps=True, band=_filter), \
+                self.pps(pps=False, band=_filter)
+            if len(_pps)==0: continue
+                
+            # obtain error bars
+            _dat = self.errors(pps=True, band=_filter)
+            if _dat is None: xerrdat, yerrdat = None, None
+            else: xerrdat, yerrdat = _dat
+                
+            _lmt = self.errors(pps=False, band=_filter)
+            if _lmt is None: xerrlim, yerrlim = None, None
+            else: xerrlim, yerrlim = _lmt
+            
+            # data points
+            if not _pps is None:
+                ax.errorbar(_pps['time'], _pps['magnitude'],
+                            xerr=xerrdat, yerr=yerrdat, ls=ls,
+                            marker=markers[_mm % len(markers)],
+                            color=colors[_mm], label=_filter)
+                        
+                # upper limits
+                if not _uls is None and showlim:
+                    ax.errorbar(_uls['time'], _uls['magnitude'],
+                                yerr=1, lolims=True, ls=ls,
+                                marker=markers[_mm % len(markers)],
+                                color=colors[_mm])
+        if showlegend: plt.legend()
+        return fig
+    
+
+    def obsplot(self, _time, _deg, **kwargs):
+        '''show sun height, etc at one observatory
+        '''
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)
+        
+        # judge        
+        if isinstance(_time, astropy.time.Time):
+            _time = [_time]       
+            _deg = [_deg]        
+                                   
+        for _x, _y in zip(_time, _deg):
+            try: _y=_y.deg
+            except:pass
+            plt.plot(_x.mjd, _y, **self.getkeys(kwargs, 'projplot'))
+
+    def cooplot(self, _time, _deg, ids=False,
+                  colors=['r','k','b','y','g','m','c'], **kwargs):
+        '''show candidates airmass, etc at one observatory         
+        '''        
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)
+        
+        # judge        
+        if isinstance(_time, astropy.time.Time):
+            _time = [_time]       
+            _deg = [_deg]
+        
+        _x, _y = [], {}                                
+        for _ii, (_time0, _deg0) in enumerate(zip(_time, _deg)):            
+            _x.append(_time0.mjd)
+            for _nn, _deg00 in enumerate(_deg0):                
+                if ids: _nn = ids[_nn]                
+                try: _y[_nn]
+                except: _y[_nn]=[]
+                _y[_nn].append(_deg00)
+        
+        #plot
+        for _mm, _m in enumerate(_y):
+            kwargs['color'] = colors[_mm % len(colors)]
+            if ids: kwargs['label'] = _m            
+            plt.plot(_x, _y[_m], **self.getkeys(kwargs, 'projplot'))     
+                
+class vtrigger(visualization):
+    """visualize a trigger map and its contours
+
+    Notes
+    ----------   
+    *vtrigger* inherients from **visualization**,
+    and inheriented by *trigger*.
+    """        
+    
+    def locshow(self, cls=None, showhp=True, showtype='m', showgrid=True, **kwargs):
+        """show trigger via healpy
+        
+        Parameters
+        ----------                       
+        showgrid :          bool
+           show the background grids or not
+        rot_theta  : int, float
+           healpix.visualization rotation angle
+           pi/2 - decl, unit in deg, rotate localization map along longtitude direction
+        rot_phi    : int, float
+           phi = ra, unit in deg, rotate localization map along latitude direction
+        rot_psi    :  int, float
+           the point at longitude lon and latitude lat will be at the center.   
+           An additional rotation of angle psi around this direction is applied.
+        num          :   int or  str
+           matplotlib/healpy figure number
+        showhp :    bool
+           show healpix map or not
+        showtype  :       string
+           if show healpix map, which healpix function was called to use:
+           options: [m]ollview, [g]nomview, [c]artview, and [o]rthview
+           default: m
+        cls:   list
+           confidence levels for contours to show
+           set to None, will not show contours
+           e.g. cls=[.5, .9] would show 50% and 90% CL contours                  
+        
+        Healpix Parameters                      
+        Matplotlib.figure Parameters 
+        Healpix graticule Parameters (if showgrid=True)        
+        Healpix projplot Parameters (if show contours)
+        """
+        
+        if self.hpmap is None:
+            self.logger.info ('Warning: hpmap not parsed')
+            return
+        
+        # set key        
+        kwargs = self.setkeys(kwargs)
+        
+        # create figure
+        fig = self._init_figure(**kwargs)
+                        
+        # 2d trigger healpix map
+        if showhp:                   
+            self.hpmapproj(self.hpmap, showtype=showtype, **kwargs)
+        else:
+            self._grid(**kwargs) 
+            self.logger.info ('skip showing healpix map')
+                    
+        # show trigger contours        
+        if cls is None:
+            self.logger.info ('skip showing contours')            
+        
+        elif self.is_seq(cls):
+            contours = self.compute_contours(cls, self.hpmap)
+            if contours is None:
+                self.logger.info ('Warning: no meander installed')
+                return
+            
+            theta_contours, phi_contours = contours
+            for _ii, _jj in enumerate(theta_contours):                
+                for _theta, _phi in zip(theta_contours[_jj], phi_contours[_jj]):
+                    if len(_theta)==0:continue                                       
+                    if showhp:
+                        self.projplot(_theta,_phi,**kwargs)
+                    else:
+                        for _kk in ['rot_theta', 'rot_phi', 'rot_psi']:
+                            kwargs.setdefault(_kk, 0)                        
+                        rot= [kwargs['rot_theta'], kwargs['rot_phi'], kwargs['rot_psi']]
+                        r = hp.Rotator(deg=True, rot=rot)
+                        _theta, _phi = r(_theta, _phi)
+                        self.projplot(_theta,_phi,**kwargs)
+                        
+        # show grids        
+        if showgrid:            
+            self._grid(**kwargs)            
+            if showhp:
+                self.plot_coord(**kwargs)
+            else:
+                self.plot_coord(rot = [kwargs['rot_theta'],
+                    kwargs['rot_phi'], kwargs['rot_psi']], **kwargs)                

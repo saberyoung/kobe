@@ -15,8 +15,6 @@
     <link rel="shortcut icon" href="../_static/kb_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="kobe.KBobservatory.observatory.parse_time" href="kobe.KBobservatory.observatory.parse_time.html" />
-    <link rel="prev" title="kobe.KBobservatory.observatory.calc_sun_height" href="kobe.KBobservatory.observatory.calc_sun_height.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,42 +33,6 @@
             
   <div class="section" id="kobe-kbobservatory-observatory-frame">
 <h1>kobe.KBobservatory.observatory.frame<a class="headerlink" href="#kobe-kbobservatory-observatory-frame" title="Permalink to this headline">¶</a></h1>
-<dl class="method">
-<dt id="kobe.KBobservatory.observatory.frame">
-<code class="sig-prename descclassname">observatory.</code><code class="sig-name descname">frame</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#kobe.KBobservatory.observatory.frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculate altazimuth</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>lon</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>longtitude of telescope, defaul: la palma chile</p>
-</dd>
-<dt><strong>lat</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>latitude of telescope, defaul: la palma chile</p>
-</dd>
-<dt><strong>alt</strong><span class="classifier"><cite>float</cite> or None</span></dt><dd><p>altitude of telescope, defaul: la palma chile</p>
-</dd>
-<dt><strong>obstime</strong><span class="classifier"><cite>float</cite> or None or astropy.time obj</span></dt><dd><p>observing time.
-None for now; <cite>float</cite> number (unit in seconds) represents how much time before (negative) or after (positive) now; <cite>astropy.time</cite> set specific observing time</p>
-</dd>
-<dt><strong>cls</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>list of confidence level, default: [.5, .9]</p>
-</dd>
-<dt><strong>nest</strong><span class="classifier"><cite>bool</cite></span></dt><dd><p>healpix ordering options: 
-if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</cite> instead</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>altaz</strong><span class="classifier"><cite>list</cite></span></dt><dd><p>altaz list</p>
-</dd>
-<dt><strong>obstime</strong><span class="classifier"><cite>astropy.time</cite></span></dt><dd><p>observing time,</p>
-</dd>
-<dt><strong>observaroty</strong><span class="classifier"><cite>astropy.coordinate</cite></span></dt><dd><p>observaroty location</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
 
@@ -101,12 +63,12 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <li class="toctree-l1"><a class="reference internal" href="../faq/index.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">Licenses</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions kobe objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">general</span></code> – provide various generic useful functions for kobe objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
 
@@ -114,12 +76,6 @@ if True, healpix map use <cite>nest</cite> ordering, otherwise, use <cite>ring</
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a><ul>
-  <li><a href="kobe.KBobservatory.observatory.html">kobe.KBobservatory.observatory</a><ul>
-      <li>Previous: <a href="kobe.KBobservatory.observatory.calc_sun_height.html" title="previous chapter">kobe.KBobservatory.observatory.calc_sun_height</a></li>
-      <li>Next: <a href="kobe.KBobservatory.observatory.parse_time.html" title="next chapter">kobe.KBobservatory.observatory.parse_time</a></li>
-  </ul></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>

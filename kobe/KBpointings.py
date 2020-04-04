@@ -18,28 +18,7 @@ __all__ = ['pointings', 'tilings', 'pointings']
 
 class tilings(vtilings, circulate):
         """tilings: Generate, read and process tilings
-
-        Parameters
-        ----------
-        limra :         `range`
-           tilings: ra range, default: [0, 360]
-        limdec :        `range`           
-           tilings: dec range, default: [-90, 90]
-        fovra :         `float`           
-           tiling field of view in ra direction
-        fovdec :        `float`           
-           tiling field of view in dec direction
-        shiftra :       `float`                  
-           ra of initial tiling will be 0 + shiftra
-        shiftdec :      `float`           
-           dec of initial tiling will be 0 + shiftdec                     
-        skipfrac:        `float`  
-           one vertice is skipped when how much fraction of it is covered        
-        wdir    : `str`     
-           define a working directory, that used to read and build tiling list        
-        clobber   : `bool`  
-           if any products already available in self, clobber=True will redo it 
-
+        
         See Also
         --------
         kobe.galaxies, kobe.pointings    
@@ -64,27 +43,15 @@ class tilings(vtilings, circulate):
         healpix map for mass
         '''
         def __new__(cls, logger=None, **kwargs):
-                """
-                generate a new tiling object with input logger and parameter settings        
+                """generate a new tiling object with input logger and parameter settings        
                 """
                 instance = super(tilings, cls).__new__(cls)
                 instance.__init__(logger=logger, **kwargs)        
                 return instance
         
         def __init__(self, logger=None, **kwargs):
-                """
-                initialize tiling object with input logger and parameter settings
-        
-                Parameters
-                ----------
-                logger :     `class`
-                   logging object
-
-                **kwargs :     
-                   check kobe.vtilings.defkwargs, 
-                   kobe.circulate.defkwargs, kobe.tilings.defkwargs
-                """
-                        
+                """initialize tiling object with input logger and parameter settings        
+                """                        
                 # ----- define logger ----- #
                 if logger is None:
                         logging.basicConfig(level = logging.INFO)
@@ -102,25 +69,27 @@ class tilings(vtilings, circulate):
                 Parameters
                 ----------
                 limra :         `range`
-                tilings: ra range, default: [0, 360]
+                  tilings: ra range, default: [0, 360]
                 limdec :        `range`           
-                tilings: dec range, default: [-90, 90]
+                  tilings: dec range, default: [-90, 90]
                 fovra :         `float`           
-                tiling field of view in ra direction
+                  tiling field of view in ra direction
                 fovdec :        `float`           
-                tiling field of view in dec direction
+                  tiling field of view in dec direction
                 shiftra :       `float`                  
-                ra of initial tiling will be 0 + shiftra
+                  ra of initial tiling will be 0 + shiftra
                 shiftdec :      `float`           
-                dec of initial tiling will be 0 + shiftdec
+                  dec of initial tiling will be 0 + shiftdec
                 clobber   : `bool`  
-                if any products already available in self, clobber=True will redo it 
+                  if any products already available in self, clobber=True will redo it 
+                returndata : `bool`  
+                  if False, will parse data to self.data, otherwise will return data
 
                 Examples
                 --------                
                 >>> from kobe import tilings
                 >>> a = tilings()
-                >>> a.generate_pointings(limdec=[-20,90])
+                >>> a.generatep(limdec=[-20,90])
                 >>> a.data
                 <Table length=27791>
                 n       ra      dec    fovra   fovdec
@@ -143,6 +112,7 @@ class tilings(vtilings, circulate):
                 27788 286.53708    88.0     1.0     1.0
                 27789 315.19079    88.0     1.0     1.0
                 27790  343.8445    88.0     1.0     1.0
+                >>> b=a.generatep(limdec=[-20,90],returndata=True,clobber=True)                
                 """
                 kwargs = self.setkeys(kwargs)
         
@@ -185,7 +155,143 @@ class tilings(vtilings, circulate):
                 if returndata: return _data
                 else: self.data = _data
 
-        def inputp(self, ra=None, dec=None, fovra=None, fovdec=None, hms=False):
+        def generatep_trigger(self, hpmap, num=None, limra=[0,360.], limdec=[-89,89], fovra=1.,
+                              fovdec=1., dfov=[5.,10.,20.], looplim=3, nest=False, **kwargs):
+                """monte carlo approach on shiftra and shiftdec to maxmize 
+                trigger probability
+                
+                Parameters
+                ----------        
+                hpmap :   `list` 
+                  healpix map
+                num :           `int`           
+                  number of pointings                 
+                limra :         `range`
+                  tilings: ra range, default: [0, 360]
+                limdec :        `range`           
+                  tilings: dec range, default: [-90, 90]
+                fovra :         `float`           
+                  tiling field of view in ra direction
+                fovdec :        `float`           
+                  tiling field of view in dec direction
+                shiftra :       `float`                  
+                  ra of initial tiling will be 0 + shiftra
+                shiftdec :      `float`           
+                  dec of initial tiling will be 0 + shiftdec
+                clobber   : `bool`  
+                  if any products already available in self, clobber=True will redo it             
+                """
+                from kobe import triggers
+                
+                if not num is None: assert type(num) is int
+                
+                kwargs = self.setkeys(kwargs)
+                if not self.data is None and not kwargs['clobber']:
+                        self.logger.info ('Warning: tiling data already parsed')
+                        return
+                
+                assert type(hpmap) is list, 'healpix map wrong'       
+                
+                # monte carlo for tiling
+                _log = [0.]
+                
+                for nn in dfov:
+                        
+                        self.logger.info ('- searching in fovh/%i fovw/%i'%(nn,nn))
+                        shiftra, shiftdec = fovra/nn, fovdec/nn
+
+                        ntrial, answ1 = 0, False
+                        while not answ1:  # if angle OK
+                                angle = random.uniform(0,2*np.pi)
+                                self.logger.info ('\t %i with angle: %.2f'%(ntrial,angle))
+                                _shiftra = np.sqrt(shiftra**2+shiftdec**2)*np.sin(angle)
+                                _shiftdec = np.sqrt(shiftra**2+shiftdec**2)*np.cos(angle)
+                
+                                answ2 = False
+                                while not answ2:  # if OK, go on, if no, change
+                                                                                
+                                        # generate pointings
+                                        shiftra += _shiftra
+                                        shiftdec += _shiftdec
+                                        _data = self.generatep(limra=limra,
+                                                limdec=limdec, fovra=fovra, fovdec=fovdec,
+                                                shiftra=shiftra, shiftdec=shiftdec,
+                                                returndata=True, **kwargs)
+                    
+                                        # cal prob for tiling list
+                                        t = triggers.calc_loc_prob_pointings(nest=nest, data=_data)
+                                        if not num is None:
+                                                t = sorted(t)[::-1][:num]
+                                        
+                                        # judge converge or not
+                                        if sum(t)>_log[-1]:  # accept, direction correct
+                                                _log.append(sum(t))
+                                                self.logger.info ('\tcovered %.5e probs'%_log[-1])
+                                
+                                        else:  # reject, change direction
+                                                ntrial += 1
+                                                answ2 = True
+                                if ntrial >= looplim: answ1=True                        
+                if num is None: self.data = _data
+                else: self.data = _data[:num]                
+                
+        def readp_coo(self, ra=None, dec=None, fovra=None,
+                   fovdec=None, hms=False, **kwargs):
+                """read pointings from coordinate lists
+
+                Parameters
+                ----------
+                ra :         `list`
+                  tilings: ra range, default: [0, 360]
+                dec :        `range`           
+                  tilings: dec range, default: [-90, 90]
+                fovra :         `float`           
+                  tiling field of view in ra direction
+                fovdec :        `float`           
+                  tiling field of view in dec direction
+                hms :       `bool`                  
+                  ra of initial tiling will be 0 + shiftra                
+                clobber   : `bool`  
+                  if any products already available in self, clobber=True will redo it 
+
+                Examples
+                --------         
+                >>> from kobe import tilings
+                >>> a=tilings()
+                # input ra, dec in degree
+                >>> a.readp_coo(ra=[1,2,3,4],dec=[1,2,3,4],fovra=1, fovdec=1, clobber=True)
+                >>> a.data
+                <Table length=4>
+                n     ra   dec  fovra fovdec
+                int64 int64 int64 int64 int64
+                ----- ----- ----- ----- ------
+                0     1     1     1      1
+                1     2     2     1      1
+                2     3     3     1      1
+                3     4     4     1      1   
+                # for ra, dec in hh:mm:ss format
+                >>> a.readp_coo(ra=['12:20:30','0:20:30'],dec=['10:30:00','-5:00:20'],fovra=1, fovdec=1)
+                >>> a.data
+                <Table length=2>
+                n      ra      dec    fovra fovdec
+                int64   str8     str8   int64 int64
+                ----- -------- -------- ----- ------
+                0 12:20:30 10:30:00     1      1
+                1  0:20:30 -5:00:20     1      1            
+                >>> a.readp_coo(ra=['12:20:30','0:20:30'],dec=['10:30:00','-5:00:20'],fovra=1, fovdec=1,hms=True,clobber=True)
+                >>> a.data
+                <Table length=2>
+                n           ra                 dec         fovra fovdec
+                int64      float64             float64       int64 int64
+                ----- ------------------ ------------------- ----- ------
+                0 185.12499999999997                10.5     1      1
+                1  5.124999999999999 -5.0055555555555555     1      1
+                """
+                kwargs = self.setkeys(kwargs)
+        
+                if not self.data is None and not kwargs['clobber']:
+                        self.logger.info ('Warning: tiling data already parsed')
+                        return
                 
                 radecs = self.radecs(ra=ra, dec=dec, hms=hms)                
                 if radecs is None: return                
@@ -202,7 +308,7 @@ class tilings(vtilings, circulate):
                                 radecs[0], radecs[1], _data['fovra'], _data['fovdec']],
                                 names=('n', 'ra', 'dec', 'fovra', 'fovdec'))                
                                                         
-        def readp(self, filename, filetype='npz', split=' ', returndata=False,
+        def readp_file(self, filename, filetype='npz', split=' ', returndata=False,
                            keys=['n','ra','dec','fovra','fovdec'], **kwargs):
                 """read pointings from file
 
@@ -222,6 +328,15 @@ class tilings(vtilings, circulate):
                 split :      `string`
                   if filetype is txt, the string defined to split each lines
                   default: ' ' (space)
+
+                Examples
+                --------         
+                >>> from kobe import tilings
+                >>> a = tilings()
+                >>> a.generatep(limdec=[-20,90])               
+                >>> a.savep('tmp.npz', filetype='npz')
+                >>> a.readp_file('tmp.npz')
+                >>> a.data
                 """                
                 kwargs = self.setkeys(kwargs)
                 
@@ -266,9 +381,9 @@ class tilings(vtilings, circulate):
                 
                 Examples
                 --------                
-                >>> from kobe.pipeline.KBGetTilings import KBGetTilings
-                >>> a = KBGetTilings()
-                >>> a.generate(limdec=[-20,90])                               
+                >>> from kobe import tilings
+                >>> a = tilings()
+                >>> a.generatep(limdec=[-20,90])                               
                 <Table length=27791>
                 n       ra      dec    fovra   fovdec
                 int64  float64  float64 float64 float64
@@ -303,7 +418,7 @@ class tilings(vtilings, circulate):
                 27788 286.53708    88.0     1.0     1.0
                 27789 315.19079    88.0     1.0     1.0
                 27790  343.8445    88.0     1.0     1.0   
-                >>> a.remove_pointings_coo([10],[10],[10],[10],skipfrac=0)
+                >>> a.removep_coo([10],[10],[10],[10],skipfrac=0)
                 <Table length=27670>
                 n       ra      dec    fovra   fovdec
                 int64  float64  float64 float64 float64
@@ -401,10 +516,10 @@ class tilings(vtilings, circulate):
                 
                 Examples
                 --------                
-                >>> from kobe.pipeline.KBGetTilings import KBGetTilings
-                >>> a = KBGetTilings()
-                >>> a.generate(limdec=[-20,90])               
-                >>> a.remove_pointings_file(filename='tmp.npz', filetype='npz')
+                >>> from kobe import tilings
+                >>> a = tilings()
+                >>> a.generatep(limdec=[-20,90])               
+                >>> a.removep_file(filename='tmp.npz', filetype='npz')
                 """                               
                 _r = self.readlist(split=split, filename=filename,
                                 filetype=filetype, keys=keys, **kwargs)         
@@ -433,25 +548,36 @@ class tilings(vtilings, circulate):
 
                 Examples
                 --------                
-                >>> from kobe.pipeline.KBGetTilings import KBGetTilings
-                >>> a = KBGetTilings()
-                >>> a.generate(limdec=[-20,90])               
-                >>> a.save_pointings('tmp.npz', filetype='npz')
+                >>> from kobe import tilings
+                >>> a = tilings()
+                >>> a.generatep(limdec=[-20,90])               
+                >>> a.savep('tmp.npz', filetype='npz')
                 """                
                 self.writelist(datain=data, filename=filename, filetype=filetype,
                                split=split, keys=keys, **kwargs)
 
-        def preport(self, split=' '):       
-                """make a report for data
+        def reportp(self, split=' '):       
+                """make a report for self.data
 
                 Parameters
                 ----------   
                 split     : `str`
-                """        
-                _report = self.dic2txt(split=split)
+
+                Examples
+                --------                
+                >>> from kobe import tilings
+                >>> a = tilings()
+                >>> a.generatep(limdec=[-20,90])               
+                >>> a.reportp()
+                >>> a.texts
+                """
+                assert hasattr(self, 'texts')
+                assert not self.texts is None
+                _report = self.dic2txt(self.data, split=split)
+                if _report is None: return
                 if not _report in self.texts: self.texts += _report
         
-        def group_OB(self, obra, obdec):
+        def groupp(self, obra, obdec):
                 """group sub-tilings to a joint tiling
 
                 Parameters
@@ -460,6 +586,33 @@ class tilings(vtilings, circulate):
                   tiling field of view in ra direction to group pointings
                 obdec :        `float`           
                   tiling field of view in dec direction to group pointings
+
+                Examples
+                --------                
+                >>> from kobe import tilings
+                >>> a=tilings()
+                >>> a.generatep(limra=[0,40], limdec=[20, 40], fovra=1, fovdec=1)             
+                >>> a.groupp(3,3)
+                >>> a.data
+                <Table length=682>
+                n      ra      dec    fovra   fovdec
+                int64 float64  float64 float64 float64
+                ----- -------- ------- ------- -------
+                0  1.06418    20.0     1.0     1.0
+                0  2.12836    20.0     1.0     1.0
+                0  3.19253    20.0     1.0     1.0
+                1  4.25671    20.0     1.0     1.0
+                1  5.32089    20.0     1.0     1.0
+                1  6.38507    20.0     1.0     1.0
+                2  7.44924    20.0     1.0     1.0
+                ...      ...     ...     ...     ...
+                88 32.16899    39.0     1.0     1.0
+                88 33.45575    39.0     1.0     1.0
+                89 34.74251    39.0     1.0     1.0
+                89 36.02927    39.0     1.0     1.0
+                90 37.31603    39.0     1.0     1.0
+                90 38.60279    39.0     1.0     1.0
+                90 39.88955    39.0     1.0     1.0
                 """
                 assert type(obra) in [float,int] and type(obdec) in [float,int]
                 
@@ -481,7 +634,7 @@ class tilings(vtilings, circulate):
                         self.data['n'][_id1 & _id2 & _id3 & _id4] = _n                        
                         if len(self.data[_id1 & _id2 & _id3 & _id4])>0:_n+=1
                         
-        def divide_OB(self, obra, obdec):
+        def dividep(self, obra, obdec):
                 """divide each tiling to a serious of sub-tilings
 
                 Parameters
@@ -495,8 +648,9 @@ class tilings(vtilings, circulate):
                 -------- 
                 >>> from kobe import tilings
                 >>> a = tilings()
-                >>> a.generate_pointings(limdec=[-20,90]) 
-                >>> a.divide_OB(obra=3,obdec=3)
+                >>> a.generatep(limdec=[-20,90]) 
+                >>> a.dividep(3,3)
+                >>> a.data
                 <Table length=250119>
                 n       ra      dec    fovra   fovdec
                 int64  float64  float64 float64 float64
@@ -541,7 +695,7 @@ class tilings(vtilings, circulate):
                 ralist, declist, fovralist, fovdeclist, oblist = [], [], [], [], []                
                 for _nn, _ra,_dec,_fovw,_fovh in zip(self.data['n'], self.data['ra'],
                         self.data['dec'], self.data['fovra'], self.data['fovdec']):
-                        _ra0,_dec0,_fovw0,_fovh0 = self.divide_OB_one(_ra,_dec,_fovw,_fovh,obra,obdec)
+                        _ra0,_dec0,_fovw0,_fovh0 = self.dividep_one(_ra,_dec,_fovw,_fovh,obra,obdec)
                         for _ra00,_dec00,_fovw00,_fovh00 in zip(_ra0,_dec0,_fovw0,_fovh0):
                                 ralist.append(float('%.5f'%_ra00))
                                 declist.append(float('%.5f'%_dec00))
@@ -556,8 +710,9 @@ class tilings(vtilings, circulate):
                                    'fovdec': np.array(fovdeclist)})
                 
         @staticmethod
-        def divide_OB_one(rac, decc, fovw, fovh, nobw, nobh):
-                """divide one pointing to a list of sub-pointings
+        def dividep_one(rac, decc, fovw, fovh, nobw, nobh):
+                """divide one pointing to a list of sub-pointings,
+                used by divedep
 
                 Parameters
                 ----------   
@@ -609,9 +764,16 @@ class tilings(vtilings, circulate):
                 ----------                   
                 mode     : `int`
                   1. strict approach: follow above strategy strictly
-                  2. adjacent approach: start from the westest point or 
-                       highest probability point and arange the next pointing 
-                       either adjacent or closest to the previous one
+                  2. adjacent approach: start from the westest point point 
+                       and arange the next pointing either adjacent or closest 
+                       to the previous one
+
+                Examples
+                -------- 
+                >>> from kobe import tilings
+                >>> a=tilings()            
+                >>> a.generatep(fovra=3,fovdec=3,limra=[20, 100], limdec=[0,30])
+                >>> a.rankp(mode=2)
                 """                
                 assert 'data' in self.__dict__                     
                 assert not self.data is None, 'Warning: tiling data not parsed'
@@ -649,39 +811,17 @@ class tilings(vtilings, circulate):
 
 
 class galaxies(vgalaxies, circulate):
-        """galaxies: Generate (by querying astropy.Vizier), 
+        """galaxies: generate (by querying astropy.Vizier), 
         read and process galaxies
-
-        Parameters
-        ----------
-        limra :         `range`
-           galaxies: ra range, default: [0, 360]
-        limdec :        `range`
-           galaxies: dec range, default: [-90, 90]
-        limdist :       `range`
-           galaxies: distance range, default: [0, 100]           
-        limmag :        `range`
-           galaxies: absolute magnitude range, default: [-18, -99]
-        catalog :       `string`
-           Vizier galaxy catalog
-           options: `GWGC`, `GLADE`
-           default: GLADE
-        filter :        `string`
-           magnitude filter. 
-           `B` and `K` are available for `GLADE` 
-           `B` available for `GWGV`
-           default: B
-        size :      `float`
-           size of the querying galaxies, -1 for the full query. 
-           default: -1                      
-        wdir    : `str`     
-           define a working directory, that used to read and build tiling list       
-        clobber   : `bool`  
-           if any products already available in self, clobber=True will redo it
-
+       
         See Also
         --------
         kobe.tilings, kobe.telescope
+
+        Notes
+        ----------   
+        *galaxies* inherients from **vgalaxies** and **circulate**,
+        and inheriented by *pointings*.   
         """                           
         defkwargs = {**vgalaxies.defkwargs, **circulate.defkwargs,}
         '''
@@ -702,16 +842,7 @@ class galaxies(vgalaxies, circulate):
         
         def __init__(self, logger=None, **kwargs):
                 """
-                initialize galaxy object with input logger and parameter settings
-        
-                Parameters
-                ----------
-                logger :     `class`
-                   logging object
-
-                **kwargs :     
-                   check kobe.vgalaxies.defkwargs, 
-                   kobe.circulate.defkwargs, kobe.galaxy.defkwargs
+                initialize galaxy object with input logger and parameter settings        
                 """
                         
                 # ----- define logger ----- #
@@ -755,7 +886,7 @@ class galaxies(vgalaxies, circulate):
                 --------                
                 >>> from kobe import galaxies
                 >>> a = galaxies()
-                >>> a.generate_pointings(limdec=[-20,90], limdist=[0,40])
+                >>> a.generatep(limdec=[-20,90], limdist=[0,40])
                 INFO:kobe.KBtelescope:2492 galaxies selected from VII/281
                 >>> a.data
                 <Table length=2492>
@@ -853,9 +984,85 @@ class galaxies(vgalaxies, circulate):
                 else:
                         self.data = _data
 
-        def readp(self, filename, filetype='npz', split=' ', returndata=None,
+        def generatep_trigger(self, hpmap, num=None, limra=[0,360.], limdec=[-89,89], fovra=1.,
+                              fovdec=1., dfov=[5.,10.,20.], looplim=3, nest=False, **kwargs):
+                """monte carlo approach on shiftra and shiftdec to maxmize 
+                trigger probability
+                
+                Parameters
+                ----------        
+                hpmap :   `list` 
+                  healpix map
+                num :           `int`           
+                  number of pointings                 
+                limra :         `range`
+                  tilings: ra range, default: [0, 360]
+                limdec :        `range`           
+                  tilings: dec range, default: [-90, 90]
+                fovra :         `float`           
+                  tiling field of view in ra direction
+                fovdec :        `float`           
+                  tiling field of view in dec direction
+                shiftra :       `float`                  
+                  ra of initial tiling will be 0 + shiftra
+                shiftdec :      `float`           
+                  dec of initial tiling will be 0 + shiftdec
+                clobber   : `bool`  
+                  if any products already available in self, clobber=True will redo it             
+                """
+                assert type(num) is int
+                assert 'pointings' in self.__dict__              
+                kwargs = self.setkeys(kwargs)
+                if not self.pointings.data is None and not kwargs['clobber']:
+                        self.logger.info ('Warning: tiling data already parsed')
+                        return
+                
+                assert not self.hpmap is None, 'parse healpix map first'       
+                            
+                # monte carlo for tiling
+                _log = [0.]
+                
+                for nn in dfov:
+                        
+                        self.logger.info ('- searching in fovh/%i fovw/%i'%(nn,nn))
+                        shiftra, shiftdec = fovra/nn, fovdec/nn
+
+                        ntrial, answ1 = 0, False
+                        while not answ1:  # if angle OK
+                                angle = random.uniform(0,2*np.pi)
+                                self.logger.info ('\t %i with angle: %.2f'%(ntrial,angle))
+                                _shiftra = np.sqrt(shiftra**2+shiftdec**2)*np.sin(angle)
+                                _shiftdec = np.sqrt(shiftra**2+shiftdec**2)*np.cos(angle)
+                
+                        answ2 = False
+                        while not answ2:  # if OK, go on, if no, change
+                                                                                
+                                # generate pointings
+                                shiftra += _shiftra
+                                shiftdec += _shiftdec
+                                _data = self.pointings.generatep(limra=limra,
+                                        limdec=limdec, fovra=fovra, fovdec=fovdec,
+                                        shiftra=shiftra, shiftdec=shiftdec,
+                                        returndata=True, **kwargs)
+                    
+                        # cal prob for tiling list
+                        t = self.calc_loc_prob_pointings(nest=nest, data=_data)
+                        t = sorted(t)[::-1][:num]
+                                        
+                        # judge converge or not
+                        if sum(t)>_log[-1]:  # accept, direction correct
+                                _log.append(sum(t))
+                                self.logger.info ('\tcovered %.5e probs'%_log[-1])
+                                
+                        else:  # reject, change direction
+                                ntrial += 1
+                                answ2 = True
+                        if ntrial >= looplim: answ1=True
+                        return _data
+                
+        def readp_file(self, filename, filetype='npz', split=' ', returndata=None,
                            keys=['n','name','ra','dec','mag','dist'], **kwargs):
-                """read pointings from file
+                """read pointings from a file
 
                 Parameters
                 ----------               
@@ -871,6 +1078,14 @@ class galaxies(vgalaxies, circulate):
                 split :      `string`
                   if filetype is txt, the string defined to split each lines
                   default: ' ' (space)
+
+                Examples
+                --------                
+                >>> from kobe import galaxies
+                >>> a = galaxies()
+                >>> a.generate(limdec=[-20,90])               
+                >>> a.savep('tmp.npz', filetype='npz')
+                >>> a.readp_file('tmp.npz', filetype='npz')
                 """                
                 kwargs = self.setkeys(kwargs)
                 
@@ -915,9 +1130,9 @@ class galaxies(vgalaxies, circulate):
                 --------                
                 >>> from kobe import galaxies
                 >>> a = galaxies()
-                >>> a.generate_pointings(limdec=[-20,90], limdist=[0,40])
+                >>> a.generatep(limdec=[-20,90], limdist=[0,40])
                 INFO:kobe.KBtelescope:2492 galaxies selected from VII/281
-                >>> a.remove_fileds_coo([10],[10],[10],[10])
+                >>> a.removep_coo([10],[10],[10],[10])
                 >>> a.data
                 <Table length=2490>
                 n                    name                      ra        dec      mag         dist
@@ -984,8 +1199,8 @@ class galaxies(vgalaxies, circulate):
                 --------                
                 >>> from kobe import galaxies
                 >>> a = galaxies()
-                >>> a.generate_pointings(limdec=[-20,90], limdist=[0,40])              
-                >>> a.remove_pointings_file(filename='tmp.npz')
+                >>> a.generatep(limdec=[-20,90], limdist=[0,40])              
+                >>> a.removep_file(filename='tmp.npz')
                 """                
                 _r = self.readlist(split=' ', filename=filename,
                                    filetype=filetype, keys=keys, **kwargs)         
@@ -1017,12 +1232,12 @@ class galaxies(vgalaxies, circulate):
                 >>> from kobe import galaxies
                 >>> a = galaxies()
                 >>> a.generate(limdec=[-20,90])               
-                >>> a.save_pointings('tmp.npz', filetype='npz')
+                >>> a.savep('tmp.npz', filetype='npz')
                 """                  
                 self.writelist(filename=filename, filetype=filetype, 
                                datain=data, keys=keys, **kwargs)                        
 
-        def group_OB(self, obra, obdec):
+        def groupp(self, obra, obdec):
                 """group sub-galaxies, assign them with same index
 
                 Parameters
@@ -1031,6 +1246,31 @@ class galaxies(vgalaxies, circulate):
                   tiling field of view in ra direction to group pointings
                 obdec :        `float`           
                   tiling field of view in dec direction to group pointings
+
+                Examples
+                -------- 
+                from kobe import galaxies
+                >>> a=galaxies()
+                >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])
+                >>> a.group_OB(10,10)
+                >>> a.data
+                <Table length=2492>
+                n   ...      dist
+                int64 ...    float64
+                ----- ... -------------
+                265 ... 4.70228466231
+                18 ... 3.65995814653
+                147 ... 3.87868462045
+                82 ... 14.6955181559
+                206 ... 2.49371678269
+                35 ... 18.4142043388
+                ... ...           ...
+                35 ... 21.2227303453
+                146 ... 25.2571985761
+                146 ... 20.7004974885
+                114 ... 24.8768244613
+                82 ... 29.7521819633
+                53 ... 23.4249708242
                 """
                 assert type(obra) in [float,int] and type(obdec) in [float,int]                
                 
@@ -1052,17 +1292,28 @@ class galaxies(vgalaxies, circulate):
                         self.data['n'][_id1 & _id2 & _id3 & _id4] = _n                        
                         if len(self.data[_id1 & _id2 & _id3 & _id4])>0:_n+=1
                         
-        def preport(self, split=' '):       
-                """make a report for data
+        def reportp(self, split=' '):       
+                """make a report for self.data
 
                 Parameters
                 ----------   
                 split     : `str`
-                """        
-                _report = self.dic2txt(split=split)
-                if not _report in self.texts: self.texts += _report                        
+
+                Examples
+                --------                
+                >>> from kobe import galaxies
+                >>> a = galaxies()
+                >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])         
+                >>> a.reportp()
+                >>> a.texts
+                """
+                assert hasattr(self, 'texts')
+                assert not self.texts is None
+                _report = self.dic2txt(self.data, split=split)
+                if _report is None: return
+                if not _report in self.texts: self.texts += _report                    
         
-        def galaxies2hpmap(self, tracer='l', nside=512, nest=False):
+        def gmap(self, tracer='l', nside=512, nest=False):
                 """build a healpix map with KBGetGalaxies.data
         
                 Parameters
@@ -1076,10 +1327,12 @@ class galaxies(vgalaxies, circulate):
                   healpix ordering options: 
                   if True, healpix map use `nest` ordering, otherwise, use `ring` instead
 
-                returns
-                ----------               
-                hpmap :      array-like shape (Npix,)
-                  healpix fits map for trigger localization probability (1d) 
+                from kobe import galaxies
+                >>> a=galaxies()
+                >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])
+                >>> a.gmap(tracer='l', nside=512, nest=False)
+                >>> a.hpmapm
+                array([0., 0., 0., ..., 0., 0., 0.])
                 """                                 
                 if self.data is None:
                         self.logger.info ('Warning: pointings not parsed')
@@ -1104,7 +1357,16 @@ class galaxies(vgalaxies, circulate):
                 ----------                   
                 mode     : `int`
                   1. strict approach: follow above strategy strictly
-                  2. adjacent approach: start from the westest point or highest probability point and arange the next pointing either adjacent or closest to the previous one
+                  2. adjacent approach: start from the westest point point 
+                       and arange the next pointing either adjacent or closest 
+                       to the previous one
+
+                Examples
+                -------- 
+                >>> from kobe import galaxies
+                >>> a=galaxies()            
+                >>> a.generatep(catalog='GLADE', limdist=[0,40], limra=[20, 100], limdec=[0,30])
+                >>> a.rankp(mode=2)
                 """                
                 assert 'data' in self.__dict__                     
                 assert not self.data is None, 'Warning: tiling data not parsed'
@@ -1116,10 +1378,22 @@ class galaxies(vgalaxies, circulate):
                 if mode == 1:
                         ipx = np.argsort(_data['ra'])
             
-                elif mode == 2:            
-                        ipx = self.adjacent_move(_data['ra'],_data['dec'],
-                                                 _idstart,threshold=1,sort=1)
-                        
+                elif mode == 2:
+                        idx = np.arange(len(_data['ra']))                                
+                        ipx, _idr = np.array([], dtype=int), _idstart
+        
+                        while len(ipx) < len(idx)-1:
+                                ipx = np.append(ipx, _idr)  
+                                _ra, _dec = _data['ra'][_idr],_data['dec'][_idr]            
+                                _idl = np.array([], dtype=int)
+                                for ii in idx:                
+                                        if not ii in ipx: _idl = np.append(_idl, ii)            
+                                _ral, _decl = _data['ra'][_idl], _data['dec'][_idl]            
+                                _id = self.adjacent_move(_ra,_dec,_ral,_decl,
+                                                         threshold=threshold,sort=sort)
+                                _idr = idx[np.logical_and(_data['ra'] == _ral[_id],
+                                                          _data['dec'] == _decl[_id])][0]
+                                np.append(ipx, _idr)                        
                 else:
                         self.logger.info ('wrong mode')
                         return
@@ -1128,10 +1402,21 @@ class galaxies(vgalaxies, circulate):
                 self.data['n'] = np.arange(len(self.data['n']), dtype=int)
                 
 class pointings:
-        """telescope: define the name and a pointing list for one telescope
-        inherient from tilings and galaxies              
+        """pointings (inherient from tilings and galaxies): define the name and a pointing list for one telescope.          
+
+        Examples
+        --------                
+        >>> from kobe import pointings
+        >>> a = pointings('T')
+        >>> a
+        <kobe.KBpointings.tilings object at 0x103163208>
+        >>> a.generatep()
+        >>> a.readp_coo()
+        ... ...
         """
-        def __new__(cls, strategy, logger=None, **kwargs):                
+        def __new__(cls, strategy, logger=None, **kwargs):
+                """call either tilings or galaxies from kobe
+                """
                 if cls is not pointings:
                         return super().__new__(cls)
                 class_map = {'T': tilings, 'G': galaxies}

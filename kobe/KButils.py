@@ -22,7 +22,7 @@ __all__ = ['utils']
 
 class utils:
     """
-    provide various generic useful functions kobe objects   
+    provide various generic useful functions for kobe objects   
 
     Parameters
     ----------    
@@ -57,19 +57,18 @@ class utils:
         
     version = 1.0
     '''
-    kobe class version
+    kobe package version
     '''
     
     defkwargs = {'wdir'           : './',
-                 'clobber'        : False,
-                 # plotter
+                 'clobber'        : False,                 
                  'rot_theta'      : 0,
                  'rot_phi'        : 0,
                  'rot_psi'        : 0,                 
                  'num'            : 1,                 
     }
     '''
-    default parameter settings
+    default kobe parameter settings
     '''
     
     exkwargs = {'readmap'    : ['dtype', 'nest', 'partial', 'hdu', 'verbose', 'memmap'],
@@ -87,7 +86,7 @@ class utils:
                 'pixtool'    : ['nest'],
     }
     '''
-    set parameters for external package calls: healpy, matplotlib, etc
+    allowed parameters for external package calls
     '''
     
     def ckpython(self):
@@ -98,12 +97,7 @@ class utils:
             
     def ckdir(self, **kwargs):
         ''' check working directory,
-        see if it's exists, and if readable/writable        
-
-        Parameters
-        ----------    
-        wdir      : str   
-           working directory        
+        see if it's exists, and if readable/writable
         '''
         kwargs = self.setkeys(kwargs)
         wdir = kwargs['wdir']
@@ -126,13 +120,8 @@ class utils:
             self.logger.info ('Error: insufficient priority to read and write in %s'%wdir)            
 
     def setkeys(self, kwargs):
-        '''set kobe key arguments:
-        if one kwarg provide, set it, otherwise use default
-
-        Parameters
-        ----------    
-        wdir      : str   
-           working directory   
+        '''set kobe arguments
+        (use default if one kwarg not provided)
         '''
         for _key in self.defkwargs:
             kwargs.setdefault(_key, self.defkwargs[_key])
@@ -146,8 +135,7 @@ class utils:
         return kwargs
     
     def getkeys(self, kwargs, _class=None):
-        '''get specific kwargs for kobe and external function calls.
-        e.g. _class='matplotlib' will return all matplotlib parameters
+        '''get specific kwargs
         '''
         kwargs = self.setkeys(kwargs)
         if _class is None:
@@ -214,8 +202,7 @@ class utils:
         -------
         ipix_in_box : list
            a sequence of healpix indices    
-        """
-                                                
+        """                                                
         v1_ra, v2_ra, v3_ra, v4_ra, v1_dec, v2_dec, v3_dec, v4_dec = \
             self.vertices(ra, dec, width, height)
         ra_vertices, dec_vertices = ([v1_ra, v2_ra, v4_ra, v3_ra],\
@@ -234,11 +221,9 @@ class utils:
     
     @staticmethod
     def vertices(ra,dec,fovw,fovh):
-        """finding the vertices of a FoV by giving:
-        the central location, i.e. ra, dec in deg) 
-        and the FoV size: fovw, fovh in deg
-        """
-                
+        """finding the vertices of a FoV by giving
+        the central location and the FoV size
+        """                
         fovw,fovh = fovw/2.,fovh/2.
         vert_ra,vert_dec=[],[]
         ra_rad,dec_rad,fovw_rad,fovh_rad = np.deg2rad(ra), np.deg2rad(dec),\
@@ -267,7 +252,8 @@ class utils:
         returns
         ----------   
         mask :     sequence
-             a bool list, that indeces of common elements is True, otherwise False
+             a bool list, that indeces of common 
+             elements is True, otherwise False
         """               
         list1 = self.flatten(list1, nullv=nullv)
         list2 = self.flatten(list2, nullv=nullv)
@@ -383,7 +369,7 @@ class utils:
                 except:
                     pass                
         return data
-
+                
     def writelist(self, datain=None, filename=None, filetype=None,
                   split=' ', keys=None, **kwargs):
         """ write data to a file
@@ -451,7 +437,7 @@ class utils:
                 ww.write('%s \n'%_text)
             ww.close()
 
-    def dic2txt(self, split=' '):
+    def dic2txt(self, _data, split=' '):
         """ read dictionary like object, generate standard texts    
         
         Parameters
@@ -459,14 +445,13 @@ class utils:
         split :      string
                   if filetype is txt, the string defined to split each lines
                   default: ' ' (space)           
-        """
-        assert self.data
-        assert not self.data is None       
-        keys = list(self.data.keys())
+        """              
+        try: keys = list(_data.keys())
+        except: return
         _txt = '%s \n'%(split.join(keys))
-        for ii in range(len(self.data[keys[0]])):            
+        for ii in range(len(_data[keys[0]])):            
             for _key in keys:                
-                _txt += '%s%s'%(self.data[_key][ii],split)          
+                _txt += '%s%s'%(_data[_key][ii],split)          
             _txt += '\n'
         return _txt
     
@@ -493,10 +478,14 @@ class utils:
         return dist
 
     def adjacent_move(self,ra,dec,ral,decl,threshold=5,sort=1):
-        '''
-        sort = 1: clockwise
-        sort = 2: reverse clockwise
-        '''                   
+        """ set the next step of a pointing list
+
+        Parameters
+        ---------- 
+        sort  : int
+           1: clockwise
+           2: reverse clockwise
+        """                    
         _dist = self.spherical_angle(ra,dec,ral,decl)                        
         assert min(_dist) != 0, 'remove duplicated pointings'
                             
@@ -547,7 +536,7 @@ class utils:
         return _idrr
 
     def arrange_filter(self, data=None, add=False, filters='r'):
-        """set telescope name
+        """set telescope filter
 
         Parameters
         ----------
@@ -615,9 +604,8 @@ class utils:
 
         
     def radecs(self, ra=None, dec=None, theta=None, phi=None, hms=False):
-        '''read ra dec
-        '''
-        
+        """read ra dec
+        """        
         if hms: ra,dec = self.hms2deg(ra,dec)        
         if not ra is None and not dec is None:            
             if self.is_seq(ra):
@@ -638,12 +626,14 @@ class utils:
         return ra, dec    
 
     def hms2deg(self, ra, dec):
-        
+        """coordinate from hms to deg
+        """
         _p = SkyCoord(ra=ra, dec=dec, unit=(u.hourangle, u.deg))                
         return _p.ra.deg, _p.dec.deg
         
     def deg2hms(self, ra, dec):
-        
+        """coordinate from deg to hms
+        """        
         _p = SkyCoord(ra=ra, dec=dec, unit='deg')                                  
         _rahms = '%.2i:%.2i:%.3f'%(_p.ra.hms[0],abs(_p.ra.hms[1]),abs(_p.ra.hms[2]))
         _dechms = '%.2i:%.2i:%.3f'%(_p.dec.dms[0],abs(_p.dec.dms[1]),abs(_p.dec.dms[2]))

@@ -20,11 +20,15 @@ Tilings
 	     
    tilings   
    tilings.generatep
-   tilings.readp
+   tilings.readp_coo
+   tilings.readp_file
    tilings.removep_coo
    tilings.removep_file
    tilings.savep
-   tilings.divide_OB
+   tilings.reportp
+   tilings.groupp
+   tilings.dividep
+   tilings.rankp
 
 Galaxies
 --------------------
@@ -33,8 +37,11 @@ Galaxies
    
    galaxies
    galaxies.generatep
-   galaxies.readp
+   galaxies.readp_file
    galaxies.removep_coo
    galaxies.removep_file
    galaxies.savep
-   galaxies.galaxies2hpmap
+   galaxies.groupp
+   galaxies.reportp   
+   galaxies.rankp
+   galaxies.gmap
