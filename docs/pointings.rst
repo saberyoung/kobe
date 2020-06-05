@@ -20,6 +20,7 @@ Tilings
 	     
    tilings   
    tilings.generatep
+   tilings.generatep_trigger
    tilings.readp_coo
    tilings.readp_file
    tilings.removep_coo
@@ -37,6 +38,7 @@ Galaxies
    
    galaxies
    galaxies.generatep
+   galaxies.generatep_trigger
    galaxies.readp_file
    galaxies.removep_coo
    galaxies.removep_file

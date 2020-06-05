@@ -53,7 +53,7 @@ Tiling search
       >>> a=tilings()
 
       # fovra/fovdec should be a number when ra/dec is a number
-      >>> a.inputp(ra=20,dec=30,fovra=5,fovdec=5)
+      >>> a.readp_coo(ra=20,dec=30,fovra=5,fovdec=5)
       >>> a.data
       <Table length=1>
       n     ra   dec  fovra fovdec
@@ -63,7 +63,7 @@ Tiling search
 
       # when ra/dec is sequence
       # fovra/fovdec could be either a number, or a same length sequence
-      >>> a.inputp(ra=[0,10,20,30],dec=[0,10,20,30],fovra=5,fovdec=5)            
+      >>> a.readp_coo(ra=[0,10,20,30],dec=[0,10,20,30],fovra=5,fovdec=5)            
       >>> a.data
       <Table length=4>
       n     ra   dec  fovra fovdec
@@ -74,7 +74,7 @@ Tiling search
       2    20    20     5      5
       3    30    30     5      5
       
-      >>> a.inputp(ra=[0,10,20,30],dec=[0,10,20,30],fovra=[1,2,3,4],fovdec=[1,2,3,4])      
+      >>> a.readp_coo(ra=[0,10,20,30],dec=[0,10,20,30],fovra=[1,2,3,4],fovdec=[1,2,3,4])      
       >>> a.data
       <Table length=4>
       n     ra   dec  fovra fovdec
@@ -85,6 +85,16 @@ Tiling search
       2    20    20     3      3
       3    30    30     4      4
 
+      # if ra/dec is hh:mm:ss format
+      >>> a.readp_coo(ra=['12:20:30','0:20:30'],dec=['10:30:00','-5:00:20'],fovra=1, fovdec=1,hms=True,clobber=True)
+      >>> a.data
+      <Table length=2>
+      n           ra                 dec         fovra fovdec
+      int64      float64             float64       int64 int64
+      ----- ------------------ ------------------- ----- ------
+      0 185.12499999999997                10.5     1      1
+      1  5.124999999999999 -5.0055555555555555     1      1
+      
    .. _rg:
       
    1.2 Then, tilings could be also generated via a region query, e.g. an example is shown below to create a tiling list varied dec from -20 deg to north pole, with 3 by 3 sq deg field of view.
@@ -152,7 +162,7 @@ Tiling search
 
       Let's start with an example of tiling generation based on trigger localization.
       Since for such case, we need both `trigger` and `pointings` utilities,
-      thus we should import their son class, i.e. schedule instead.
+      thus we should import their son class, i.e. `schedule` instead.
       For more detials of `trigger` utilities, please check the :ref:`trigger chapter <kbtrigger>`.
       
       .. code-block:: bash
@@ -197,10 +207,11 @@ Tiling search
    Therefore, the tiles could be visualized via `KOBE visualization` utils:
    
    .. code-block:: bash
-		   
+
+      # do plot
       >>> a.locshow()
       
-      # save figure to the current directory (will check the read-write permission), with filename as tiling1.png      
+      # save figure to the current directory (make sure one had the read-write permission), with filename as tiling1.png      
       >>> a.savefig(filepath='tiling1',wdir='./')
 
    .. image:: ../static/tiling1.png
@@ -258,7 +269,7 @@ Tiling search
    .. code-block:: bash
 
       >>> b=tilings()
-      >>> b.inputp(ra=20,dec=30,fovra=5,fovdec=5)
+      >>> b.readp_coo(ra=20,dec=30,fovra=5,fovdec=5)
       >>> b.locshow(color='r')
       >>> b.savefig('skip11')
       
@@ -356,7 +367,7 @@ Tiling search
    .. code-block:: bash
 
       # then, divide each of them into a 3 by 3 deg sub-tilings      
-      >>> a.divide_OB(3,3)
+      >>> a.dividep(3,3)
 
       # as shown, pointings within same OB would have the same index
       >>> a.data
@@ -405,7 +416,7 @@ Tiling search
 
       # group them
       # in such case, `KOBE` would split tiling network into a series of 3 by 3 deg boxes, and consider all pointings inside the same box as in the same OB
-      >>> a.group_OB(3,3)
+      >>> a.groupp(3,3)
       >>> a.data
       n     ra    dec  fovra fovdec
       --- -------- ---- ----- ------
@@ -483,7 +494,7 @@ Tiling search
 6. report and circulate
 
    In `KOBE`, there're 3 types of informations defined, i.e. `texts`, `images` and `attachments`.
-   One could use various of functions (e.g. `preport` shown below) to append them, and call `circulate` functions to circulate to user/API/etc at any stage.
+   One could use various of functions (e.g. `reportp` shown below) to append them, and call `circulate` functions to circulate to user/API/etc at any stage.
    
    .. code-block:: bash
 		   
@@ -492,7 +503,7 @@ Tiling search
       >>> a.generatep(limra=[10,40], limdec=[20, 40], fovra=3, fovdec=3)
 
       # append `KOBE texts`
-      >>> a.preport(split=' ')
+      >>> a.reportp(split=' ')
       >>> a.texts      
       'n ra dec fovra fovdec \n0 10.64178 20.0 1.0 1.0 \n1 11.70596 20.0 1.0 1.0 \n2 12.77013 20.0 1.0 1.0 \n3 13.83431 20.0 1.0 1.0 \n4 14.89849 20.0 1.0 1.0 \n5 15.96267 20.0 1.0 1.0 \n6 17.02684 20.0 1.0 1.0 \n7 18.09102 20.0 1.0 1.0 \n8 19.1552 20.0 1.0 1.0 \n
       ...'
@@ -511,6 +522,8 @@ For galaxy search, the main difference compared to `tilings` is that the pointin
 .. _galaxies1:
 
 1. generate pointings
+
+   For pointing generation, `galaxies` is quite similar to `tilings` object:
    
    .. code-block:: bash
 
@@ -541,15 +554,31 @@ For galaxy search, the main difference compared to `tilings` is that the pointin
       ----- -------------------------------------- --------- --------- -------- -------------
       0 28655:NGC3034:NGC3034:09555243+6940469 148.96846 69.679703 -19.2115 4.70228466231
 
-   Considering it's weird that one could manually provide galaxy informations, thus we don't provide `inputp` methods.
-   However in case one would like to go for further galaxies, the query of larger catalog will take time. Also, working offline is sometimes unavoidable, thus `save` and `read` functions are essential and recommended.
-      
+   Considering it's weird that one could manually provide galaxy informations, thus we don't provide `readp_coo` methods for `galaxies`.
+   Meanwhile in case one would like to go for further galaxies, the query of larger catalog will take time. Also, working offline is sometimes unavoidable, thus `savep` and `readp` functions are essential and recommended.
+   
    .. code-block:: bash
 		
       >>> a.savep('tmp_galaxies', filetype='txt')     
       >>> a.readp('tmp_tiles', filetype='txt')
       
-   Similarly, more options could be checked in the corresponding API page.
+   `KOBE` could generate galaxies depends on trigger informations also:
+      
+   .. code-block:: bash
+		
+      >>> from kobe import schedule
+      >>> a=schedule()
+
+      # parse a trigger first		      
+      >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+
+      # initialize a tiling network
+      >>> a.set_pointings(strategy='G')
+
+      # `KOBE` will run a monte carlo on `shiftra` and `shiftdec`,
+      # in order to maximize the probability coverage of top 100 ranked tilings
+      >>> a.generatep_trigger(100,limra=[10,40], limdec=[20, 40], fovra=3, fovdec=3)
+	 
 
 .. _galaxies2:
 
@@ -621,7 +650,7 @@ For galaxy search, the main difference compared to `tilings` is that the pointin
    .. code-block:: bash
 
       >>> b=tilings()
-      >>> b.inputp(ra=0,dec=60,fovra=10,fovdec=10)
+      >>> b.readp_coo(ra=0,dec=60,fovra=10,fovdec=10)
       >>> b.locshow(color='r')
       >>> b.savefig('skipg11')
       
@@ -660,7 +689,7 @@ For galaxy search, the main difference compared to `tilings` is that the pointin
       >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])
 
       # group with every 10 by 10 sq deg region
-      >>> a.group_OB(10,10)
+      >>> a.groupp(10,10)
       >>> a.data
       <Table length=2492>
       n   ...      dist
@@ -729,7 +758,7 @@ For galaxy search, the main difference compared to `tilings` is that the pointin
       >>> from kobe import galaxies
       >>> a=galaxies()
       >>> a.generatep(catalog='GLADE', limdec=[-20, 90], limdist=[0,40])
-      >>> a.preport(split=' ')
+      >>> a.reportp(split=' ')
       >>> a.texts
 
 .. _galaxies7:

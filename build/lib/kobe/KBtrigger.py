@@ -123,8 +123,8 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------       
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         >>> a.pygcn_serve(root='bayestar.xml',server='local',port='public')
         """        
         try:            
@@ -163,8 +163,8 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------       
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         >>> a.pygcn_monitor(server='local',port='public')
         """ 
         try:
@@ -197,10 +197,11 @@ class trigger(vtrigger, circulate, candidates):
         coo :        `list`
           [ra, dec, err]: ra, dec is the center of trigger 
           while err is the estimated error box region
-
-        Other Parameters
-        ----------
-        `savefits`, `wdir, `nest`, `clobber`
+        `nest` : `str`
+          healpy nest
+        `savefits` :   `bool`/`str`
+        `wdir`  : `str`
+        `clobber` : `bool`
 
         Examples
         --------       
@@ -228,10 +229,11 @@ class trigger(vtrigger, circulate, candidates):
         ----------
         url :        `string`         
           url of healpix fits
-
-        Other Parameters
-        ----------
-        `savefits`, `wdir, `nest`, `clobber`
+        `nest` : `str`
+          healpy nest
+        `savefits` :   `bool`/`str`
+        `wdir`  : `str`
+        `clobber` : `bool`       
 
         Examples
         --------       
@@ -274,15 +276,14 @@ class trigger(vtrigger, circulate, candidates):
         ----------
         hpfile :        `string`         
           file name or url of healpix fits
-
-        Other Parameters
-        ----------
-        `nest`, `clobber`
+        `nest` : `str`
+          healpy nest        
+        `clobber` : `bool`       
         
         Examples
         --------       
-        >>> from kobe import triggers
-        >>> a = triggers(nest=True)
+        >>> from kobe import trigger
+        >>> a = trigger(nest=True)
         >>> a.fits('S190510g_bayestar.fits.gz')
         >>> a.hpmap
         array([1.25419392e-07, 1.62144031e-07, 1.79526856e-07, ...,
@@ -329,15 +330,20 @@ class trigger(vtrigger, circulate, candidates):
         radec_keys: `list`
           ra, dec, uncertainty keys that would be used for the constrction of healpix map
           default: ['C1','C2','Error2Radius']
-
-        Other Parameters
-        ----------
-        `savefits`, `wdir`, `nside`, `coord`, `clobber`
+        `nest` : `str`
+          healpy nest
+        `savefits` :   `bool`/`str`
+        `wdir`  : `str`
+        `clobber` : `bool`
+         `nside`  :  `int`
+          healpix resolution
+        `coord`  :  `bool`
+          healpix paramete
 
         Examples
         --------       
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         # build healpix fits by downloading one via the url in voevent XML file
         >>> a.xml('LVC#S190510g-2-Initial.xml')
         array([1.25419392e-07, 1.62144031e-07, 1.79526856e-07, ...,
@@ -395,15 +401,16 @@ class trigger(vtrigger, circulate, candidates):
           default: ['C1','C2','Error2Radius']
         nside : int
            healpix resolution
-
-        Other Parameters
-        ----------
-        `savefits`, `wdir`, `coord`,  `clobber`
+        `savefits` :   `bool`/`str`
+        `wdir`  : `str`
+        `clobber` : `bool`         
+        `coord`  :  `bool`
+          healpix paramete
 
         Examples
         --------              
-        >>> from kobe import triggers
-        >>> a = triggers(clobber=True, savefits=True)        
+        >>> from kobe import trigger
+        >>> a = trigger(clobber=True, savefits=True)        
         # use pygcn to moniror ligo server
         >>> import gcn
         >>> def handler(payload, root): 
@@ -455,10 +462,15 @@ class trigger(vtrigger, circulate, candidates):
           while err is the estimated error box region
         nside : int
            healpix resolution
-
-        Other Parameters
-        ----------
-        `savefits`, `wdir`, `coord`, `nest`, `clobber`
+        `nest` : `str`
+          healpy nest
+        `savefits` :   `bool`/`str`
+        `wdir`  : `str`
+        `clobber` : `bool`
+         `nside`  :  `int`
+          healpix resolution
+        `coord`  :  `bool`
+          healpix paramete
        
         Examples
         --------                               
@@ -513,7 +525,7 @@ class trigger(vtrigger, circulate, candidates):
 
     def parse_root_skymap(self, root, skymap_key):       
         """parse root object, try find healpix fits map url
-        used by kobe.triggers.root
+        used by kobe.trigger.root
         """        
 
         # skymap url
@@ -530,7 +542,7 @@ class trigger(vtrigger, circulate, candidates):
             
     def parse_root_coo(self, root, nside, radec_keys, obst_key):        
         """parse root object, try find ra,dec and localization of trigger
-        used by kobe.triggers.root
+        used by kobe.trigger.root
         """
         
         coo = []
@@ -582,7 +594,7 @@ class trigger(vtrigger, circulate, candidates):
         style     : `str`
             when making report, specify the stype
             current options: `email`, `slack`, `sms`
-            can be added as you want in kobe.KBtriggers.triggers.trigger_report()
+            can be added as you want in kobe.KBtrigger.trigger.trigger_report()
         keys_to_checkxml  : `list`
            which parameters from voevent XML would be reported
         keys_to_checkfits : `list`
@@ -598,8 +610,8 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                               
-        >>> from kobe import triggers
-        >>> a = triggers()       
+        >>> from kobe import trigger
+        >>> a = trigger()       
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> a.make_report()
         'DISTMEAN:268.8566049372629 DISTSTD:108.0709050006497 DATE-OBS:2019-05-10T02:59:39.292500 MJD-OBS:58613.12476032978 OBJECT:G331903 INSTRUME:H1,L1,V1 CREATOR:BAYESTAR '             
@@ -657,7 +669,7 @@ class trigger(vtrigger, circulate, candidates):
         self.candidates = Table([range(len(ra)),ra,dec,_dist],
                                 names=('n', 'ra', 'dec', 'dist'))
         
-    def calc_loc_contours(self, cls=[.5,.9], **kwargs):        
+    def calc_loc_contours(self, hpmap=None, cls=[.5,.9], **kwargs):        
         """calculate indices located in specific confidence level region of trigger map
 
         Parameters
@@ -673,32 +685,32 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                               
-        >>> from kobe import triggers
-        >>> a = triggers()       
+        >>> from kobe import trigger
+        >>> a = trigger()       
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> a.calc_loc_contours()
         {0.5: array([2414072, 2418168, 2416119, ..., 2018356, 2022450, 2024499]), 0.9: array([2414072, 2418168, 2416119, ...,  783552,  734398,  771264])}
         >>> a.calc_loc_contours(cls=[.1,.5,.99])
         {0.1: array([2414072, 2418168, 2416119, ..., 1570953, 1573001, 1573000]), 0.5: array([2414072, 2418168, 2416119, ..., 2018356, 2022450, 2024499]), 0.99: array([2414072, 2418168, 2416119, ..., 1309038, 1309052, 1309051])}
-        """
-        
+        """        
         kwargs = self.setkeys(kwargs)
         assert self.is_seq(cls)
-        if self.hpmap is None:
-            self.logger.info ('Warning: hpmap not parsed')
-            return
-        
+        if hpmap is None:
+            assert not self.hpmap is None, 'Warning: hpmap not parsed'
+            hpmap = self.hpmap        
+        assert self.is_seq(hpmap)
+            
         indexlist = {}
-        sortid = self.hpmap.argsort()[::-1]
-        sorted_hpx = self.hpmap[sortid]
+        sortid = hpmap.argsort()[::-1]
+        sorted_hpx = hpmap[sortid]
         cumulative_hpx = np.cumsum(sorted_hpx)
         for _cl in cls:
             if len(sorted_hpx[cumulative_hpx<_cl]) > 0:
                 _limit = sorted_hpx[cumulative_hpx<_cl][-1]
-                indexlist[_cl] = np.array([i for i in sortid if self.hpmap[i] >= _limit])
+                indexlist[_cl] = np.array([i for i in sortid if hpmap[i] >= _limit])
         return indexlist
     
-    def calc_loc_area(self, cls=[.5,.9], **kwargs):       
+    def calc_loc_area(self, hpmap=None, cls=[.5,.9], **kwargs):       
         """calculate sky localization region area (unit in sq. deg) for different confidence level region of trigger map
 
         Parameters
@@ -714,8 +726,8 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                               
-        >>> from kobe import triggers
-        >>> a = triggers()       
+        >>> from kobe import trigger
+        >>> a = trigger()       
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> a.calc_loc_area()
         {0.5: 575.5456172035578, 0.9: 3463.7648737864856}
@@ -723,10 +735,13 @@ class trigger(vtrigger, circulate, candidates):
         {0.1: 36.351906008208665, 0.5: 575.5456172035578, 0.99: 11508.39446313552}
         """
         kwargs = self.setkeys(kwargs)        
-        _ilist = self.calc_loc_contours(cls=cls, **kwargs)
-        if _ilist is None: return        
+        _ilist = self.calc_loc_contours(hpmap=hpmap, cls=cls, **kwargs)
+        if _ilist is None: return
         
-        nside = hp.get_nside(self.hpmap)    
+        if hpmap is None:
+            assert not self.hpmap is None, 'Warning: hpmap not parsed'
+            hpmap = self.hpmap      
+        nside = hp.get_nside(hpmap)    
         areapix = (hp.nside2resol(nside,arcmin=True)/60.)**2
         _alist = {}
         for _cl in cls:
@@ -734,32 +749,98 @@ class trigger(vtrigger, circulate, candidates):
             _alist[_cl] = _area
         return _alist
 
-    def calc_loc_prob_candidates(self, nest=False, add=False, **kwargs):
-        assert 'candidates' in self.__dict__
-        assert not self.candidates is None       
-        _prob = self.calc_loc_prob(ra=self.candidates['ra'],
-                    dec=self.candidates['dec'], nest=nest, **kwargs)
+    def calc_loc_prob_candidates(self, data=None, nest=False, add=False, **kwargs):
+        """calculate sky localization probabilities for self.candadates
+
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.candidates object          
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.readc(ra=[1,10,30], dec=[-30,20,57])
+        >>> a.calc_loc_prob_candidates(add=True)
+        >>> a.candidates
+        <Table length=3>
+        n     ra   dec    dist    mag     time           prob
+        int64 int64 int64 float64 float64 float64        float64
+        ----- ----- ----- ------- ------- ------- ----------------------
+        0     1   -30     0.0     0.0     0.0 1.9284269010978466e-08
+        1    10    20     0.0     0.0     0.0 2.0231011501525045e-09
+        2    30    57     0.0     0.0     0.0 1.8087733560399342e-10
+        """
+        if data is None:
+            assert 'candidates' in self.__dict__
+            _data = self.candidates
+        else:
+            _data = data
+        assert not _data is None
+     
+        _prob = self.calc_loc_prob(ra=_data['ra'], dec=_data['dec'],
+                                   nest=nest, **kwargs)
         if add:
             probs = Column(_prob, name='prob')                                
             self.candidates.add_column(probs)
         else:
             return _prob
 
-    def calc_dis_sigma_candidates(self, add=False, nest=False, **kwargs):
-        assert 'candidates' in self.__dict__
-        assert not self.candidates is None        
-        _dsigma = self.calc_dis_sigma(ra=self.candidates['ra'],
-                                      dec=self.candidates['dec'],
-                                      dist=self.candidates['dist'],
-                                      nest=nest, **kwargs)
-        if add:
-            probs = Column(_dsigma, name='dsigma')                                
-            self.candidates.add_column(probs)
-        else:
-            return _dsigma
-    
     def calc_loc_prob_pointings(self, data=None, add=False, nest=False, **kwargs):
+        """calculate sky localization probabilities for self.pointings.data
 
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.pointings.data object 
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.set_pointings(strategy='T')
+        >>> a.pointings.generatep(limdec=[-20,90],fovra=5, fovdec=5)
+        >>> a.calc_loc_prob_pointings(add=True)
+        >>> a.pointings.data
+        <Table length=1128>
+        n       ra      dec    fovra   fovdec          prob
+        int64  float64  float64 float64 float64        float64
+        ----- --------- ------- ------- ------- ----------------------
+        0   5.32089   -20.0     5.0     5.0   0.009728355739561507
+        1  10.64178   -20.0     5.0     5.0   0.013614537263252586
+        2  15.96267   -20.0     5.0     5.0   0.006435266976085065
+        3  21.28356   -20.0     5.0     5.0  0.0023835978877237256
+        4  26.60444   -20.0     5.0     5.0  0.0012316932615025519
+        5  31.92533   -20.0     5.0     5.0   0.000549853534969534
+        ...       ...     ...     ...     ...                    ...
+        1122  57.36857    85.0     5.0     5.0  8.142902921795454e-05
+        1123 114.73713    85.0     5.0     5.0 0.00010967822935337512
+        1124  172.1057    85.0     5.0     5.0  0.0002658732639348022
+        1125 229.47426    85.0     5.0     5.0 0.00019311538253077086
+        1126 286.84283    85.0     5.0     5.0 0.00021044599985796703
+        1127  344.2114    85.0     5.0     5.0  0.0001819337623675672
+        """
         if data is None:
             assert 'pointings' in self.__dict__
             _data = self.pointings.data
@@ -780,6 +861,224 @@ class trigger(vtrigger, circulate, candidates):
             self.pointings.data.add_column(probs)            
         else:
             return _prob
+
+    def calc_loc_cl_candidates(self, data=None, nest=False, add=False, **kwargs):
+        """calculate localization confidence levels for self.candadates
+
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.candidates object          
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.readc(ra=[20,10,30], dec=[-30,20,57])
+        >>> a.calc_loc_cl_candidates(add=True)
+        >>> a.candidates
+        <Table length=3>
+        n     ra   dec    dist    mag     time          cls
+        int64 int64 int64 float64 float64 float64       float64
+        ----- ----- ----- ------- ------- ------- -------------------
+        0    20   -30     0.0     0.0     0.0 0.23678837424612284
+        1    10    20     0.0     0.0     0.0  0.9992523864248773
+        2    30    57     0.0     0.0     0.0  0.9999673120604142
+        """
+        if data is None:
+            assert 'candidates' in self.__dict__
+            _data = self.candidates
+        else:
+            _data = data
+        assert not _data is None
+     
+        _prob = self.calc_loc_cl(ra=_data['ra'], dec=_data['dec'],
+                                 nest=nest, **kwargs)
+        if add:
+            probs = Column(_prob, name='cls')                                
+            self.candidates.add_column(probs)
+        else:
+            return _prob
+
+    def calc_loc_cl_pointings(self, data=None, add=False, nest=False, **kwargs):
+        """calculate localization localization confidence levels for self.pointings.data
+
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.pointings.data object 
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.set_pointings(strategy='T')
+        >>> a.pointings.generatep(limdec=[-20,90],fovra=5, fovdec=5)
+        >>> a.calc_loc_cl_pointings(add=True)
+        >>> a.pointings.data
+        <Table length=1128>
+        n       ra      dec    fovra   fovdec         cls
+        int64  float64  float64 float64 float64       float64
+        ----- --------- ------- ------- ------- -------------------
+        0   5.32089   -20.0     5.0     5.0  0.5370071550727633
+        1  10.64178   -20.0     5.0     5.0 0.38562002577815235
+        2  15.96267   -20.0     5.0     5.0   0.663659380445685
+        3  21.28356   -20.0     5.0     5.0  0.8347505122150383
+        4  26.60444   -20.0     5.0     5.0  0.9077678798350197
+        5  31.92533   -20.0     5.0     5.0  0.9600297132613304
+        ...       ...     ...     ...     ...                 ...
+        1122  57.36857    85.0     5.0     5.0  0.9905368638482657
+        1123 114.73713    85.0     5.0     5.0  0.9879538328773944
+        1124  172.1057    85.0     5.0     5.0  0.9684805602290152
+        1125 229.47426    85.0     5.0     5.0  0.9713763450597671
+        1126 286.84283    85.0     5.0     5.0  0.9599899750735108
+        1127  344.2114    85.0     5.0     5.0   0.965801991024868
+        """
+        if data is None:
+            assert 'pointings' in self.__dict__
+            _data = self.pointings.data
+        else:
+            _data = data
+        assert not _data is None
+
+        _prob = self.calc_loc_cl(ra=_data['ra'], dec=_data['dec'],
+                                 nest=nest, **kwargs)
+        
+        if add:
+            assert 'pointings' in self.__dict__
+            probs = Column(_prob, name='cls')           
+            self.pointings.data.add_column(probs)            
+        else:
+            return _prob
+
+    def calc_dis_sigma_candidates(self, data=None, nest=False, add=False, **kwargs):
+        """calculate sky localization probabilities for self.candadates
+
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.candidates object          
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.readc(ra=[20,10,30], dec=[-30,20,57])
+        >>> a.calc_loc_cl_candidates(add=True)
+        >>> a.candidates
+        <Table length=3>
+        n     ra   dec    dist    mag     time          cls
+        int64 int64 int64 float64 float64 float64       float64
+        ----- ----- ----- ------- ------- ------- -------------------
+        0    20   -30     0.0     0.0     0.0 0.23678837424612284
+        1    10    20     0.0     0.0     0.0  0.9992523864248773
+        2    30    57     0.0     0.0     0.0  0.9999673120604142
+        """
+        if data is None:
+            assert 'candidates' in self.__dict__
+            _data = self.candidates
+        else:
+            _data = data
+        assert not _data is None
+     
+        _prob = self.calc_loc_cl(ra=_data['ra'], dec=_data['dec'],
+                                 nest=nest, **kwargs)
+        if add:
+            probs = Column(_prob, name='cls')                                
+            self.candidates.add_column(probs)
+        else:
+            return _prob
+
+    def calc_dis_sigma_pointings(self, data=None, add=False, nest=False, **kwargs):
+        """calculate sky localization probabilities for self.pointings.data
+
+        Parameters
+        ----------   
+        data   :  `dict` 
+          kobe.pointings.data object 
+        nest       : `list` 
+          healpix nest parameter   
+        add     : `bool` 
+          if append probability to self.data, if not will return the result
+
+        returns
+        ----------
+        problist :   `astropy column`
+          available if add = False
+
+        Examples
+        --------                               
+        >>> from kobe import schedule       
+        >>> a = schedule()
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+        >>> a.set_pointings(strategy='T')
+        >>> a.pointings.generatep(limdec=[-20,90],fovra=5, fovdec=5)
+        >>> a.calc_loc_cl_pointings(add=True)
+        >>> a.pointings.data
+        <Table length=1128>
+        n       ra      dec    fovra   fovdec         cls
+        int64  float64  float64 float64 float64       float64
+        ----- --------- ------- ------- ------- -------------------
+        0   5.32089   -20.0     5.0     5.0  0.5370071550727633
+        1  10.64178   -20.0     5.0     5.0 0.38562002577815235
+        2  15.96267   -20.0     5.0     5.0   0.663659380445685
+        3  21.28356   -20.0     5.0     5.0  0.8347505122150383
+        4  26.60444   -20.0     5.0     5.0  0.9077678798350197
+        5  31.92533   -20.0     5.0     5.0  0.9600297132613304
+        ...       ...     ...     ...     ...                 ...
+        1122  57.36857    85.0     5.0     5.0  0.9905368638482657
+        1123 114.73713    85.0     5.0     5.0  0.9879538328773944
+        1124  172.1057    85.0     5.0     5.0  0.9684805602290152
+        1125 229.47426    85.0     5.0     5.0  0.9713763450597671
+        1126 286.84283    85.0     5.0     5.0  0.9599899750735108
+        1127  344.2114    85.0     5.0     5.0   0.965801991024868
+        """
+        if data is None:
+            assert 'pointings' in self.__dict__
+            _data = self.pointings.data
+        else:
+            _data = data
+        assert not _data is None
+
+        _prob = self.calc_loc_cl(ra=_data['ra'], dec=_data['dec'],
+                                 nest=nest, **kwargs)
+        
+        if add:
+            assert 'pointings' in self.__dict__
+            probs = Column(_prob, name='cls')           
+            self.pointings.data.add_column(probs)            
+        else:
+            return _prob                   
         
     def cut_pointings_hpmap(self, data=None, cls=None, nest=None, frac=0, **kwargs):                
         """remove tilings the probability that can cover targeting sources
@@ -801,8 +1100,8 @@ class trigger(vtrigger, circulate, candidates):
         >>> from kobe.pipeline.KBGetTilings import KBGetTilings
         >>> a = KBGetTilings()
         >>> a.generate(limdec=[-20,90])               
-        >>> from kobe.pipeline.KBParseTriggers import KBParseTriggers
-        >>> b = KBParseTriggers()   
+        >>> from kobe import trigger
+        >>> b = trigger()   
         >>> b.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> c = a.cut_contours(b, cls=[.9])
         >>> c
@@ -845,9 +1144,9 @@ class trigger(vtrigger, circulate, candidates):
             
     def calc_loc_prob(self, ra=None, dec=None, theta=None, phi=None,
                       fovra=None, fovdec=None, nest=False, **kwargs):
-        """calculate localization probability for specific regions
-        if fov is None, return probability of input coordinates
-        otherwise, calculate sum of one or a serios of vertices
+        """calculate localization probability for specific boxes/points.
+        If fov is None, return probability of input coordinates;
+        otherwise, calculate sum of one or a serios of vertices.
 
         Parameters
         ----------   
@@ -863,10 +1162,8 @@ class trigger(vtrigger, circulate, candidates):
           set the width for a tiling
         fovdec :  None, `int`, `float`-or sequence
           set the height for a tiling
-
-        Other Parameters
-        ----------   
-        `nest`
+        `nest` : `str`
+          healpy nest        
 
         returns
         ----------
@@ -875,8 +1172,8 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                               
-        >>> from kobe import triggers
-        >>> a = triggers()       
+        >>> from kobe import trigger
+        >>> a = trigger()       
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         # calculate prob for point at ra=1, dec=1, and ra=10, dec=-20
         >>> a.calc_loc_prob(ra=[1,10], dec=[1,-20])
@@ -916,7 +1213,34 @@ class trigger(vtrigger, circulate, candidates):
 
     def calc_loc_cl(self, ra=None, dec=None, theta=None, phi=None,
                     nest=False, **kwargs):       
-         
+        """calculate confidenc level at specific coordinates
+
+        Parameters
+        ----------   
+        ra :   None, `int`, `float`-or sequence
+          ra, unit in deg
+        dec :  None, `int`, `float`-or sequence
+          dec, unit in deg
+        theta :  None, `int`, `float`-or sequence
+          healpix theta, unit in radians
+        phi :   None, `int`, `float`-or sequence
+          healpix phi, unit in radians                
+        `nest` : `str`
+          healpy nest
+
+        returns
+        ----------
+        cl list :   `dictionary`
+          dictionary of cls at input coordinates
+
+        Examples
+        --------                               
+        >>> from kobe import trigger
+        >>> a = trigger()       
+        >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')       
+        >>> a.calc_loc_cl(ra=[1,10], dec=[1,-20])
+        [0.8718188163741416, 0.34519511496241106]        
+        """
         kwargs = self.setkeys(kwargs)        
         if self.hpmap is None:
             self.logger.info ('Warning: hpmap not parsed')
@@ -940,9 +1264,8 @@ class trigger(vtrigger, circulate, candidates):
 
     def calc_dis_inf(self, ra=None, dec=None, theta=None,
                      phi=None, nest=False, **kwargs):
-        """get trigger distance information, i.e. mean, variance and normalization, of specific direction
-        for CBC GW only
-                        
+        """(for CBC GW) get distance, i.e. mean, variance and normalization, for specific directions.
+                                
         Parameters
         ------------         
         ra :   None, `int`, `float`-or sequence
@@ -953,10 +1276,8 @@ class trigger(vtrigger, circulate, candidates):
           healpix theta, unit in radians
         phi :   None, `int`, `float`-or sequence
           healpix phi, unit in radians       
-                    
-        Other Parameters
-        ------------         
-        `nest`
+        `nest` : `str`
+          healpy nest        
 
         returns
         ----------
@@ -965,13 +1286,12 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> a.calc_dis_inf(ra=[1,10], dec=[1,-20])
         (array([233.86346031, 273.32868364]), array([121.25377326, 112.45704833]), array([1.44320589e-05, 1.14500239e-05]))
-        """
-                                
+        """                                
         kwargs = self.setkeys(kwargs)        
         if self.hpd1 is None or self.hpd2 is None or self.hpd3 is None:            
             self.logger.info ('Warning: no distance information')
@@ -986,11 +1306,12 @@ class trigger(vtrigger, circulate, candidates):
     
     def calc_dis_prob(self, ra=None, dec=None, theta=None, phi=None,
                       nest=False, limmag=20, filt='r', dtemp=40, **kwargs):        
-        """calculate trigger probability for specific directions, based on distance informations
-        for CBC GW, the distance mean, variance and normalization at each direction is provided
-        by assuming the limiting distance of one telescope on target, e.g. 200 Mpc on KNe,
-        thus, triggers.calc_dis_prob will calculate the Gaussian probability from 0 to 200 Mpc,
-        obtain the largest probability within such region
+        """calculate trigger probability for specific directions, based on distance informations.
+        For CBC GW, the distance mean, variance and normalization at each direction is provided,
+        user is supposed to provide the limiting mag of one telescope on target, 
+        e.g. 200 Mpc on KNe,
+        thus, calc_dis_prob will calculate the Gaussian probability from 0 to 200 Mpc,
+        obtain the most possible probability
                         
         Parameters
         ------------         
@@ -1003,11 +1324,9 @@ class trigger(vtrigger, circulate, candidates):
         phi :   None, `int`, `float`-or sequence
           healpix phi, unit in radians       
         limdist :  `float`
-          limiting distance of telescope on targeting sources, unit in Mpc        
-            
-        Other Parameters
-        ------------         
-        `nest`
+          limiting distance of telescope on targeting sources, unit in Mpc                    
+        `nest` : `str`
+          healpy nest
 
         returns
         ----------
@@ -1016,13 +1335,12 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
         >>> a.calc_dis_prob(ra=[1,10], dec=[1,-20])
         [3.6100349724294025e-06, 3.089517808764708e-06]
-        """
-                                
+        """                                
         kwargs = self.setkeys(kwargs)
         if self.hpd1 is None or self.hpd2 is None or self.hpd3 is None:            
             self.logger.info ('Warning: no distance information')
@@ -1058,10 +1376,8 @@ class trigger(vtrigger, circulate, candidates):
           healpix phi, unit in radians       
         dist :  `int`, `float`
           distance, unit in Mpc        
-            
-        Other Parameters
-        ------------         
-        `nest`
+        `nest` : `str`
+          healpy nest
 
         returns
         ----------
@@ -1070,13 +1386,13 @@ class trigger(vtrigger, circulate, candidates):
 
         Examples
         --------                
-        >>> from kobe import triggers
-        >>> a = triggers()
+        >>> from kobe import trigger
+        >>> a = trigger()
         >>> a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
-        >>> a.calc_dis_sigma(ra=[1,10], dec=[1,-20])
-        [3.6100349724294025e-06, 3.089517808764708e-06]
+        >>> a.calc_dis_sigma(ra=[1,10], dec=[1,-20], dist=[0,1000])
+        array([1.92871079, 6.46176765])
         """
-        if dist is None: return        
+        assert not dist is None, 'distance should be specified'
         kwargs = self.setkeys(kwargs)
         if self.hpd1 is None or self.hpd2 is None or self.hpd3 is None:            
             self.logger.info ('Warning: no distance information')
@@ -1093,8 +1409,8 @@ class trigger(vtrigger, circulate, candidates):
             return abs(dist - dmu)/dsigma
     
     def parse_xml(self, xmlfile):
-        """parse xmlfile via lxml
-        used by kobe.triggers.xml
+        """parse xmlfile via lxml,
+        used by kobe.trigger.xml
         """
          
         try:

@@ -155,17 +155,23 @@ class tilings(vtilings, circulate):
                 if returndata: return _data
                 else: self.data = _data
 
-        def generatep_trigger(self, hpmap, num=None, limra=[0,360.], limdec=[-89,89], fovra=1.,
-                              fovdec=1., dfov=[5.,10.,20.], looplim=3, nest=False, **kwargs):
-                """monte carlo approach on shiftra and shiftdec to maxmize 
-                trigger probability
+        def generatep_trigger(self, hpmap, num=None, limra=[0,360.],
+                limdec=[-89,89], fovra=1., fovdec=1., probt=None,
+                dfov=[5.,10.,20.], looplim=3, nest=False,
+                returndata=False, **kwargs):
+                """generate pointings depends on trigger localizations.
                 
                 Parameters
                 ----------        
                 hpmap :   `list` 
-                  healpix map
+                  input a healpix map, e.g. GW localization, candidates or galaxy distribution,
+                  or their convolution
                 num :           `int`           
-                  number of pointings                 
+                  number of pointings,                
+                  if set, make monte carlo run on shiftra and shiftdec to maxmize 
+                  trigger probability
+                probt  :     `float`   
+                  threshold on the total probabilities inside one pointing (ranging from 0 to 1)
                 limra :         `range`
                   tilings: ra range, default: [0, 360]
                 limdec :        `range`           
@@ -173,28 +179,41 @@ class tilings(vtilings, circulate):
                 fovra :         `float`           
                   tiling field of view in ra direction
                 fovdec :        `float`           
-                  tiling field of view in dec direction
-                shiftra :       `float`                  
-                  ra of initial tiling will be 0 + shiftra
-                shiftdec :      `float`           
-                  dec of initial tiling will be 0 + shiftdec
+                  tiling field of view in dec direction                
                 clobber   : `bool`  
                   if any products already available in self, clobber=True will redo it             
-                """
-                from kobe import triggers
-                
-                if not num is None: assert type(num) is int
+                dfov    :   `list`  
+                  if `num` set, will be used to set the monte carlo step
+                looplim  :  `int`  
+                  limit on the monte carlo loop
+                nest  :    `bool`  
+                  healpix nest parameter
+
+                Examples
+                --------                
+                >>> from kobe import tilings, trigger
+                >>> a=tilings()
+                >>> b=trigger()
+                >>> b.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+                >>> a.generatep_trigger(b.hpmap, probt=1e-4, num=100, fovra=3,fovdec=3,limra=[20, 100], limdec=[0,30])                
+                """                
+                if not num is None:
+                        assert type(num) is int
+                if not probt is None:
+                        assert type(probt) is float
+                        assert probt>=0 and probt<=1
+                from kobe import trigger
+                _t = trigger()                
+                assert self.is_seq(hpmap), 'healpix map wrong'
+                _t.hpmap = hpmap
                 
                 kwargs = self.setkeys(kwargs)
                 if not self.data is None and not kwargs['clobber']:
                         self.logger.info ('Warning: tiling data already parsed')
                         return
                 
-                assert type(hpmap) is list, 'healpix map wrong'       
-                
                 # monte carlo for tiling
-                _log = [0.]
-                
+                _log = [0.]                
                 for nn in dfov:
                         
                         self.logger.info ('- searching in fovh/%i fovw/%i'%(nn,nn))
@@ -219,10 +238,17 @@ class tilings(vtilings, circulate):
                                                 returndata=True, **kwargs)
                     
                                         # cal prob for tiling list
-                                        t = triggers.calc_loc_prob_pointings(nest=nest, data=_data)
+                                        t = _t.calc_loc_prob_pointings(nest=nest, data=_data)
+                                        t = np.array(t)
                                         if not num is None:
-                                                t = sorted(t)[::-1][:num]
-                                        
+                                                _i = np.argsort(t)[::-1]   
+                                                t = t[_i][:num]
+                                                _data = _data[_i][:num]
+                                        if not probt is None:
+                                                _j = np.where(t>=probt)
+                                                t = t[_j]
+                                                _data = _data[_j]
+                                                
                                         # judge converge or not
                                         if sum(t)>_log[-1]:  # accept, direction correct
                                                 _log.append(sum(t))
@@ -232,8 +258,10 @@ class tilings(vtilings, circulate):
                                                 ntrial += 1
                                                 answ2 = True
                                 if ntrial >= looplim: answ1=True                        
-                if num is None: self.data = _data
-                else: self.data = _data[:num]                
+                if returndata:
+                        return _data
+                else:
+                        self.data = _data              
                 
         def readp_coo(self, ra=None, dec=None, fovra=None,
                    fovdec=None, hms=False, **kwargs):
@@ -857,7 +885,7 @@ class galaxies(vgalaxies, circulate):
                 
         def generatep(self, catalog='GLADE', filter='B', size=-1,
                       limra=[0,360.], limdec=[-89,89], limdist=[0,1000],
-                      limmag=[-18,-99], returndata=None, **kwargs):
+                      limmag=[-18,-99], returndata=False, **kwargs):
                 """generate galaxies by querying Vizier
                 
                 Parameters
@@ -984,17 +1012,23 @@ class galaxies(vgalaxies, circulate):
                 else:
                         self.data = _data
 
-        def generatep_trigger(self, hpmap, num=None, limra=[0,360.], limdec=[-89,89], fovra=1.,
-                              fovdec=1., dfov=[5.,10.,20.], looplim=3, nest=False, **kwargs):
-                """monte carlo approach on shiftra and shiftdec to maxmize 
-                trigger probability
+        def generatep_trigger(self, hpmap, hpd1=None, hpd2=None,
+                hpd3=None, num=None, sigma=None, catalog='GLADE', filter='B',
+                size=-1, limra=[0,360.], limdec=[-89,89], limdist=[0,1000],
+                limmag=[-18,-99], returndata=False, **kwargs):
+                """generate pointings depends on trigger localizations.
                 
                 Parameters
                 ----------        
                 hpmap :   `list` 
-                  healpix map
+                  input a healpix map, e.g. GW localization, candidates or galaxy distribution,
+                  or their convolution
                 num :           `int`           
-                  number of pointings                 
+                  number of pointings,                
+                  if set, make monte carlo run on shiftra and shiftdec to maxmize 
+                  trigger probability
+                probt  :     `float`   
+                  threshold on the total probabilities inside one pointing (ranging from 0 to 1)
                 limra :         `range`
                   tilings: ra range, default: [0, 360]
                 limdec :        `range`           
@@ -1002,63 +1036,50 @@ class galaxies(vgalaxies, circulate):
                 fovra :         `float`           
                   tiling field of view in ra direction
                 fovdec :        `float`           
-                  tiling field of view in dec direction
-                shiftra :       `float`                  
-                  ra of initial tiling will be 0 + shiftra
-                shiftdec :      `float`           
-                  dec of initial tiling will be 0 + shiftdec
+                  tiling field of view in dec direction                
                 clobber   : `bool`  
                   if any products already available in self, clobber=True will redo it             
-                """
-                assert type(num) is int
-                assert 'pointings' in self.__dict__              
+                dfov    :   `list`  
+                  if `num` set, will be used to set the monte carlo step
+                looplim  :  `int`  
+                  limit on the monte carlo loop
+                nest  :    `bool`  
+                  healpix nest parameter
+
+                Examples
+                --------                
+                >>> from kobe import tilings, trigger
+                >>> a=tilings()
+                >>> b=trigger()
+                >>> b.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+                >>> a.generatep_trigger(b.hpmap, probt=1e-4, num=100, fovra=3,fovdec=3,limra=[20, 100], limdec=[0,30])                
+                """                
+                if not num is None:
+                        assert type(num) is int
+                if not probt is None:
+                        assert type(probt) is float
+                        assert probt>=0 and probt<=1
+                
+                from kobe import trigger
+                _t = trigger()
+                assert self.is_seq(hpmap), 'healpix map wrong'
+                _t.hpmap = hpmap
+                if not hpd1 is None and not hpd2 is None and not hpd2 is None:
+                        for _hpd in [hpd1, hpd2, hpd3]:
+                                assert self.is_seq(_hpd) and len(_hpd)==len(hpmap), 'distance wrong'
+                        _t.hpd1 = hpd1
+                        _t.hpd2 = hpd2
+                        _t.hpd3 = hpd3
+                        
                 kwargs = self.setkeys(kwargs)
-                if not self.pointings.data is None and not kwargs['clobber']:
+                if not self.data is None and not kwargs['clobber']:
                         self.logger.info ('Warning: tiling data already parsed')
                         return
-                
-                assert not self.hpmap is None, 'parse healpix map first'       
                             
-                # monte carlo for tiling
-                _log = [0.]
-                
-                for nn in dfov:
-                        
-                        self.logger.info ('- searching in fovh/%i fovw/%i'%(nn,nn))
-                        shiftra, shiftdec = fovra/nn, fovdec/nn
-
-                        ntrial, answ1 = 0, False
-                        while not answ1:  # if angle OK
-                                angle = random.uniform(0,2*np.pi)
-                                self.logger.info ('\t %i with angle: %.2f'%(ntrial,angle))
-                                _shiftra = np.sqrt(shiftra**2+shiftdec**2)*np.sin(angle)
-                                _shiftdec = np.sqrt(shiftra**2+shiftdec**2)*np.cos(angle)
-                
-                        answ2 = False
-                        while not answ2:  # if OK, go on, if no, change
-                                                                                
-                                # generate pointings
-                                shiftra += _shiftra
-                                shiftdec += _shiftdec
-                                _data = self.pointings.generatep(limra=limra,
-                                        limdec=limdec, fovra=fovra, fovdec=fovdec,
-                                        shiftra=shiftra, shiftdec=shiftdec,
-                                        returndata=True, **kwargs)
-                    
-                        # cal prob for tiling list
-                        t = self.calc_loc_prob_pointings(nest=nest, data=_data)
-                        t = sorted(t)[::-1][:num]
-                                        
-                        # judge converge or not
-                        if sum(t)>_log[-1]:  # accept, direction correct
-                                _log.append(sum(t))
-                                self.logger.info ('\tcovered %.5e probs'%_log[-1])
-                                
-                        else:  # reject, change direction
-                                ntrial += 1
-                                answ2 = True
-                        if ntrial >= looplim: answ1=True
-                        return _data
+                _data = generatep(self, catalog=catalog, filter=filter, size=size,
+                      limra=limra, limdec=limdec, limdist=limdist,
+                      limmag=limmag, returndata=True, **kwargs)
+                t = _t.calc_loc_prob_pointings(nest=nest, data=_data)
                 
         def readp_file(self, filename, filetype='npz', split=' ', returndata=None,
                            keys=['n','name','ra','dec','mag','dist'], **kwargs):

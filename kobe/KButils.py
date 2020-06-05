@@ -27,28 +27,30 @@ class utils:
     Parameters
     ----------    
     wdir      : str   
-       working directory.
-       default: ./.
+       working directory
+       default: ./
     clobber   : bool  
-       if any product has already been parsed, 
-       set clobber as True will remove and redo the calculation.
+       if any task has already been done, 
+       set clobber as True will redo the task
        default: False
     rot_theta  : int, float
-       *healpix.visualization* rotation angle.
-       theta = pi/2 - decl (unit in deg), default: 0.
-       setted to rotate localization map along longtitude direction
+       *healpix.visualization* rotation angle,
+       theta = pi/2 - decl (unit in deg),
+       setted to rotate localization map along longtitude direction,
+       default: 0.       
     rot_phi    : int, float
        *healpix.visualization* rotation angle.
-       phi = ra (unit in deg), default: 0.
-       rotate localization map along latitude direction
+       phi = ra (unit in deg), 
+       rotate localization map along latitude direction,
+       default: 0.       
     rot_psi    :  int, float
        *healpix.visualization* rotation angle.
-       the point at longitude and latitude will be at the center.   
+       the point at longitude and latitude will be at the center,
        An additional rotation of angle psi around this direction is applied.
        default: 0.
     num          :   int, str
-        *matplotlib* or *healpy* figure number.
-        default: 1.
+       *matplotlib* or *healpy* figure number.
+       default: 1.
 
     Notes
     ----------   
@@ -90,15 +92,12 @@ class utils:
     '''
     
     def ckpython(self):
-        '''check python version
-        '''
+        '''check python version'''
         if sys.version_info>(3,0,0): return 3
         else: return 2
             
     def ckdir(self, **kwargs):
-        ''' check working directory,
-        see if it's exists, and if readable/writable
-        '''
+        ''' check working directory: exists/readable/writable'''
         kwargs = self.setkeys(kwargs)
         wdir = kwargs['wdir']
         assert type(wdir) is str, 'directory should be a string'
@@ -120,9 +119,7 @@ class utils:
             self.logger.info ('Error: insufficient priority to read and write in %s'%wdir)            
 
     def setkeys(self, kwargs):
-        '''set kobe arguments
-        (use default if one kwarg not provided)
-        '''
+        '''set kobe arguments, use default if one kwarg not provided'''
         for _key in self.defkwargs:
             kwargs.setdefault(_key, self.defkwargs[_key])
 
@@ -135,8 +132,7 @@ class utils:
         return kwargs
     
     def getkeys(self, kwargs, _class=None):
-        '''get specific kwargs
-        '''
+        '''get specific kwargs'''
         kwargs = self.setkeys(kwargs)
         if _class is None:
             # select kobe parameters

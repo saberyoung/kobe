@@ -3,24 +3,12 @@ import pylab as pl
 import numpy as np
 pl.ion()
 
-
-from kobe import galaxies
-a=galaxies()    
-a.generatep(limdist=[0,40], limra=[20, 100], limdec=[0,30])
-a.rankp(mode=2)
-                
-'''
-from kobe import pointings
-a=pointings('T')
-a.generatep(fovra=3,fovdec=3,limra=[20, 100], limdec=[0,30])
-a.rankp(mode=2)
-a.locshow(color='r')
-a.routeshow(color='k')
-a.zoomin([-1.2,0],[-.5,.6])
-'''
-
-
-
+from kobe import schedule       
+a = schedule()
+a.url('https://gracedb.ligo.org/api/superevents/S190510g/files/bayestar.fits.gz')
+a.set_pointings(strategy='T')
+a.pointings.generatep(limdec=[-20,90],fovra=5, fovdec=5)
+a.calc_loc_cl_pointings(add=True)
 
 '''
 from kobe import schedule

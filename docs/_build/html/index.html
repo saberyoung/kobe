@@ -36,23 +36,14 @@
 <h1>Welcome to the KOBE documentation<a class="headerlink" href="#welcome-to-the-kobe-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-is-kobe">
 <h2>What is KOBE?<a class="headerlink" href="#what-is-kobe" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://sngyang.com/kobe">Key Observing Block Establishment (KOBE)</a> is an open source Python package that help develop <a class="reference external" href="http://www.not.iac.es/news/reports/stc/49/node32.html">observing blocks (OBs)</a> for ground-based astronomical telescopes, aiming to optimize observations in order to monitor a trigger efficiently.</p>
-<p>Modern synoptic surveys monitored large sky volume, aiming at detecting the variability of astronomical sources with high cadence in different messenger channels.
-Such transiting sources are deemed to be very important ingredients for astronomers to learn physics in extreme conditions.
-However in recent years, the dramatic increasing of dataset is challenging for the efficient identification and further follow-up of transient sources.
-The followup search of certain triggers could increase the confidence of astronomers to assign rare observing resources to those fast transients.
-For instance, the detection of kilonova AT2017gfo, that was detected by a followup search of the LIGO GW trigger, GW170817, marks the success of such trigger search.
-However in the meantime, we should be aware that GW170817 was quite special trigger that it’s very close, well localized and associate with gamma ray emissions.
-In fact, currently the localization regions of GW events are still formidably large, being of order around 1000 square degree for two detector events, and 10-100 square degree for three.
-The localization problem would be probably better in other meseenger channels, but still with difficulties.
-Thus, we provide <cite>KOBE</cite>, a Python based package that can assist to build up pointing list for multiple telescopes, increasing the overall efficiency of EM counterpart searches in the multi-messenger astronomy era.</p>
+<p><a class="reference external" href="https://sngyang.com/kobe">Key Observing Block Establishment (KOBE)</a> is an open source Python package to help develop <a class="reference external" href="http://www.not.iac.es/news/reports/stc/49/node32.html">observing blocks (OBs)</a> for ground-based astronomical telescopes, aiming to optimize observations in order to efficiently monitor a trigger.</p>
 <p><cite>KOBE</cite> provides utilities to:</p>
 <ul class="simple">
-<li><p>handle and evaluate (GW/GRB/AMON/etc) triggers.</p></li>
+<li><p>handle and evaluate triggers from multi-messenger channels, e.g. GW, GRB, AMON, etc.</p></li>
 <li><p>generate pointing list for telescopes with various of searching strategy.</p></li>
 <li><p>coordinate, visualize, and assess the followup search efficiency.</p></li>
 <li><p>optimize observing strategy in order to effectively accumulate trigger probability, with inclusion of field visibility and other factors.</p></li>
-<li><p>circulate to users for a real time search.</p></li>
+<li><p>circulate to users/API/webs for a real time search.</p></li>
 </ul>
 </div>
 <div class="section" id="documentation">
@@ -76,6 +67,7 @@ Thus, we provide <cite>KOBE</cite>, a Python based package that can assist to bu
 <li class="toctree-l1"><a class="reference internal" href="pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="candidates.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">candidates</span></code> – define a list of candidates and targeting lightcurves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>
@@ -137,6 +129,7 @@ Thus, we provide <cite>KOBE</cite>, a Python based package that can assist to bu
 <li class="toctree-l1"><a class="reference internal" href="pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="candidates.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">candidates</span></code> – define a list of candidates and targeting lightcurves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>

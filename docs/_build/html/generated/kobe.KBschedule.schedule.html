@@ -48,6 +48,7 @@
 <dt><strong>hpd3</strong></dt><dd></dd>
 <dt><strong>hphdr</strong></dt><dd></dd>
 <dt><strong>hpmap</strong></dt><dd></dd>
+<dt><strong>hpmapc</strong></dt><dd></dd>
 <dt><strong>lc</strong></dt><dd></dd>
 <dt><strong>location</strong></dt><dd></dd>
 <dt><strong>obs</strong></dt><dd></dd>
@@ -123,47 +124,47 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">closefig</span></code>(self, num)</p></td>
 <td><p>close a figure</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmap</span></code>(self[, tracer, nside, nest])</p></td>
+<td><p>build a healpix map for candidates</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">common_ele</span></code>(self, list1, list2[, nullv])</p></td>
 <td><p>find the common elements of 2 lists</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_contours</span></code>(proportions, samples[, nside])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_contours</span></code>(proportions, samples[, nside])</p></td>
 <td><p>Compute containment contour around desired level with meander</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coo</span></code>(self, \*args[, nside])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coo</span></code>(self, \*args[, nside])</p></td>
 <td><p>parse hpmap with ra, dec, error box</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cooplot</span></code>(self, _time, _deg[, ids, colors])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cooplot</span></code>(self, _time, _deg[, ids, colors])</p></td>
 <td><p>show candidates airmass, etc at one observatory</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cumprobshow</span></code>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cumprobshow</span></code>(self, \*\*kwargs)</p></td>
 <td><p>show cumulative probability</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut_pointings_hpmap</span></code>(self[, data, cls, nest, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut_pointings_hpmap</span></code>(self[, data, cls, nest, …])</p></td>
 <td><p>remove tilings the probability that can cover targeting sources</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2hms</span></code>(self, ra, dec)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2hms</span></code>(self, ra, dec)</p></td>
 <td><p>coordinate from deg to hms</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self, _data[, split])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dic2txt</span></code>(self, _data[, split])</p></td>
 <td><p>read dictionary like object, generate standard texts</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">download_skymap</span></code>(self, url, wdir, fitsname, …)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">download_skymap</span></code>(self, url, wdir, fitsname, …)</p></td>
 <td><p>look up URL of sky map, download sky map, and parse FITS file</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fits</span></code>(self, \*args, \*\*kwargs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fits</span></code>(self, \*args, \*\*kwargs)</p></td>
 <td><p>parser hpmap via skymap file  Parameters ———- hpfile :        <cite>string</cite>            file name or url of healpix fits</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code>(self, _list[, nullv])</p></td>
 <td><p>flatten a sequence if it’s a sequence of sequence</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code>(_server, _port)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcn_server</span></code>(_server, _port)</p></td>
 <td><p>get host and port so that pygcn could use for monitoring triggers.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatelc</span></code>(self[, db, tname, keys, argkeys, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatelc</span></code>(self[, db, tname, keys, argkeys, …])</p></td>
 <td><p>query lightcurve via OACAPI, <a class="reference external" href="https://github.com/astrocatalogs/OACAPI">https://github.com/astrocatalogs/OACAPI</a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generatep_trigger</span></code>(self, num[, limra, …])</p></td>
-<td><p>monte carlo approach on shiftra and shiftdec to maxmize  trigger probability with a number of pointings</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">genobs</span></code>(self[, filters, ovhtime, exptime, mode])</p></td>
 <td><p>set telescope name</p></td>
@@ -818,6 +819,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../pointings.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pointings</span></code> – define pointing networks for telescope</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../telescope.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telescope</span></code> – tools dealing with trigger map, tilings and galaxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../observatory.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">observatory</span></code> – define an observaroty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../candidates.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">candidates</span></code> – define a list of candidates and targeting lightcurves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../triggers.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">triggers</span></code> – dealing with trigger map</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../schedule.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">schedule</span></code> – makeing telescope schedule</a></li>
 </ul>

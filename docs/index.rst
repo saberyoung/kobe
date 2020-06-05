@@ -5,25 +5,15 @@ Welcome to the KOBE documentation
 What is KOBE?
 ==================
 	   
-`Key Observing Block Establishment (KOBE) <https://sngyang.com/kobe>`_ is an open source Python package that help develop `observing blocks (OBs) <http://www.not.iac.es/news/reports/stc/49/node32.html>`_ for ground-based astronomical telescopes, aiming to optimize observations in order to monitor a trigger efficiently.
-
-Modern synoptic surveys monitored large sky volume, aiming at detecting the variability of astronomical sources with high cadence in different messenger channels.
-Such transiting sources are deemed to be very important ingredients for astronomers to learn physics in extreme conditions.
-However in recent years, the dramatic increasing of dataset is challenging for the efficient identification and further follow-up of transient sources.
-The followup search of certain triggers could increase the confidence of astronomers to assign rare observing resources to those fast transients.
-For instance, the detection of kilonova AT2017gfo, that was detected by a followup search of the LIGO GW trigger, GW170817, marks the success of such trigger search.
-However in the meantime, we should be aware that GW170817 was quite special trigger that it's very close, well localized and associate with gamma ray emissions.
-In fact, currently the localization regions of GW events are still formidably large, being of order around 1000 square degree for two detector events, and 10-100 square degree for three.
-The localization problem would be probably better in other meseenger channels, but still with difficulties.
-Thus, we provide `KOBE`, a Python based package that can assist to build up pointing list for multiple telescopes, increasing the overall efficiency of EM counterpart searches in the multi-messenger astronomy era.
+`Key Observing Block Establishment (KOBE) <https://sngyang.com/kobe>`_ is an open source Python package to help develop `observing blocks (OBs) <http://www.not.iac.es/news/reports/stc/49/node32.html>`_ for ground-based astronomical telescopes, aiming to optimize observations in order to efficiently monitor a trigger.
 
 `KOBE` provides utilities to:
 
-* handle and evaluate (GW/GRB/AMON/etc) triggers.
+* handle and evaluate triggers from multi-messenger channels, e.g. GW, GRB, AMON, etc.
 * generate pointing list for telescopes with various of searching strategy.
 * coordinate, visualize, and assess the followup search efficiency.
 * optimize observing strategy in order to effectively accumulate trigger probability, with inclusion of field visibility and other factors.
-* circulate to users for a real time search.
+* circulate to users/API/webs for a real time search.
 
 Documentation
 ==============================
